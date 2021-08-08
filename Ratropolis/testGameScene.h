@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 
+class Card;
+
 #define MAPWIDTH	8000
 #define MAPHEIGHT	1500
 
@@ -8,6 +10,7 @@ class testGameScene : public Scene
 {
 private:
 	float _x, _y;
+	Card* _sample;
 
 public:
 	virtual HRESULT init();

@@ -46,9 +46,6 @@
     <Filter Include="playGround\Build">
       <UniqueIdentifier>{ce5d777b-4676-4d4f-90f5-28527aefc172}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Card">
-      <UniqueIdentifier>{7fcb59e0-ff5f-4aeb-bb1c-0daff02fe779}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Player">
       <UniqueIdentifier>{494faf37-c15f-4279-9c35-6cd6f277ecd7}</UniqueIdentifier>
     </Filter>
@@ -57,6 +54,45 @@
     </Filter>
     <Filter Include="playGround\UI\Menu">
       <UniqueIdentifier>{09e1bd97-94bf-47fc-995c-80d8a9d71d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck">
+      <UniqueIdentifier>{7fcb59e0-ff5f-4aeb-bb1c-0daff02fe779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Attribtue">
+      <UniqueIdentifier>{d4340d18-38af-475f-a349-e04d706ee73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Attribtue\base">
+      <UniqueIdentifier>{602fecec-4d6c-442f-8e8b-db459ffdfce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card">
+      <UniqueIdentifier>{b9e6b715-ddce-4e6a-b238-6d918a34bfa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\base">
+      <UniqueIdentifier>{4fa493e2-8943-412b-ad6b-092bf8d76f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Economy">
+      <UniqueIdentifier>{5ea29ae8-2778-4367-916f-e136c50e3db6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Millitary">
+      <UniqueIdentifier>{b5108037-c28e-4010-b504-25c0c01463b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Build">
+      <UniqueIdentifier>{051d331c-621a-4383-8c0d-cebc9ba5af1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Technology">
+      <UniqueIdentifier>{88052c3b-e3eb-42c5-91f9-aa6c3cb38e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Economy\base">
+      <UniqueIdentifier>{95db4e6b-a932-4988-8519-f9bae6522f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Millitary\base">
+      <UniqueIdentifier>{26bc06a6-f050-4a81-afdd-1a8e8e363e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Build\base">
+      <UniqueIdentifier>{37077bd8-42a9-43ee-a8f3-93f4976d0caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Deck\Card\Technology\base">
+      <UniqueIdentifier>{f8abf33e-6760-4823-a343-f111d17ba04f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +189,21 @@
     <ClInclude Include="Player.h">
       <Filter>playGround\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>playGround\Deck\Card\base</Filter>
+    </ClInclude>
+    <ClInclude Include="DeckManager.h">
+      <Filter>playGround\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="Attribute.h">
+      <Filter>playGround\Deck\Attribtue\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Card_Economy.h">
+      <Filter>playGround\Deck\Card\Economy\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Cheeze.h">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -229,6 +280,21 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>playGround\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>playGround\Deck\Card\base</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckManager.cpp">
+      <Filter>playGround\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="Attribute.cpp">
+      <Filter>playGround\Deck\Attribtue\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Card_Economy.cpp">
+      <Filter>playGround\Deck\Card\Economy\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Cheeze.cpp">
+      <Filter>playGround\Deck\Card\Economy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

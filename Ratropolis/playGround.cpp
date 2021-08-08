@@ -14,7 +14,7 @@ playGround::~playGround()
 //초기화는 여기다 하세요 제발
 HRESULT playGround::init()
 {
-	gameNode::init(true);
+	gameNode::init();
 	
 	_player = new Player;
 	_player->init();

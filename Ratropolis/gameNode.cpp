@@ -12,74 +12,63 @@ gameNode::~gameNode()
 
 HRESULT gameNode::init()
 {
-	_managerInit = false;
-
-	return S_OK;
-}
-
-HRESULT gameNode::init(bool managerInit)
-{
-	_managerInit = managerInit;
-
-	if (_managerInit)
-	{
-		//SetTimer(_hWnd, 1, 10, NULL);
-		KEYMANAGER->init();
-		IMAGEMANAGER->init();
-		SCENEMANAGER->init();
-		TIMEMANAGER->init();
-		PRINTMANAGER->init();
-		STREAMMANAGER->init();
-		DTDMANAGER->init();
-		CAMERAMANAGER->init();
-		UIMANAGER->init();
-		TXTDATA->init();
-		SOUNDMANAGER->init();
-	}
+	KEYMANAGER->init();
+	IMAGEMANAGER->init();
+	SCENEMANAGER->init();
+	TIMEMANAGER->init();
+	PRINTMANAGER->init();
+	STREAMMANAGER->init();
+	DTDMANAGER->init();
+	CAMERAMANAGER->init();
+	UIMANAGER->init();
+	TXTDATA->init();
+	SOUNDMANAGER->init();
+	DECKMANAGER->init();
 
 	return S_OK;
 }
 
 void gameNode::release()
 {
-	if (_managerInit)
-	{
-		//KillTimer(_hWnd, 1);
-		KEYMANAGER->release();
-		KEYMANAGER->releaseSingleton();
+	//KillTimer(_hWnd, 1);
+	KEYMANAGER->release();
+	KEYMANAGER->releaseSingleton();
 
-		IMAGEMANAGER->release();
-		IMAGEMANAGER->releaseSingleton();
+	IMAGEMANAGER->release();
+	IMAGEMANAGER->releaseSingleton();
 
-		SCENEMANAGER->release();
-		SCENEMANAGER->releaseSingleton();
+	SCENEMANAGER->release();
+	SCENEMANAGER->releaseSingleton();
 
-		TIMEMANAGER->release();
-		TIMEMANAGER->releaseSingleton();
+	TIMEMANAGER->release();
+	TIMEMANAGER->releaseSingleton();
 
-		PRINTMANAGER->release();
-		PRINTMANAGER->releaseSingleton();
+	PRINTMANAGER->release();
+	PRINTMANAGER->releaseSingleton();
 
-		STREAMMANAGER->release();
-		STREAMMANAGER->releaseSingleton();
+	STREAMMANAGER->release();
+	STREAMMANAGER->releaseSingleton();
 
-		DTDMANAGER->release();
-		DTDMANAGER->releaseSingleton();
+	DTDMANAGER->release();
+	DTDMANAGER->releaseSingleton();
 
-		CAMERAMANAGER->release();
-		CAMERAMANAGER->releaseSingleton();
+	CAMERAMANAGER->release();
+	CAMERAMANAGER->releaseSingleton();
 
-		UIMANAGER->release();
-		UIMANAGER->releaseSingleton();
+	UIMANAGER->release();
+	UIMANAGER->releaseSingleton();
 
-		TXTDATA->release();
-		TXTDATA->releaseSingleton();
+	TXTDATA->release();
+	TXTDATA->releaseSingleton();
 
-		SOUNDMANAGER->release();
-		SOUNDMANAGER->releaseSingleton();
+	SOUNDMANAGER->release();
+	SOUNDMANAGER->releaseSingleton();
 
-		CoUninitialize();
-	}
+	DECKMANAGER->release();
+	DECKMANAGER->releaseSingleton();
+
+	CoUninitialize();
+
 }
 
 void gameNode::update()

@@ -28,7 +28,6 @@ private:
 	IDWriteFactory			*_dWFactory;
 	IDWriteTextFormat		*_dWDefaultFormat;
 	IDWriteTextFormat		*_dWCustomFormat;
-	ID2D1SolidColorBrush	*_tBrush;
 
 	bool _clear;
 

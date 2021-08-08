@@ -6,7 +6,7 @@ class uiManager : public singletonBase<uiManager>
 private:
 
 private:
-	D2D1_RECT_F _screen;
+	int _gold;
 
 	//메뉴 리스트
 
@@ -30,8 +30,6 @@ public:
 
 
 
-
-	D2D1_RECT_F getScreen() { return _screen; }
 
 	bool getOpen() { return _open; }
 	void setOpen(bool open) { _open = open; }

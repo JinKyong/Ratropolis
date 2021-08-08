@@ -53,11 +53,6 @@ HRESULT dtdManager::init()
 		);
 	}
 
-	//Text Format이 생성되었으면 Text Brush 생성
-	if (SUCCEEDED(hr)) {
-		hr = _dRenderTarget->CreateSolidColorBrush(ColorF(ColorF::Black), &_tBrush);
-	}
-
 	//Text Format이 생성되었으면 기본값(가운데 정렬) 설정
 	/*if (SUCCEEDED(hr)) {
 		hr = _dWFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
@@ -89,7 +84,6 @@ void dtdManager::release()
 	if (_dWFactory)			SAFE_RELEASE2(_dWFactory);
 	if (_dWDefaultFormat)	SAFE_RELEASE2(_dWDefaultFormat);
 	if (_dWCustomFormat)	SAFE_RELEASE2(_dWCustomFormat);
-	if (_tBrush)			SAFE_RELEASE2(_tBrush);
 }
 
 void dtdManager::render(float destX, float destY, float width, float height)
@@ -170,7 +164,7 @@ void dtdManager::Rectangle(RECT rc)
 
 void dtdManager::printTextF(LPCWCHAR text, float x, float y, int width, int height)
 {
-	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, dRectMakeCenter(x, y, width, height), _tBrush);
+	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, dRectMakeCenter(x, y, width, height), _dBrush);
 }
 
 void dtdManager::printTextF(LPCWCHAR text, float x, float y, int width, int height, float size)
@@ -204,12 +198,12 @@ void dtdManager::printTextF(LPCWCHAR text, float x, float y, int width, int heig
 		);
 	}
 
-	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, dRectMakeCenter(x, y, width, height), _tBrush);
+	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, dRectMakeCenter(x, y, width, height), _dBrush);
 }
 
 void dtdManager::printTextF(LPCWCHAR text, D2D1_RECT_F rc)
 {
-	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, rc, _tBrush);
+	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, rc, _dBrush);
 }
 
 void dtdManager::printTextF(LPCWCHAR text, D2D1_RECT_F rc, float size)
@@ -243,12 +237,12 @@ void dtdManager::printTextF(LPCWCHAR text, D2D1_RECT_F rc, float size)
 		);
 	}
 
-	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, rc, _tBrush);
+	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, rc, _dBrush);
 }
 
 void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int height)
 {
-	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, dRectMakeCenter(x, y, width, height), _tBrush);
+	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, dRectMakeCenter(x, y, width, height), _dBrush);
 }
 
 void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int height, float size, bool central)
@@ -287,14 +281,14 @@ void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int heigh
 		_dWCustomFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 	}
 
-	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, dRectMakeCenter(x, y, width, height), _tBrush);
+	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, dRectMakeCenter(x, y, width, height), _dBrush);
 
 	SAFE_RELEASE2(_dWCustomFormat);
 }
 
 void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc)
 {
-	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, rc, _tBrush);
+	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, rc, _dBrush);
 }
 
 void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool central)
@@ -333,7 +327,7 @@ void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centr
 		_dWCustomFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 	}
 
-	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, rc, _tBrush);
+	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, rc, _dBrush);
 
 	SAFE_RELEASE2(_dWCustomFormat);
 }

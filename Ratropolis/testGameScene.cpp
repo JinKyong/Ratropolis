@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "testGameScene.h"
+#include "Cheeze.h"
 
 HRESULT testGameScene::init()
 {
@@ -7,6 +8,9 @@ HRESULT testGameScene::init()
 
 	_x = MAPWIDTH / 2;
 	_y = MAPHEIGHT - 240;
+
+	_sample = new Cheeze;
+	_sample->init();
 
 	//배경 이미지 등록하고 한번만 그림
 	setBackImage();
@@ -46,6 +50,8 @@ void testGameScene::render()
 		DTDMANAGER->printText(tmp, _x, _y - 20, 100, 50);
 
 	}
+
+	_sample->render();
 }
 
 void testGameScene::changeScene()
