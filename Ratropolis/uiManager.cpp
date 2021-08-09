@@ -21,10 +21,16 @@ void uiManager::update()
 {
 }
 
-void uiManager::renderDown()
+void uiManager::render()
 {
-}
+	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_UI);
 
-void uiManager::renderUp()
-{
+	DTDMANAGER->beginDraw();
+
+	//여기서 그리자
+
+
+	DTDMANAGER->endDraw();
+
+	DTDMANAGER->changeRenderTargetPast();
 }

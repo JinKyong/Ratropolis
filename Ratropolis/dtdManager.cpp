@@ -65,6 +65,8 @@ HRESULT dtdManager::init()
 	//wincodec(이미지 로더)을 사용하기 위함
 	CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
+	_pastRenderTarget = _currentRenderTarget = NULL;
+
 	return S_OK;
 }
 
@@ -75,10 +77,11 @@ void dtdManager::release()
 	if (_dRenderTarget)		SAFE_RELEASE2(_dRenderTarget);
 	if (_dBitRenderTarget)	SAFE_RELEASE2(_dBitRenderTarget);
 	if (_dBackRenderTarget) SAFE_RELEASE2(_dBackRenderTarget);
-	//if (_currentRenderTarget) SAFE_RELEASE2(_currentRenderTarget);
+	if (_dUIRenderTarget)	SAFE_RELEASE2(_dUIRenderTarget);
 
 	if (_dBitmap)			SAFE_RELEASE2(_dBitmap);
 	if (_dBackBitmap)		SAFE_RELEASE2(_dBackBitmap);
+	if (_dUIBitmap)			SAFE_RELEASE2(_dUIBitmap);
 	if (_dBrush)			SAFE_RELEASE2(_dBrush);
 
 	if (_dWFactory)			SAFE_RELEASE2(_dWFactory);
@@ -96,6 +99,7 @@ void dtdManager::render(float destX, float destY, float width, float height)
 	//(실제 게임 화면)
 	D2D1_RECT_F dest = { destX, destY, destX + width, destY + height };
 	D2D1_RECT_F sour = CAMERAMANAGER->getScreen();
+	D2D1_RECT_F sourUI = { 0, 0, WINSIZEX, WINSIZEY };
 
 	//배경
 	_dRenderTarget->DrawBitmap(_dBackBitmap, dest,
@@ -103,6 +107,9 @@ void dtdManager::render(float destX, float destY, float width, float height)
 	//오브젝트
 	_dRenderTarget->DrawBitmap(_dBitmap, dest,
 		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
+	//UI
+	_dRenderTarget->DrawBitmap(_dUIBitmap, dest,
+		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourUI);
 
 	//CAMERAMANAGER->fade();
 
@@ -120,11 +127,15 @@ void dtdManager::beginDraw()
 void dtdManager::endDraw()
 {
 	if (_currentRenderTarget) {
-		//SAFE_RELEASE2(_dBitmap);
-		if (_currentRenderTarget == _dBitRenderTarget)
-			_currentRenderTarget->GetBitmap(&_dBitmap);
-		else if (_currentRenderTarget == _dBackRenderTarget)
+		//Background
+		if(_currentRenderTarget == _dBackRenderTarget)
 			_currentRenderTarget->GetBitmap(&_dBackBitmap);
+		//BackBuffer
+		else if (_currentRenderTarget == _dBitRenderTarget)
+			_currentRenderTarget->GetBitmap(&_dBitmap);
+		//UI
+		else if(_currentRenderTarget == _dUIRenderTarget)
+			_currentRenderTarget->GetBitmap(&_dUIBitmap);
 
 		_currentRenderTarget->EndDraw();
 	}
@@ -133,6 +144,7 @@ void dtdManager::endDraw()
 void dtdManager::changeRenderTarget(RENDERTARGET_TYPE type)
 {
 	if (type >= END_RENDERTARGET_TYPE) return;
+	_pastRenderTarget = _currentRenderTarget;
 
 	switch (type) {
 	case RENDERTARGET_TYPE_STATIC:
@@ -143,9 +155,19 @@ void dtdManager::changeRenderTarget(RENDERTARGET_TYPE type)
 		_currentRenderTarget = _dBitRenderTarget;
 		break;
 
+	case RENDERTARGET_TYPE_UI:
+		_currentRenderTarget = _dUIRenderTarget;
+		break;
+
 	default:
 		break;
 	}
+}
+
+void dtdManager::changeRenderTargetPast()
+{
+	_currentRenderTarget = _pastRenderTarget;
+	_pastRenderTarget = NULL;
 }
 
 void dtdManager::Rectangle(D2D1_RECT_F rc)
@@ -371,12 +393,14 @@ void dtdManager::setBackBuffer(float width, float height)
 {
 	SAFE_RELEASE2(_dBitRenderTarget);
 	SAFE_RELEASE2(_dBackRenderTarget);
+	SAFE_RELEASE2(_dUIRenderTarget);
 
 	if (_dRenderTarget) {
 		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(width, height), &_dBitRenderTarget);
 		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(width, height), &_dBackRenderTarget);
+		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(WINSIZEX, WINSIZEY), &_dUIRenderTarget);
 
-		_currentRenderTarget = _dBitRenderTarget;
+		changeRenderTarget(RENDERTARGET_TYPE_BACKBUFFER);
 	}
 }
 

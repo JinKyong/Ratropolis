@@ -28,7 +28,7 @@ HRESULT Cheeze::init()
 
 	_x = 5000;
 	_y = 500;
-	_body = RectMakeCenter(_x, _y, 500, 700);
+	_body = RectMakeCenter(_x, _y, 400, 600);
 
 	return S_OK;
 }

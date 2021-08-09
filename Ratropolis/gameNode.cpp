@@ -23,7 +23,7 @@ HRESULT gameNode::init()
 	UIMANAGER->init();
 	TXTDATA->init();
 	SOUNDMANAGER->init();
-	DECKMANAGER->init();
+	CARDDICT->init();
 
 	return S_OK;
 }
@@ -64,8 +64,8 @@ void gameNode::release()
 	SOUNDMANAGER->release();
 	SOUNDMANAGER->releaseSingleton();
 
-	DECKMANAGER->release();
-	DECKMANAGER->releaseSingleton();
+	CARDDICT->release();
+	CARDDICT->releaseSingleton();
 
 	CoUninitialize();
 

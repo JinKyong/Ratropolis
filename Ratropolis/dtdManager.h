@@ -4,6 +4,7 @@
 enum RENDERTARGET_TYPE {
 	RENDERTARGET_TYPE_STATIC,
 	RENDERTARGET_TYPE_BACKBUFFER,
+	RENDERTARGET_TYPE_UI,
 	END_RENDERTARGET_TYPE
 };
 
@@ -15,10 +16,14 @@ private:
 	ID2D1HwndRenderTarget	*_dRenderTarget;
 	ID2D1BitmapRenderTarget	*_dBitRenderTarget;
 	ID2D1BitmapRenderTarget	*_dBackRenderTarget;
+	ID2D1BitmapRenderTarget *_dUIRenderTarget;
+
+	ID2D1BitmapRenderTarget	*_pastRenderTarget;
 	ID2D1BitmapRenderTarget	*_currentRenderTarget;
 
 	ID2D1Bitmap				*_dBitmap;
 	ID2D1Bitmap				*_dBackBitmap;
+	ID2D1Bitmap				*_dUIBitmap;
 
 	//Brush
 	ID2D1BitmapBrush		*_dBitmapBrush;
@@ -39,6 +44,7 @@ public:
 	void beginDraw();
 	void endDraw();
 	void changeRenderTarget(RENDERTARGET_TYPE type);
+	void changeRenderTargetPast();
 
 	//»ç°¢Çü
 	void Rectangle(D2D1_RECT_F rc);

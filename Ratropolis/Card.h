@@ -2,6 +2,9 @@
 #include "Attribute.h"
 #include <vector>
 
+#define CARDWIDTH	400
+#define CARDHEIGHT	600
+
 enum CARD_GRADE {
 	CARD_GRADE_COMMON,
 	CARD_GRADE_RARE,
@@ -51,6 +54,17 @@ public:
 	virtual void release() = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
+	virtual void render(float x, float y) = 0;
 
 	virtual void useCard() = 0;
+
+
+
+
+	//======================================== Á¢±ÙÀÚ ========================================//
+
+	float getX() { return _x; }
+	void setX(float x) { _x = x; }
+	float getY() { return _y; }
+	void setY(float y) { _y = y; }
 };

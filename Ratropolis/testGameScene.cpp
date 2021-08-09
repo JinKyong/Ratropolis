@@ -16,6 +16,8 @@ HRESULT testGameScene::init()
 	setBackImage();
 	drawBackImage();
 
+	DECKMANAGER->init();
+
 	return S_OK;
 }
 
@@ -35,7 +37,11 @@ void testGameScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_MBUTTON))
 		CAMERAMANAGER->resetZoom();
 
+	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+		DECKMANAGER->drawCard();
+
 	CAMERAMANAGER->updateScreen(_x, _y);
+	DECKMANAGER->update();
 }
 
 void testGameScene::render()
@@ -51,7 +57,8 @@ void testGameScene::render()
 
 	}
 
-	_sample->render();
+	//_sample->render();
+	DECKMANAGER->render();
 }
 
 void testGameScene::changeScene()
@@ -114,5 +121,5 @@ void testGameScene::drawBackImage()
 
 	DTDMANAGER->endDraw();
 
-	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_BACKBUFFER);
+	DTDMANAGER->changeRenderTargetPast();
 }

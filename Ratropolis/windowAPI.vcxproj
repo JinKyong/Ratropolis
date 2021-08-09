@@ -150,6 +150,8 @@
     <ClInclude Include="Attribute.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardDict.h" />
+    <ClInclude Include="CardHeader.h" />
     <ClInclude Include="Card_Economy.h" />
     <ClInclude Include="Cheeze.h" />
     <ClInclude Include="collisionManager.h" />
@@ -188,6 +190,7 @@
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardDict.cpp" />
     <ClCompile Include="Card_Economy.cpp" />
     <ClCompile Include="Cheeze.cpp" />
     <ClCompile Include="collisionManager.cpp" />

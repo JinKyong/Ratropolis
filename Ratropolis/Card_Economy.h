@@ -8,6 +8,7 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+	virtual void render(float x, float y);
 
 	virtual void useCard();
 };

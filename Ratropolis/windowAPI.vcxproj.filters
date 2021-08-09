@@ -192,9 +192,6 @@
     <ClInclude Include="Card.h">
       <Filter>playGround\Deck\Card\base</Filter>
     </ClInclude>
-    <ClInclude Include="DeckManager.h">
-      <Filter>playGround\Deck</Filter>
-    </ClInclude>
     <ClInclude Include="Attribute.h">
       <Filter>playGround\Deck\Attribtue\base</Filter>
     </ClInclude>
@@ -203,6 +200,15 @@
     </ClInclude>
     <ClInclude Include="Cheeze.h">
       <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClInclude>
+    <ClInclude Include="CardDict.h">
+      <Filter>playGround\Deck\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="CardHeader.h">
+      <Filter>playGround\Deck\Card\base</Filter>
+    </ClInclude>
+    <ClInclude Include="DeckManager.h">
+      <Filter>playGround\Deck</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="Cheeze.cpp">
       <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClCompile>
+    <ClCompile Include="CardDict.cpp">
+      <Filter>playGround\Deck\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
