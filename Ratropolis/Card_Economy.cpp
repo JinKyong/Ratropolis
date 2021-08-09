@@ -86,7 +86,7 @@ void Card_Economy::render(float x, float y)
 	_y = y;
 	_body = RectMakeCenter(_x, _y, CARDWIDTH, CARDHEIGHT);
 
-	DTDMANAGER->setScale(0.5, 0.5, x, y);
+	DTDMANAGER->setScale(0.4, 0.4, x, y);
 
 
 	//юл╧лаЖ

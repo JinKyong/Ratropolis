@@ -51,7 +51,7 @@ void DeckManager::render()
 
 	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_UI);
 
-	DTDMANAGER->beginDraw();
+	DTDMANAGER->beginDraw(false);
 
 	for (int i = 0; i < _currentHands.size(); i++)
 		_currentHands[i]->render(_x + i * 100, _y);

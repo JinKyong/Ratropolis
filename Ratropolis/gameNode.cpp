@@ -14,13 +14,11 @@ HRESULT gameNode::init()
 {
 	KEYMANAGER->init();
 	IMAGEMANAGER->init();
-	SCENEMANAGER->init();
 	TIMEMANAGER->init();
 	PRINTMANAGER->init();
 	STREAMMANAGER->init();
 	DTDMANAGER->init();
 	CAMERAMANAGER->init();
-	UIMANAGER->init();
 	TXTDATA->init();
 	SOUNDMANAGER->init();
 	CARDDICT->init();
@@ -37,9 +35,6 @@ void gameNode::release()
 	IMAGEMANAGER->release();
 	IMAGEMANAGER->releaseSingleton();
 
-	SCENEMANAGER->release();
-	SCENEMANAGER->releaseSingleton();
-
 	TIMEMANAGER->release();
 	TIMEMANAGER->releaseSingleton();
 
@@ -54,9 +49,6 @@ void gameNode::release()
 
 	CAMERAMANAGER->release();
 	CAMERAMANAGER->releaseSingleton();
-
-	UIMANAGER->release();
-	UIMANAGER->releaseSingleton();
 
 	TXTDATA->release();
 	TXTDATA->releaseSingleton();

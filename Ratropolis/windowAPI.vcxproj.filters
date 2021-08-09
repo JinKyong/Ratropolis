@@ -94,6 +94,9 @@
     <Filter Include="playGround\Deck\Card\Technology\base">
       <UniqueIdentifier>{f8abf33e-6760-4823-a343-f111d17ba04f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\UI\Menu\base">
+      <UniqueIdentifier>{324a69fe-518f-4ee2-a14a-e47f278b181f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -174,9 +177,6 @@
     <ClInclude Include="uiManager.h">
       <Filter>playGround\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MenuHeader.h">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>playGround\Stage\base</Filter>
     </ClInclude>
@@ -209,6 +209,15 @@
     </ClInclude>
     <ClInclude Include="DeckManager.h">
       <Filter>playGround\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuHeader.h">
+      <Filter>playGround\UI\Menu\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>playGround\UI\Menu\base</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameMenu.h">
+      <Filter>playGround\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +313,12 @@
     </ClCompile>
     <ClCompile Include="CardDict.cpp">
       <Filter>playGround\Deck\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>playGround\UI\Menu\base</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameMenu.cpp">
+      <Filter>playGround\UI\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

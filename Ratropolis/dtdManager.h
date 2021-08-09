@@ -41,7 +41,7 @@ public:
 	void release();
 	void render(float destX, float destY, float width, float height);
 
-	void beginDraw();
+	void beginDraw(bool clear = true);
 	void endDraw();
 	void changeRenderTarget(RENDERTARGET_TYPE type);
 	void changeRenderTargetPast();

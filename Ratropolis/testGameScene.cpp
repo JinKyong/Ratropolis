@@ -1,13 +1,17 @@
 #include "stdafx.h"
 #include "testGameScene.h"
+#include "Player.h"
 #include "Cheeze.h"
 
-HRESULT testGameScene::init()
+HRESULT testGameScene::init(Player * player)
 {
+	Scene::init(player);
+
 	CAMERAMANAGER->setBackScreenSize(MAPWIDTH, MAPHEIGHT);
 
-	_x = MAPWIDTH / 2;
-	_y = MAPHEIGHT - 240;
+	_player->setCamX(MAPWIDTH / 2);
+	_player->setCamY(MAPHEIGHT - 240);
+	_player->playGame();
 
 	_sample = new Cheeze;
 	_sample->init();
@@ -17,30 +21,22 @@ HRESULT testGameScene::init()
 	drawBackImage();
 
 	DECKMANAGER->init();
+	UIMANAGER->playGame();
 
 	return S_OK;
 }
 
 void testGameScene::release()
 {
+	DECKMANAGER->release();
+	DECKMANAGER->releaseSingleton();
 }
 
 void testGameScene::update()
 {
-	if (KEYMANAGER->isStayKeyDown('D')) {
-		_x += 10;
-	}
-	if (KEYMANAGER->isStayKeyDown('A')) {
-		_x -= 10;
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_MBUTTON))
-		CAMERAMANAGER->resetZoom();
-
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
-		DECKMANAGER->drawCard();
-
-	CAMERAMANAGER->updateScreen(_x, _y);
+	_player->update();
+	UIMANAGER->update();
+	CAMERAMANAGER->updateScreen(_player->getCamX(), _player->getCamY());
 	DECKMANAGER->update();
 }
 
@@ -58,7 +54,9 @@ void testGameScene::render()
 	}
 
 	//_sample->render();
+	UIMANAGER->render();
 	DECKMANAGER->render();
+	_player->render();
 }
 
 void testGameScene::changeScene()
@@ -113,7 +111,8 @@ void testGameScene::drawBackImage()
 
 
 	for (int i = 0; i < MAPWIDTH; i += 60) {
-		IMAGEMANAGER->findDImage("desertTile")->render(i, MAPHEIGHT - 240);
+		IMAGEMANAGER->findDImage("desertTile")->render(i, MAPHEIGHT - 300);
+		IMAGEMANAGER->findDImage("waterTile")->render(i, MAPHEIGHT - 240, 0.25);
 		IMAGEMANAGER->findDImage("waterTile")->render(i, MAPHEIGHT - 180, 0.25);
 		IMAGEMANAGER->findDImage("waterTile")->render(i, MAPHEIGHT - 120, 0.25);
 		IMAGEMANAGER->findDImage("waterTile")->render(i, MAPHEIGHT - 60, 0.25);

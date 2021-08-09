@@ -1,51 +1,40 @@
 #pragma once
 #include "singletonBase.h"
+#include "Menu.h"
+#include <map>
+
+class Player;
+class InGameMenu;
 
 class uiManager : public singletonBase<uiManager>
 {
 private:
+	typedef map<string, Menu*>				menuList;
+	typedef map<string, Menu*>::iterator	menuIter;
 
 private:
-	//돈과 시민, 웨이브
-	int _gold;			//돈
-	int _prize;			//현상금
-	int _tax;			//세금
-	int _currentCivil;	//현재 시민
-	int _maxCivil;		//전체 시민
-	int _wave;			//현재 웨이브
+	Player* _player;
+	InGameMenu* _inGame;
 
-	//덱
-	int _deck;			//덱의 장수
-	int _grave;			//무덤 장수
-	int _remain;		//남은 장수
+	menuList	_menuList;
+	static Menu* _currentMenu;
 
-	//스킬
-	int _level;			//스킬 레벨
-
-
-
-	//메뉴 리스트
-
-	//현재 메뉴
-
-
+	bool _start;
 	bool _open;
 
 public:
-	HRESULT init();
+	HRESULT init(Player* player);
 	void release();
 	void update();
 	void render();
 
-/*
-	UpMenu* addUpMenu(string menuName, UpMenu* menu);
-	DownMenu* addDownMenu(string menuName, DownMenu* menu);
-	HRESULT changeUpMenu(string menuName);
-	HRESULT changeDownMenu(string menuName);*/
+	Menu* addMenu(string menuName, Menu* menu);
+	HRESULT changeMenu(string menuName);
+
+	void playGame();
 
 
-
-
+	Menu* getCurrentMenu() { return _currentMenu; }
 
 	bool getOpen() { return _open; }
 	void setOpen(bool open) { _open = open; }

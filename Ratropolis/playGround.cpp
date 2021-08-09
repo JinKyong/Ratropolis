@@ -19,6 +19,9 @@ HRESULT playGround::init()
 	_player = new Player;
 	_player->init();
 
+	UIMANAGER->init(_player);
+
+	SCENEMANAGER->init(_player);
 	SCENEMANAGER->changeScene("test");
 
 	_debug = false;
@@ -31,6 +34,11 @@ void playGround::release()
 {
 	gameNode::release();
 
+	UIMANAGER->release();
+	UIMANAGER->releaseSingleton();
+
+	SCENEMANAGER->release();
+	SCENEMANAGER->releaseSingleton();
 }
 
 
@@ -44,7 +52,6 @@ void playGround::update()
 	}
 
 	SCENEMANAGER->update();
-	_player->update();
 }
 
 
@@ -58,7 +65,6 @@ void playGround::render()
 	DTDMANAGER->beginDraw();
 	//================제발 이 사이에 좀 그립시다==========================
 	SCENEMANAGER->render();
-	_player->render();
 
 	DTDMANAGER->endDraw();
 	//==================================================================

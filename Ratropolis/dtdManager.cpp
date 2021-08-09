@@ -116,11 +116,12 @@ void dtdManager::render(float destX, float destY, float width, float height)
 	_dRenderTarget->EndDraw();
 }
 
-void dtdManager::beginDraw()
+void dtdManager::beginDraw(bool clear)
 {
 	if (_currentRenderTarget) {
 		_currentRenderTarget->BeginDraw();
-		_currentRenderTarget->Clear();
+		if(clear)
+			_currentRenderTarget->Clear();
 	}
 }
 
