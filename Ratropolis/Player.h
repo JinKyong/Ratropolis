@@ -1,5 +1,7 @@
 #pragma once
 
+class Card;
+
 typedef struct tagDefaultStatus {
 	int gold;			//돈
 	int prize;			//현상금
@@ -35,6 +37,9 @@ private:
 	DEFAULT_STAT _defaultStat;		//기본 스탯(돈, 시민 등)
 	int _level;						//지도자 레벨
 
+	//선택 카드
+	Card* _selectedCard;
+
 public:
 	HRESULT init();
 	void release();
@@ -42,10 +47,15 @@ public:
 	void render();
 
 	void playGame();
+	void controlMouse();
+	void controlKeyboard();
+
+	void changeCursor(CURSOR_TYPE type);
 
 	void changeGold(int num);
 	void changeCivil(int num);
 	void changeMaxCivil(int num);
+	void changeCard(Card* card);
 
 
 
@@ -55,6 +65,13 @@ public:
 
 
 	//======================================== 접근자 ========================================//
+	float getX() { return _x; }
+	void setX(float x) { _x = x; }
+	float getY() { return _y; }
+	void setY(float y) { _y = y; }
+
+	RECT getBody() { return _body; }
+
 	float getCamX() { return _camX; }
 	void setCamX(float camX) { _camX = camX; }
 	float getCamY() { return _camY; }

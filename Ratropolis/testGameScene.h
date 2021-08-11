@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 
+class Player;
 class Card;
 
 #define MAPWIDTH	8000
@@ -9,11 +10,10 @@ class Card;
 class testGameScene : public Scene
 {
 private:
-	float _x, _y;
-	Card* _sample;
+	Player* _player;
 
 public:
-	virtual HRESULT init(Player* player);
+	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
 	virtual void render();

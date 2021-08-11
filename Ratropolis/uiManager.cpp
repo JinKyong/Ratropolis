@@ -4,15 +4,9 @@
 
 Menu* uiManager::_currentMenu = NULL;
 
-HRESULT uiManager::init(Player* player)
+HRESULT uiManager::init()
 {
-	_player = player;
-
 	_currentMenu = NULL;
-
-	//addMenu("ingameMenu", new InGameMenu);
-
-	//changeMenu("ingameMenu");
 
 	_start = false;
 	_open = false;
@@ -101,5 +95,4 @@ void uiManager::playGame()
 
 	_inGame = new InGameMenu;
 	_inGame->init();
-	_inGame->setPlayer(_player);
 }

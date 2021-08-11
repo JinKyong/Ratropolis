@@ -94,7 +94,7 @@ void dtdManager::render(float destX, float destY, float width, float height)
 	if (!_dRenderTarget) return;
 
 	_dRenderTarget->BeginDraw();
-	_dRenderTarget->Clear(ColorF(ColorF::Aquamarine));
+	_dRenderTarget->Clear(ColorF(ColorF::Black));
 
 	//(실제 게임 화면)
 	D2D1_RECT_F dest = { destX, destY, destX + width, destY + height };

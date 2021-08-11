@@ -2,8 +2,19 @@
 #include "Attribute.h"
 #include <vector>
 
-#define CARDWIDTH	400
-#define CARDHEIGHT	600
+class Player;
+
+//400, 600
+#define CARDWIDTH	160
+#define CARDHEIGHT	240
+
+enum CARD_TYPE {
+	CARD_TYPE_ECONOMY,
+	CARD_TYPE_MILLITARY,
+	CARD_TYPE_BUILD,
+	CARD_TYPE_TECH,
+	END_CARD_TYPE
+};
 
 enum CARD_GRADE {
 	CARD_GRADE_COMMON,
@@ -15,6 +26,7 @@ enum CARD_GRADE {
 
 typedef struct tagCard {
 	int number;				//번호
+	CARD_TYPE type;			//카드 타입
 	CARD_GRADE rarity;		//등급
 	int mainCost;			//메인 비용(골드)
 	int subCost;			//서브 비용(시민 or 건물크기 등등)
@@ -27,10 +39,22 @@ typedef struct tagCard {
 class Card
 {
 protected:
+	Player* _player;
+
 	//위치 좌표
 	float _x, _y;
 	float _angle;
 	RECT _body;
+
+	//상태
+	bool _select;
+	bool _usable;
+
+	//이펙트 이미지 & 프레임
+	dImage* _selectEffect;
+	dImage* _usableEffect;
+	int _frameX, _frameY;
+	float _count;
 
 
 	//이미지
@@ -50,16 +74,14 @@ protected:
 	vector<Attribute*> _atbList;
 
 public:
-	virtual HRESULT init() = 0;
-	virtual void release() = 0;
-	virtual void update() = 0;
-	virtual void render() = 0;
-	virtual void render(float x, float y) = 0;
+	virtual HRESULT init();
+	virtual void release();
+	virtual void update();
+	virtual void render();
 
 	virtual void useCard() = 0;
 
-
-
+	void controlFrame();
 
 	//======================================== 접근자 ========================================//
 
@@ -67,4 +89,11 @@ public:
 	void setX(float x) { _x = x; }
 	float getY() { return _y; }
 	void setY(float y) { _y = y; }
+
+	RECT getBody() { return _body; }
+
+	bool isSelect() { return _select; }
+	void setSelect(bool select) { _select = select; }
+
+	PCARD_INFO getCardStat() { return &_cardStat; }
 };

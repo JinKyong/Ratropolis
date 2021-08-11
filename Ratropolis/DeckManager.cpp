@@ -8,6 +8,7 @@ HRESULT DeckManager::init()
 	_threads[DECK_THREAD_TYPE_SHUFFLE] = NULL;
 	_threads[DECK_THREAD_TYPE_DRAW] = NULL;
 
+
 	_draw = 5;
 
 	for (int i = 0; i < 7; i++) {
@@ -43,6 +44,11 @@ void DeckManager::release()
 void DeckManager::update()
 {
 	//카드 충돌검사
+	COLLISIONMANAGER->handsWithPlayer();
+
+	cardIter card = _currentHands.begin();
+	for (; card!=_currentHands.end(); card++)
+		(*card)->update();
 }
 
 void DeckManager::render()
@@ -53,8 +59,8 @@ void DeckManager::render()
 
 	DTDMANAGER->beginDraw(false);
 
-	for (int i = 0; i < _currentHands.size(); i++)
-		_currentHands[i]->render(_x + i * 100, _y);
+	for (int i = 0; i < _currentHands.size(); i++) 
+		_currentHands[i]->render();
 
 
 	if (PRINTMANAGER->isDebug()) {
@@ -74,15 +80,33 @@ void DeckManager::render()
 	DTDMANAGER->changeRenderTargetPast();
 }
 
+void DeckManager::useCard(Card * card)
+{
+	cardIter hand = _currentHands.begin();
+	for (; hand != _currentHands.end(); ++hand) {
+		if ((*hand) == card) {
+			addCard2Grave((*hand));
+			(*hand)->init();
+			_currentHands.erase(hand);
+			break;
+		}
+	}
+}
+
 void DeckManager::addCard2Deck(Card * card)
 {
 	_currentDeck.push_back(card);
+	_cardBag.push_back(card);
 }
 
 void DeckManager::addCard2Hand()
 {
-	_currentHands.push_back(_currentDeck[_index]);
-	_index++;
+	_currentHands.push_back(_cardBag[0]);
+	_cardBag.erase(_cardBag.begin());
+}
+
+void DeckManager::addCard2Bag()
+{
 }
 
 void DeckManager::addCard2Grave(Card * card)
@@ -92,10 +116,28 @@ void DeckManager::addCard2Grave(Card * card)
 
 void DeckManager::sortHands()
 {
-	_x = WINSIZEX / 2;
-	_y = WINSIZEY - 100;
+	_span = (float)125 / _currentHands.size() + 75;
 
-	_x -= (_currentHands.size() - 1) * 50;
+	cardIter card = _currentHands.begin();
+	for (int i=0; card != _currentHands.end(); card++, i++) {
+		(*card)->setX(WINSIZEX / 2 - (_currentHands.size() - 1) * _span / 2 + _span * i);
+		(*card)->setY(WINSIZEY - 100);
+		(*card)->setSelect(false);
+	}
+}
+
+void DeckManager::sortHandsSelect(int index)
+{
+	if (_currentHands[index]->isSelect()) return;
+
+	_currentHands[index]->setSelect(true);
+	_currentHands[index]->setY(WINSIZEY - 200);
+
+	for (int i = 0; i < index; i++)
+		_currentHands[i]->setX(_currentHands[i]->getX() - CARDWIDTH);
+
+	for (int i = index + 1; i < _currentHands.size(); i++)
+		_currentHands[i]->setX(_currentHands[i]->getX() + CARDWIDTH);
 }
 
 void DeckManager::shuffle()
@@ -103,6 +145,13 @@ void DeckManager::shuffle()
 	//예외처리
 	//이미 셔플중이면 셔플 안 함
 	if (_threads[DECK_THREAD_TYPE_SHUFFLE]) return;
+
+	//카드 무덤 비우고
+	cardIter card = _cardGrave.begin();
+	for (; card != _cardGrave.end();) {
+		_cardBag.push_back(*card);
+		card = _cardGrave.erase(card);
+	}
 
 	//쓰레드를 써보십시다
 	_threads[DECK_THREAD_TYPE_SHUFFLE] = CreateThread(
@@ -122,7 +171,11 @@ void DeckManager::drawCard()
 	if (_threads[DECK_THREAD_TYPE_DRAW]) return;
 
 	//핸드 비우고
-	_currentHands.clear();
+	cardIter card = _currentHands.begin();
+	for (; card != _currentHands.end();) {
+		_cardGrave.push_back(*card);
+		card = _currentHands.erase(card);
+	}
 
 	//쓰레드를 써보십시다
 	_threads[DECK_THREAD_TYPE_DRAW] = CreateThread(
@@ -141,18 +194,19 @@ DWORD DeckManager::threadShuffle(LPVOID lpParameter)
 
 	int index1, index2;
 	Card* tmp;
-	cardList deck = deckHelper->getCurrentDeck();
+	cardList cardBag = deckHelper->getCardBag();
 
 	for (int i = 0; i < 1000; i++) {
-		index1 = RND->getInt(deck.size());
-		index2 = RND->getInt(deck.size());
+		index1 = RND->getInt(cardBag.size());
+		index2 = RND->getInt(cardBag.size());
 
-		tmp = deck[index1];
-		deck[index1] = deck[index2];
-		deck[index2] = tmp;
+		tmp = cardBag[index1];
+		cardBag[index1] = cardBag[index2];
+		cardBag[index2] = tmp;
 	}
 
-	deckHelper->setIndex(0);
+	//deckHelper->setIndex(0);
+	deckHelper->setCardBag(cardBag);
 	deckHelper->releaseShuffleThread();
 
 	return 0;
@@ -174,13 +228,12 @@ DWORD DeckManager::threadDrawCard(LPVOID lpParameter)
 	{
 		if (deckHelper->getThreads()[DECK_THREAD_TYPE_SHUFFLE])	continue;
 
-		if (deckHelper->getIndex() == deck.size()) {
+		if (deckHelper->getCardBag().size() <= 0) {
 			deckHelper->shuffle();
 			continue;
 		}
 
 		deckHelper->addCard2Hand();
-		deckHelper->sortHands();
 
 		Sleep(250);
 

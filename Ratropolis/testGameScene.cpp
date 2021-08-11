@@ -1,26 +1,23 @@
 #include "stdafx.h"
 #include "testGameScene.h"
 #include "Player.h"
-#include "Cheeze.h"
 
-HRESULT testGameScene::init(Player * player)
+HRESULT testGameScene::init()
 {
-	Scene::init(player);
-
 	CAMERAMANAGER->setBackScreenSize(MAPWIDTH, MAPHEIGHT);
+	COLLISIONMANAGER->init();
 
+	_player = GAMEMANAGER->getPlayer();
 	_player->setCamX(MAPWIDTH / 2);
 	_player->setCamY(MAPHEIGHT - 240);
 	_player->playGame();
-
-	_sample = new Cheeze;
-	_sample->init();
 
 	//배경 이미지 등록하고 한번만 그림
 	setBackImage();
 	drawBackImage();
 
 	DECKMANAGER->init();
+	GAMEMANAGER->playGame();
 	UIMANAGER->playGame();
 
 	return S_OK;
@@ -28,13 +25,16 @@ HRESULT testGameScene::init(Player * player)
 
 void testGameScene::release()
 {
+	COLLISIONMANAGER->release();
+	COLLISIONMANAGER->releaseSingleton();
+
 	DECKMANAGER->release();
 	DECKMANAGER->releaseSingleton();
 }
 
 void testGameScene::update()
 {
-	_player->update();
+	GAMEMANAGER->update();
 	UIMANAGER->update();
 	CAMERAMANAGER->updateScreen(_player->getCamX(), _player->getCamY());
 	DECKMANAGER->update();
@@ -45,18 +45,12 @@ void testGameScene::render()
 	if (PRINTMANAGER->isDebug()) {
 		WCHAR tmp[128];
 
-		swprintf_s(tmp, L"x : %f", _x);
-		DTDMANAGER->printText(tmp, _x, _y - 40, 100, 50);
-
-		swprintf_s(tmp, L"y : %f", _y);
-		DTDMANAGER->printText(tmp, _x, _y - 20, 100, 50);
 
 	}
 
-	//_sample->render();
 	UIMANAGER->render();
 	DECKMANAGER->render();
-	_player->render();
+	GAMEMANAGER->render();
 }
 
 void testGameScene::changeScene()

@@ -3,7 +3,6 @@
 #include "Menu.h"
 #include <map>
 
-class Player;
 class InGameMenu;
 
 class uiManager : public singletonBase<uiManager>
@@ -13,7 +12,6 @@ private:
 	typedef map<string, Menu*>::iterator	menuIter;
 
 private:
-	Player* _player;
 	InGameMenu* _inGame;
 
 	menuList	_menuList;
@@ -23,7 +21,7 @@ private:
 	bool _open;
 
 public:
-	HRESULT init(Player* player);
+	HRESULT init();
 	void release();
 	void update();
 	void render();
@@ -34,9 +32,10 @@ public:
 	void playGame();
 
 
+
+	InGameMenu* getInGame() { return _inGame; }
 	Menu* getCurrentMenu() { return _currentMenu; }
 
 	bool getOpen() { return _open; }
 	void setOpen(bool open) { _open = open; }
 };
-

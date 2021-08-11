@@ -21,6 +21,7 @@ HRESULT gameNode::init()
 	CAMERAMANAGER->init();
 	TXTDATA->init();
 	SOUNDMANAGER->init();
+	UIMANAGER->init();
 	CARDDICT->init();
 
 	return S_OK;
@@ -55,6 +56,9 @@ void gameNode::release()
 
 	SOUNDMANAGER->release();
 	SOUNDMANAGER->releaseSingleton();
+
+	UIMANAGER->release();
+	UIMANAGER->releaseSingleton();
 
 	CARDDICT->release();
 	CARDDICT->releaseSingleton();

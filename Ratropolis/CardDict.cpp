@@ -26,32 +26,45 @@ void CardDict::setCardImage()
 
 void CardDict::registerCardFrameImage()
 {
-	IMAGEMANAGER->addDImage("economyFrame", L"img/card/frame/CardFrame1.png", 500, 700);
-	IMAGEMANAGER->addDImage("millitaryFrame", L"img/card/frame/CardFrame2.png", 500, 700);
-	IMAGEMANAGER->addDImage("buildFrame", L"img/card/frame/CardFrame3.png", 500, 700);
-	IMAGEMANAGER->addDImage("techFrame", L"img/card/frame/CardFrame4.png", 500, 700);
+	//500, 700
+	IMAGEMANAGER->addDImage("economyFrame", L"img/card/frame/CardFrame1.png", 200, 280);
+	IMAGEMANAGER->addDImage("millitaryFrame", L"img/card/frame/CardFrame2.png", 200, 280);
+	IMAGEMANAGER->addDImage("buildFrame", L"img/card/frame/CardFrame3.png", 200, 280);
+	IMAGEMANAGER->addDImage("techFrame", L"img/card/frame/CardFrame4.png", 200, 280);
 
-	IMAGEMANAGER->addDImage("nameTag", L"img/card/frame/Ribbon #2426.png", 404, 140);
+	//404, 140
+	IMAGEMANAGER->addDImage("nameTag", L"img/card/frame/Ribbon #2426.png", 162, 56);
 }
 
 void CardDict::registerCardGemImage()
 {
-	IMAGEMANAGER->addDImage("card_rarity0", L"img/card/gem/Card_Rarity2_1.png", 32, 38);
-	IMAGEMANAGER->addDImage("card_rarity1", L"img/card/gem/Card_Rarity2_2.png", 32, 38);
-	IMAGEMANAGER->addDImage("card_rarity2", L"img/card/gem/Card_Rarity2_3.png", 32, 38);
-	IMAGEMANAGER->addDImage("card_rarity3", L"img/card/gem/Card_Rarity2_4.png", 32, 38);
+	//32, 38
+	IMAGEMANAGER->addDImage("card_rarity0", L"img/card/gem/Card_Rarity2_1.png", 13, 15);
+	IMAGEMANAGER->addDImage("card_rarity1", L"img/card/gem/Card_Rarity2_2.png", 13, 15);
+	IMAGEMANAGER->addDImage("card_rarity2", L"img/card/gem/Card_Rarity2_3.png", 13, 15);
+	IMAGEMANAGER->addDImage("card_rarity3", L"img/card/gem/Card_Rarity2_4.png", 13, 15);
 }
 
 void CardDict::registerCardIlluste()
 {
-	//for(int i=0; i)
+	for (int i = 0; i < 33; i++) {
+		char key[128];
+		WCHAR dir[128];
+
+		sprintf_s(key, "illuste%d", i);
+		swprintf_s(dir, L"img/card/illuste/illuste%d.png", i);
+
+		//340, 250
+		IMAGEMANAGER->addDImage(key, dir, 136, 100);
+	}
 }
 
 void CardDict::registerCardCostImage()
 {
-	IMAGEMANAGER->addDImage("cost_gold", L"img/card/cost/GoldFrame.png", 70, 70);
-	IMAGEMANAGER->addDImage("cost_civil", L"img/card/cost/CostFrame.png", 70, 70);
-	IMAGEMANAGER->addDImage("cost_ground", L"img/card/cost/GroundFrame.png", 70, 70);
+	//70, 70
+	IMAGEMANAGER->addDImage("cost_gold", L"img/card/cost/GoldFrame.png", 28, 28);
+	IMAGEMANAGER->addDImage("cost_civil", L"img/card/cost/CostFrame.png", 28, 28);
+	IMAGEMANAGER->addDImage("cost_ground", L"img/card/cost/GroundFrame.png", 28, 28);
 
 	IMAGEMANAGER->addDImage("cost_sword", L"img/card/cost/Card2_Attack.png", 130, 250);
 	IMAGEMANAGER->addDImage("cost_bow", L"img/card/cost/Card2_AttackBow.png", 193, 313);

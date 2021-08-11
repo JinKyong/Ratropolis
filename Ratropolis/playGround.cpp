@@ -19,9 +19,9 @@ HRESULT playGround::init()
 	_player = new Player;
 	_player->init();
 
-	UIMANAGER->init(_player);
+	GAMEMANAGER->init(_player);
 
-	SCENEMANAGER->init(_player);
+	SCENEMANAGER->init();
 	SCENEMANAGER->changeScene("test");
 
 	_debug = false;
@@ -34,8 +34,8 @@ void playGround::release()
 {
 	gameNode::release();
 
-	UIMANAGER->release();
-	UIMANAGER->releaseSingleton();
+	GAMEMANAGER->release();
+	GAMEMANAGER->releaseSingleton();
 
 	SCENEMANAGER->release();
 	SCENEMANAGER->releaseSingleton();

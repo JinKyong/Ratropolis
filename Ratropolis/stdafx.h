@@ -40,6 +40,7 @@
 #include "soundManager.h"
 #include "DeckManager.h"
 #include "CardDict.h"
+#include "GameManager.h"
 
 
 using namespace std;
@@ -73,6 +74,7 @@ using namespace D2D1;
 #define SOUNDMANAGER soundManager::getSingleton()
 #define DECKMANAGER DeckManager::getSingleton()
 #define CARDDICT CardDict::getSingleton()
+#define GAMEMANAGER GameManager::getSingleton()
 
 #define SAFE_DELETE(p) { if(p) { delete(p); (p) = nullptr; } }
 #define SAFE_DELETE_ARRAY(p) { if(p) { delete[](p); (p) = nullptr; } }

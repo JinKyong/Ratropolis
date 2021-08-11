@@ -43,12 +43,6 @@
     <Filter Include="playGround\Stage\base">
       <UniqueIdentifier>{4833ff6c-8b65-4590-9631-30d237f87701}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Build">
-      <UniqueIdentifier>{ce5d777b-4676-4d4f-90f5-28527aefc172}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\Player">
-      <UniqueIdentifier>{494faf37-c15f-4279-9c35-6cd6f277ecd7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\UI">
       <UniqueIdentifier>{f4775c06-247b-4cc5-9eeb-e85d0b391671}</UniqueIdentifier>
     </Filter>
@@ -96,6 +90,21 @@
     </Filter>
     <Filter Include="playGround\UI\Menu\base">
       <UniqueIdentifier>{324a69fe-518f-4ee2-a14a-e47f278b181f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object">
+      <UniqueIdentifier>{47400504-ac2b-4803-9eb8-663064fa98ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\Player">
+      <UniqueIdentifier>{494faf37-c15f-4279-9c35-6cd6f277ecd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\Build">
+      <UniqueIdentifier>{ce5d777b-4676-4d4f-90f5-28527aefc172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\Enemy">
+      <UniqueIdentifier>{a98966f8-9132-4dfc-860f-0cf9910b7f6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\NPC">
+      <UniqueIdentifier>{fdd06dec-c10b-47dc-a366-991031a25956}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -187,7 +196,7 @@
       <Filter>playGround\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>playGround\Player</Filter>
+      <Filter>playGround\Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>playGround\Deck\Card\base</Filter>
@@ -218,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="InGameMenu.h">
       <Filter>playGround\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>playGround\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -294,7 +306,7 @@
       <Filter>playGround\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>playGround\Player</Filter>
+      <Filter>playGround\Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>playGround\Deck\Card\base</Filter>
@@ -319,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="InGameMenu.cpp">
       <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>playGround\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -24,11 +24,13 @@ private:
 	cardList	_cardGrave;			//카드 무덤(사용한 카드)
 	int _index;
 
+
 	//뽑는 카드 수
 	int _draw;
 
 	//카드출력 시작지점
 	float _x, _y;
+	float _span;
 	//float _angle;
 
 
@@ -41,13 +43,18 @@ public:
 	void update();
 	void render();
 
+	//카드 사용
+	void useCard(Card* card);
+
 	//카드 추가하기
 	void addCard2Deck(Card* card);
 	void addCard2Hand();
+	void addCard2Bag();
 	void addCard2Grave(Card* card);
 
 	//카드 정렬
 	void sortHands();
+	void sortHandsSelect(int index);
 
 	//카드 셔플 및 드로우
 	void shuffle();
@@ -63,8 +70,9 @@ public:
 	//======================================== 접근자 ========================================//
 	cardList getCurrentDeck() { return _currentDeck; }
 	cardList getCurrentHands() { return _currentHands; }
-	cardList getCardGrave() { return _cardGrave; }
 	cardList getCardBag() { return _cardBag; }
+	void setCardBag(cardList cardBag) { _cardBag = cardBag; }
+	cardList getCardGrave() { return _cardGrave; }
 
 	int getIndex() { return _index; }
 	void setIndex(int index) { _index = index; }

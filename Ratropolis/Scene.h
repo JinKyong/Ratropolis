@@ -1,18 +1,15 @@
 #pragma once
 #include <vector>
 
-class Player;
-
 class Scene
 {
 protected:
-	static Player* _player;
 
 public:
 	Scene() {};
 	~Scene() {};
 
-	virtual HRESULT init(Player* player);
+	virtual HRESULT init() = 0;
 	virtual void release() = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;
