@@ -148,12 +148,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Attribute.h" />
+    <ClInclude Include="Building.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Card31.h" />
+    <ClInclude Include="Card32.h" />
+    <ClInclude Include="CardBagMenu.h" />
     <ClInclude Include="CardDict.h" />
+    <ClInclude Include="CardGraveMenu.h" />
     <ClInclude Include="CardHeader.h" />
     <ClInclude Include="Card_Economy.h" />
-    <ClInclude Include="Cheeze.h" />
+    <ClInclude Include="Card_Millitary.h" />
     <ClInclude Include="collisionManager.h" />
     <ClInclude Include="DeckManager.h" />
     <ClInclude Include="dialogManager.h" />
@@ -161,6 +166,10 @@
     <ClInclude Include="dtdManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="gameNode.h" />
+    <ClInclude Include="Icon.h" />
+    <ClInclude Include="Icon_Civil.h" />
+    <ClInclude Include="Icon_Gold.h" />
+    <ClInclude Include="Icon_Space.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="InGameMenu.h" />
@@ -168,6 +177,7 @@
     <ClInclude Include="macroFunc.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuHeader.h" />
+    <ClInclude Include="NameTag.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="printManager.h" />
@@ -191,11 +201,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Attribute.cpp" />
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Card31.cpp" />
+    <ClCompile Include="Card32.cpp" />
+    <ClCompile Include="CardBagMenu.cpp" />
     <ClCompile Include="CardDict.cpp" />
+    <ClCompile Include="CardGraveMenu.cpp" />
     <ClCompile Include="Card_Economy.cpp" />
-    <ClCompile Include="Cheeze.cpp" />
+    <ClCompile Include="Card_Millitary.cpp" />
     <ClCompile Include="collisionManager.cpp" />
     <ClCompile Include="DeckManager.cpp" />
     <ClCompile Include="dialogManager.cpp" />
@@ -203,11 +218,16 @@
     <ClCompile Include="dtdManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="Icon_Civil.cpp" />
+    <ClCompile Include="Icon_Gold.cpp" />
+    <ClCompile Include="Icon_Space.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="NameTag.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="printManager.cpp" />

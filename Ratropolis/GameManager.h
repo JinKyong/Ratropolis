@@ -9,6 +9,10 @@ private:
 	Player* _player;
 	RECT _useBox;
 
+	//buildManager
+	//enemyManager
+	//npcManager
+
 public:
 	HRESULT init(Player* player);
 	void release();

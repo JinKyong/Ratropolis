@@ -88,6 +88,8 @@ void Player::playGame()
 	//지도자 레벨
 	_level = 1;
 
+	_selectedCard = NULL;
+
 
 	//세금 징수 쓰레드
 	CreateThread(
@@ -106,12 +108,18 @@ void Player::controlMouse()
 	if (KEYMANAGER->isOnceKeyDown(VK_MBUTTON))
 		CAMERAMANAGER->resetZoom();
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) {
 		changeCursor(CURSOR_TYPE_CLICK);
+		COLLISIONMANAGER->buttonWithCursor();
+	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON)) {
 		if (COLLISIONMANAGER->grabbedCard())
 			changeCursor(CURSOR_TYPE_GRAB);
+		if (_selectedCard) {
+			_selectedCard->setX(_ptMouse.x);
+			_selectedCard->setY(_ptMouse.y);
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON)) {

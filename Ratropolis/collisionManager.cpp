@@ -2,6 +2,7 @@
 #include "collisionManager.h"
 #include "Player.h"
 #include "Card.h"
+#include "MenuHeader.h"
 
 HRESULT collisionManager::init()
 {
@@ -14,23 +15,7 @@ void collisionManager::release()
 {
 }
 
-bool collisionManager::grabbedCard()
-{
-	vector<Card*> hands = DECKMANAGER->getCurrentHands();
-
-	for (int i = 0; i < hands.size(); i++) {
-		if (PtInRect(&(hands[i]->getBody()), _ptMouse)) {
-			_player->changeCard(hands[i]);
-			hands[i]->setX(_ptMouse.x);
-			hands[i]->setY(_ptMouse.y);
-			return true;
-		}
-	}
-
-	return false;
-}
-
-void collisionManager::handsWithPlayer()
+void collisionManager::handsWithCursor()
 {
 	vector<Card*> hands = DECKMANAGER->getCurrentHands();
 
@@ -45,6 +30,22 @@ void collisionManager::handsWithPlayer()
 	DECKMANAGER->sortHands();
 }
 
+bool collisionManager::grabbedCard()
+{
+	if (_player->getCard())	return false;
+
+	vector<Card*> hands = DECKMANAGER->getCurrentHands();
+
+	for (int i = 0; i < hands.size(); i++) {
+		if (PtInRect(&(hands[i]->getBody()), _ptMouse)) {
+			_player->changeCard(hands[i]);
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void collisionManager::handsWithUseBox(Card* card)
 {
 	switch (card->getCardStat()->type) {
@@ -55,5 +56,17 @@ void collisionManager::handsWithUseBox(Card* card)
 
 	default:
 		break;
+	}
+}
+
+void collisionManager::buttonWithCursor()
+{
+	BUTTON* buttons = UIMANAGER->getInGame()->getButton();
+
+	for (int i = 0; i < END_HUD_TYPE; i++) {
+		if (PtInRect(&buttons[i].body, _ptMouse)) {
+			UIMANAGER->getInGame()->useButton(i);
+			break;
+		}
 	}
 }

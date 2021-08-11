@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "Card_Economy.h"
+#include "Card_Millitary.h"
 #include "Player.h"
 #include "NameTag.h"
 #include "Icon.h"
 
-HRESULT Card_Economy::init()
+HRESULT Card_Millitary::init()
 {
 	Card::init();
 
@@ -14,13 +14,13 @@ HRESULT Card_Economy::init()
 	_body = RectMakeCenter(_x, _y, CARDWIDTH, CARDHEIGHT);
 
 
-	//경제 카드
-	_cardStat.type = CARD_TYPE_ECONOMY;
+	//군사 카드
+	_cardStat.type = CARD_TYPE_MILLITARY;
 
 
 
 	//이미지 할당
-	_frame = IMAGEMANAGER->findDImage("economyFrame");
+	_frame = IMAGEMANAGER->findDImage("millitaryFrame");
 
 	char tmp[128];
 	sprintf_s(tmp, "card_rarity%d", _cardStat.rarity);
@@ -33,12 +33,12 @@ HRESULT Card_Economy::init()
 	return S_OK;
 }
 
-void Card_Economy::release()
+void Card_Millitary::release()
 {
 	Card::release();
 }
 
-void Card_Economy::update()
+void Card_Millitary::update()
 {
 	Card::update();
 
@@ -54,14 +54,12 @@ void Card_Economy::update()
 		_usable = false;
 }
 
-void Card_Economy::render()
+void Card_Millitary::render()
 {
-	if(_select)
+	if (_select)
 		DTDMANAGER->setScale(2.0, 2.0, _x, _y);
 
-	//이펙트
 	Card::render();
-
 
 	//이미지
 	_illuste->render(_x - _illuste->getWidth() / 2, _y - _illuste->getHeight() / 2 - 40);
@@ -72,7 +70,7 @@ void Card_Economy::render()
 	_name->render(_x, _y - _frame->getHeight() / 2);
 	_cost->render(_x - CARDWIDTH / 2 + 16, _y - CARDHEIGHT / 2 + 22);
 	if (_civilCost)
-		_civilCost->render(_x + CARDWIDTH / 2 - 16,	_y - CARDHEIGHT / 2 + 22);
+		_civilCost->render(_x + CARDWIDTH / 2 - 16, _y - CARDHEIGHT / 2 + 22);
 
 
 	//텍스트
@@ -91,11 +89,11 @@ void Card_Economy::render()
 	DTDMANAGER->resetTransform();
 }
 
-void Card_Economy::useCard()
+void Card_Millitary::useCard()
 {
 	//cost
 	_player->changeGold(-_cost->getValue());
-	if(_civilCost)
+	if (_civilCost)
 		_player->changeCivil(-_civilCost->getValue());
 
 	DECKMANAGER->useCard(this);

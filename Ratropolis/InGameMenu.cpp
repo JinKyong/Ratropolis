@@ -70,6 +70,48 @@ void InGameMenu::render()
 	rightBottomText();
 }
 
+void InGameMenu::useButton(int index)
+{
+	if (index >= END_HUD_TYPE) return;
+
+	switch (index) {
+	case HUD_TYPE_LEADERSKILL:
+		//useSkill();
+		break;
+
+	case HUD_TYPE_CARDBAG:
+		//UIMANAGER->changeMenu("cardBag");
+		break;
+
+	case HUD_TYPE_ALLCARDS:
+		//UIMANAGER->changeMenu("allCards");
+		break;
+
+	case HUD_TYPE_ADVISOR:
+		//hide and seek (advisor)
+		break;
+
+	case HUD_TYPE_PAUSE:
+		//pause & change Icon
+		break;
+
+	case HUD_TYPE_OPTION:
+		//UIMANAGER->changeMenu("option");
+		break;
+
+	case HUD_TYPE_REDRAW:
+		DECKMANAGER->drawCard();
+		break;
+
+	case HUD_TYPE_CARDGRAVE:
+		UIMANAGER->changeMenu("cardGrave");
+		break;
+
+	default:
+		break;
+	}
+}
+
 void InGameMenu::leftTopInit()
 {
 	//LEFT TOP HUD

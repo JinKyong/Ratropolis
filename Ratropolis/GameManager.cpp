@@ -37,5 +37,5 @@ void GameManager::render()
 
 void GameManager::playGame()
 {
-	_useBox = RectMakeCenter(WINSIZEX / 2, (WINSIZEY - 240) / 2, WINSIZEX, WINSIZEY - 240);
+	_useBox = RectMakeCenter(WINSIZEX / 2, (WINSIZEY - 240) / 2, WINSIZEX, WINSIZEY - 360);
 }

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "DeckManager.h"
-#include "Cheeze.h"
 
 HRESULT DeckManager::init()
 {
@@ -11,8 +10,13 @@ HRESULT DeckManager::init()
 
 	_draw = 5;
 
-	for (int i = 0; i < 7; i++) {
-		Card* card = new Cheeze;
+	for (int i = 0; i < 10; i++) {
+		Card* card = CARDDICT->makeCard(31);
+		card->init();
+		addCard2Deck(card);
+	}
+	for (int i = 0; i < 10; i++) {
+		Card* card = CARDDICT->makeCard(32);
 		card->init();
 		addCard2Deck(card);
 	}
@@ -44,7 +48,7 @@ void DeckManager::release()
 void DeckManager::update()
 {
 	//카드 충돌검사
-	COLLISIONMANAGER->handsWithPlayer();
+	COLLISIONMANAGER->handsWithCursor();
 
 	cardIter card = _currentHands.begin();
 	for (; card!=_currentHands.end(); card++)

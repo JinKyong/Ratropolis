@@ -6,6 +6,8 @@ typedef struct tagButton {
 
 	float x, y;
 	RECT body;
+
+	void useButton() {};
 }BUTTON;
 
 enum HUD_TYPE {
@@ -45,6 +47,9 @@ public:
 	virtual void update();
 	virtual void render();
 
+	void useButton(int index);
+
+
 	void leftTopInit();
 	void leftBottomInit();
 	void rightTopInit();
@@ -54,5 +59,13 @@ public:
 	void leftBottomText();
 	void rightTopText();
 	void rightBottomText();
+
+
+
+
+
+
+
+	BUTTON* getButton() { return _defaultHUDButton; }
 };
 

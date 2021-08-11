@@ -78,4 +78,6 @@ public:
 	void setCamY(float camY) { _camY = camY; }
 
 	DEFAULT_STAT getDefaultStat() { return _defaultStat; }
+
+	Card* getCard() { return _selectedCard; }
 };

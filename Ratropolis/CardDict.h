@@ -11,14 +11,13 @@ private:
 	typedef map<int, func>		cardList;
 
 private:
-	int _index;
 	cardList _cardList;
 
 public:
 	HRESULT init();
 	void release();
 
-	void addCard(func f);
+	void addCard(int num, func f);
 	Card* makeCard(int num) { return (this->*_cardList[num])(); }
 
 
@@ -30,6 +29,7 @@ public:
 	void registerCardCostImage();			//카드 cost		(비용)
 
 	//======================== 카드 도감 ========================//
-	//Card* card32() { return new Card32; }
+	Card* card31() { return new Card31; }
+	Card* card32() { return new Card32; }
 };
 

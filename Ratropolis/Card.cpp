@@ -37,52 +37,52 @@ void Card::render()
 
 void Card::controlFrame()
 {
-	if (_select) {
-		_count += TIMEMANAGER->getElapsedTime();
-		
-		if (_count >= 0.1) {
-			if (_frameX >= _selectEffect->getMaxFrameX()) {
-
-				if (_frameY >= _selectEffect->getMaxFrameY()) {
-					_frameX = _frameY = 0;
-				}
-				else {
-					_frameX = 0;
-					_frameY++;
-				}
-
-			}
-			else {
-				_frameX++;
-			}
-
-			_count = 0;
-		}
-
-		_selectEffect->frameRender(_x - CARDWIDTH / 2 - 21, _y - CARDHEIGHT / 2 - 19, _frameX, _frameY);
-	}
-	else if (_usable) {
+	if (_usable) {
 		_count += TIMEMANAGER->getElapsedTime();
 
-		if (_count >= 0.1) {
-			if (_frameX >= _usableEffect->getMaxFrameX()) {
+		if (_select) {
+			if (_count >= 0.1) {
+				if (_frameX >= _selectEffect->getMaxFrameX()) {
 
-				if (_frameY >= _usableEffect->getMaxFrameY()) {
-					_frameX = _frameY = 0;
+					if (_frameY >= _selectEffect->getMaxFrameY()) {
+						_frameX = _frameY = 0;
+					}
+					else {
+						_frameX = 0;
+						_frameY++;
+					}
+
 				}
 				else {
-					_frameX = 0;
-					_frameY++;
+					_frameX++;
 				}
 
-			}
-			else {
-				_frameX++;
+				_count = 0;
 			}
 
-			_count = 0;
+			_selectEffect->frameRender(_x - CARDWIDTH / 2 - 21, _y - CARDHEIGHT / 2 - 19, _frameX, _frameY);
 		}
+		else {
+			if (_count >= 0.1) {
+				if (_frameX >= _usableEffect->getMaxFrameX()) {
 
-		_usableEffect->frameRender(_x - CARDWIDTH / 2 - 21, _y - CARDHEIGHT / 2 - 19, _frameX, _frameY);
+					if (_frameY >= _usableEffect->getMaxFrameY()) {
+						_frameX = _frameY = 0;
+					}
+					else {
+						_frameX = 0;
+						_frameY++;
+					}
+
+				}
+				else {
+					_frameX++;
+				}
+
+				_count = 0;
+			}
+
+			_usableEffect->frameRender(_x - CARDWIDTH / 2 - 21, _y - CARDHEIGHT / 2 - 19, _frameX, _frameY);
+		}
 	}
 }

@@ -3,6 +3,8 @@
 #include <vector>
 
 class Player;
+class NameTag;
+class Icon;
 
 //400, 600
 #define CARDWIDTH	160
@@ -26,13 +28,10 @@ enum CARD_GRADE {
 
 typedef struct tagCard {
 	int number;				//번호
+	int level;				//레벨(최대 2)
 	CARD_TYPE type;			//카드 타입
 	CARD_GRADE rarity;		//등급
-	int mainCost;			//메인 비용(골드)
-	int subCost;			//서브 비용(시민 or 건물크기 등등)
-	int level;				//레벨(최대 2)
 
-	wstring name;			//이름
 	wstring desc;			//설명
 }CARD_INFO, *PCARD_INFO;
 
@@ -61,9 +60,10 @@ protected:
 	dImage* _frame;			//틀
 	dImage* _gem;			//레어도(보석)
 	dImage* _illuste;		//이미지(그림)
-	dImage* _nameTag;		//이름태그
-	dImage* _mainCost;		//메인 비용(골드)
-	dImage* _subCost;		//서브 비용
+
+	//컴포넌트
+	NameTag* _name;			//이름
+	Icon* _cost;			//비용
 
 
 	//카드 내용

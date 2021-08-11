@@ -5,6 +5,9 @@ HRESULT CardDict::init()
 {
 	setCardImage();
 
+	addCard(31, &CardDict::card31);
+	addCard(32, &CardDict::card32);
+
 	return S_OK;
 }
 
@@ -12,8 +15,9 @@ void CardDict::release()
 {
 }
 
-void CardDict::addCard(func f)
+void CardDict::addCard(int num, func f)
 {
+	_cardList.insert(make_pair(num, f));
 }
 
 void CardDict::setCardImage()

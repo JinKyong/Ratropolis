@@ -2,6 +2,7 @@
 
 class Menu
 {
+
 public:
 	virtual HRESULT init() = 0;
 	virtual void release() = 0;

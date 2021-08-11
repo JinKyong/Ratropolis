@@ -8,6 +8,8 @@ HRESULT uiManager::init()
 {
 	_currentMenu = NULL;
 
+	addMenu("cardGrave", new CardGraveMenu);
+
 	_start = false;
 	_open = false;
 
@@ -67,6 +69,13 @@ Menu * uiManager::addMenu(string menuName, Menu * menu)
 
 HRESULT uiManager::changeMenu(string menuName)
 {
+	if (menuName == "null") {
+		if (_currentMenu) _currentMenu->release();
+		_open = false;
+
+		_currentMenu = NULL;
+	}
+
 	menuIter find = _menuList.find(menuName);
 
 	if (find == _menuList.end()) return E_FAIL;

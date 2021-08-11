@@ -52,12 +52,6 @@
     <Filter Include="playGround\Deck">
       <UniqueIdentifier>{7fcb59e0-ff5f-4aeb-bb1c-0daff02fe779}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Deck\Attribtue">
-      <UniqueIdentifier>{d4340d18-38af-475f-a349-e04d706ee73c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\Deck\Attribtue\base">
-      <UniqueIdentifier>{602fecec-4d6c-442f-8e8b-db459ffdfce4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Deck\Card">
       <UniqueIdentifier>{b9e6b715-ddce-4e6a-b238-6d918a34bfa7}</UniqueIdentifier>
     </Filter>
@@ -97,14 +91,44 @@
     <Filter Include="playGround\Object\Player">
       <UniqueIdentifier>{494faf37-c15f-4279-9c35-6cd6f277ecd7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Object\Build">
-      <UniqueIdentifier>{ce5d777b-4676-4d4f-90f5-28527aefc172}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Object\Enemy">
       <UniqueIdentifier>{a98966f8-9132-4dfc-860f-0cf9910b7f6d}</UniqueIdentifier>
     </Filter>
     <Filter Include="playGround\Object\NPC">
       <UniqueIdentifier>{fdd06dec-c10b-47dc-a366-991031a25956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\Building">
+      <UniqueIdentifier>{ce5d777b-4676-4d4f-90f5-28527aefc172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\Building\base">
+      <UniqueIdentifier>{9fece669-8390-4aaf-8094-9d701c3a31f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component">
+      <UniqueIdentifier>{81f2e3bb-edf1-4dae-a5e6-0f3f982b0202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\ToolTip">
+      <UniqueIdentifier>{2c61a333-67d1-4837-b0c3-c6e69762d3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\ProgressBar">
+      <UniqueIdentifier>{5556c6f0-31c3-480c-b5fb-9d6b8ab307fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\Icon">
+      <UniqueIdentifier>{ac78b3a0-85e4-4294-bcf0-f47865511798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\Icon\cost">
+      <UniqueIdentifier>{d99fdbda-18a5-4118-aa4f-e40444391558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\Icon\base">
+      <UniqueIdentifier>{9f1c6881-0e5d-435d-9f6c-733380699a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\ToolTip\NameTag">
+      <UniqueIdentifier>{d6d49fae-73f7-42a6-9d09-1f251c192b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\Attribtue">
+      <UniqueIdentifier>{d4340d18-38af-475f-a349-e04d706ee73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\Attribtue\base">
+      <UniqueIdentifier>{602fecec-4d6c-442f-8e8b-db459ffdfce4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +172,6 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="printManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="sceneManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="soundManager.h">
@@ -202,13 +223,10 @@
       <Filter>playGround\Deck\Card\base</Filter>
     </ClInclude>
     <ClInclude Include="Attribute.h">
-      <Filter>playGround\Deck\Attribtue\base</Filter>
+      <Filter>playGround\Component\Attribtue\base</Filter>
     </ClInclude>
     <ClInclude Include="Card_Economy.h">
       <Filter>playGround\Deck\Card\Economy\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Cheeze.h">
-      <Filter>playGround\Deck\Card\Economy</Filter>
     </ClInclude>
     <ClInclude Include="CardDict.h">
       <Filter>playGround\Deck\Card</Filter>
@@ -230,6 +248,42 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>playGround\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneManager.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Card32.h">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClInclude>
+    <ClInclude Include="Card31.h">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClInclude>
+    <ClInclude Include="Building.h">
+      <Filter>playGround\Object\Building\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon.h">
+      <Filter>playGround\Component\Icon\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon_Civil.h">
+      <Filter>playGround\Component\Icon\cost</Filter>
+    </ClInclude>
+    <ClInclude Include="NameTag.h">
+      <Filter>playGround\Component\ToolTip\NameTag</Filter>
+    </ClInclude>
+    <ClInclude Include="Card_Millitary.h">
+      <Filter>playGround\Deck\Card\Millitary\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon_Gold.h">
+      <Filter>playGround\Component\Icon\cost</Filter>
+    </ClInclude>
+    <ClInclude Include="Icon_Space.h">
+      <Filter>playGround\Component\Icon\cost</Filter>
+    </ClInclude>
+    <ClInclude Include="CardGraveMenu.h">
+      <Filter>playGround\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="CardBagMenu.h">
+      <Filter>playGround\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +318,6 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="printManager.cpp">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="sceneManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="soundManager.cpp">
@@ -315,13 +366,10 @@
       <Filter>playGround\Deck</Filter>
     </ClCompile>
     <ClCompile Include="Attribute.cpp">
-      <Filter>playGround\Deck\Attribtue\base</Filter>
+      <Filter>playGround\Component\Attribtue\base</Filter>
     </ClCompile>
     <ClCompile Include="Card_Economy.cpp">
       <Filter>playGround\Deck\Card\Economy\base</Filter>
-    </ClCompile>
-    <ClCompile Include="Cheeze.cpp">
-      <Filter>playGround\Deck\Card\Economy</Filter>
     </ClCompile>
     <ClCompile Include="CardDict.cpp">
       <Filter>playGround\Deck\Card</Filter>
@@ -334,6 +382,42 @@
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>playGround\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>playGround\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Card32.cpp">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClCompile>
+    <ClCompile Include="Card31.cpp">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>playGround\Object\Building\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon.cpp">
+      <Filter>playGround\Component\Icon\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon_Civil.cpp">
+      <Filter>playGround\Component\Icon\cost</Filter>
+    </ClCompile>
+    <ClCompile Include="NameTag.cpp">
+      <Filter>playGround\Component\ToolTip\NameTag</Filter>
+    </ClCompile>
+    <ClCompile Include="Card_Millitary.cpp">
+      <Filter>playGround\Deck\Card\Millitary\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon_Gold.cpp">
+      <Filter>playGround\Component\Icon\cost</Filter>
+    </ClCompile>
+    <ClCompile Include="Icon_Space.cpp">
+      <Filter>playGround\Component\Icon\cost</Filter>
+    </ClCompile>
+    <ClCompile Include="CardGraveMenu.cpp">
+      <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="CardBagMenu.cpp">
+      <Filter>playGround\UI\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -34,8 +34,8 @@ void testGameScene::release()
 
 void testGameScene::update()
 {
-	GAMEMANAGER->update();
 	UIMANAGER->update();
+	GAMEMANAGER->update();
 	CAMERAMANAGER->updateScreen(_player->getCamX(), _player->getCamY());
 	DECKMANAGER->update();
 }
