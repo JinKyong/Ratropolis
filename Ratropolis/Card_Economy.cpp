@@ -56,8 +56,7 @@ void Card_Economy::update()
 
 void Card_Economy::render()
 {
-	if(_select)
-		DTDMANAGER->setScale(2.0, 2.0, _x, _y);
+	DTDMANAGER->setScale(_zoom, _zoom, _x, _y);
 
 	//¿Ã∆Â∆Æ
 	Card::render();

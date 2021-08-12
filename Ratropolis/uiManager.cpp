@@ -9,6 +9,8 @@ HRESULT uiManager::init()
 	_currentMenu = NULL;
 
 	addMenu("cardGrave", new CardGraveMenu);
+	addMenu("cardBag", new CardBagMenu);
+	addMenu("allCard", new AllCardMenu);
 
 	_start = false;
 	_open = false;
@@ -45,17 +47,35 @@ void uiManager::update()
 
 void uiManager::render()
 {
-	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_UI);
+	//inGame UI
+	if (_start) {
+		DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_UI);
 
-	DTDMANAGER->beginDraw();
+		DTDMANAGER->beginDraw();
 
-	//여기서 그리자
-	if (_start) _inGame->render();
-	if (_currentMenu) _currentMenu->render();
+		//여기서 그리자
+		_inGame->render();
 
-	DTDMANAGER->endDraw();
+		DTDMANAGER->endDraw();
 
-	DTDMANAGER->changeRenderTargetPast();
+		DTDMANAGER->changeRenderTargetPast();
+	}
+
+
+
+
+	//Card UI
+	if (_currentMenu) {
+		DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_CARD);
+
+		DTDMANAGER->beginDraw();
+
+		_currentMenu->render();
+
+		DTDMANAGER->endDraw();
+
+		DTDMANAGER->changeRenderTargetPast();
+	}
 }
 
 Menu * uiManager::addMenu(string menuName, Menu * menu)

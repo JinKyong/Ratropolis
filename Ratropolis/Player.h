@@ -1,4 +1,5 @@
 #pragma once
+#include "Cursor.h"
 
 class Card;
 
@@ -12,24 +13,10 @@ typedef struct tagDefaultStatus {
 	//int poison;			//오염도
 }DEFAULT_STAT;
 
-enum CURSOR_TYPE {
-	CURSOR_TYPE_DEFAULT,
-	CURSOR_TYPE_CLICK,
-	CURSOR_TYPE_GRAB,
-	CURSOR_TYPE_ATTACK,
-	CURSOR_TYPE_MINING,
-	END_CURSOR_TYPE
-};
-
 class Player
 {
 private:
-	//cursor
-	dImage* _cursor[END_CURSOR_TYPE];
-	dImage* _currentCursor;
-
-	float _x, _y;
-	RECT _body;
+	Cursor* _cursor;
 
 	//camera중점
 	float _camX, _camY;
@@ -47,10 +34,7 @@ public:
 	void render();
 
 	void playGame();
-	void controlMouse();
 	void controlKeyboard();
-
-	void changeCursor(CURSOR_TYPE type);
 
 	void changeGold(int num);
 	void changeCivil(int num);
@@ -65,12 +49,7 @@ public:
 
 
 	//======================================== 접근자 ========================================//
-	float getX() { return _x; }
-	void setX(float x) { _x = x; }
-	float getY() { return _y; }
-	void setY(float y) { _y = y; }
-
-	RECT getBody() { return _body; }
+	Cursor* getCursor() { return _cursor; }
 
 	float getCamX() { return _camX; }
 	void setCamX(float camX) { _camX = camX; }
@@ -80,4 +59,5 @@ public:
 	DEFAULT_STAT getDefaultStat() { return _defaultStat; }
 
 	Card* getCard() { return _selectedCard; }
+	void setCard(Card* card) { _selectedCard = card; }
 };

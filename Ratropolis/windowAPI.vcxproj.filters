@@ -130,6 +130,9 @@
     <Filter Include="playGround\Component\Attribtue\base">
       <UniqueIdentifier>{602fecec-4d6c-442f-8e8b-db459ffdfce4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Component\Cursor">
+      <UniqueIdentifier>{643a5402-e409-482f-ae52-31664ffa21a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -228,9 +231,6 @@
     <ClInclude Include="Card_Economy.h">
       <Filter>playGround\Deck\Card\Economy\base</Filter>
     </ClInclude>
-    <ClInclude Include="CardDict.h">
-      <Filter>playGround\Deck\Card</Filter>
-    </ClInclude>
     <ClInclude Include="CardHeader.h">
       <Filter>playGround\Deck\Card\base</Filter>
     </ClInclude>
@@ -284,6 +284,15 @@
     </ClInclude>
     <ClInclude Include="CardBagMenu.h">
       <Filter>playGround\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="AllCardMenu.h">
+      <Filter>playGround\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="CardDict.h">
+      <Filter>playGround\Deck\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>playGround\Component\Cursor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +427,12 @@
     </ClCompile>
     <ClCompile Include="CardBagMenu.cpp">
       <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="AllCardMenu.cpp">
+      <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>playGround\Component\Cursor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

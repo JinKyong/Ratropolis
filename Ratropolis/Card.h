@@ -46,8 +46,9 @@ protected:
 	RECT _body;
 
 	//상태
-	bool _select;
+	float _zoom;
 	bool _usable;
+	bool _select;
 
 	//이펙트 이미지 & 프레임
 	dImage* _selectEffect;
@@ -92,6 +93,10 @@ public:
 
 	RECT getBody() { return _body; }
 
+	float getZoom() { return _zoom; }
+	void setZoom(float zoom) { _zoom = zoom; }
+	bool isUsable() { return _usable; }
+	void setUsable(bool usable) { _usable = usable; }
 	bool isSelect() { return _select; }
 	void setSelect(bool select) { _select = select; }
 

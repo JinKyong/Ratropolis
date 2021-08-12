@@ -5,6 +5,7 @@ enum RENDERTARGET_TYPE {
 	RENDERTARGET_TYPE_STATIC,
 	RENDERTARGET_TYPE_BACKBUFFER,
 	RENDERTARGET_TYPE_UI,
+	RENDERTARGET_TYPE_CARD,
 	END_RENDERTARGET_TYPE
 };
 
@@ -17,6 +18,7 @@ private:
 	ID2D1BitmapRenderTarget	*_dBitRenderTarget;
 	ID2D1BitmapRenderTarget	*_dBackRenderTarget;
 	ID2D1BitmapRenderTarget *_dUIRenderTarget;
+	ID2D1BitmapRenderTarget *_dCardRenderTarget;
 
 	ID2D1BitmapRenderTarget	*_pastRenderTarget;
 	ID2D1BitmapRenderTarget	*_currentRenderTarget;
@@ -24,6 +26,7 @@ private:
 	ID2D1Bitmap				*_dBitmap;
 	ID2D1Bitmap				*_dBackBitmap;
 	ID2D1Bitmap				*_dUIBitmap;
+	ID2D1Bitmap				*_dCardBitmap;
 
 	//Brush
 	ID2D1BitmapBrush		*_dBitmapBrush;

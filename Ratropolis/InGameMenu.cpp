@@ -80,11 +80,11 @@ void InGameMenu::useButton(int index)
 		break;
 
 	case HUD_TYPE_CARDBAG:
-		//UIMANAGER->changeMenu("cardBag");
+		UIMANAGER->changeMenu("cardBag");
 		break;
 
 	case HUD_TYPE_ALLCARDS:
-		//UIMANAGER->changeMenu("allCards");
+		UIMANAGER->changeMenu("allCard");
 		break;
 
 	case HUD_TYPE_ADVISOR:

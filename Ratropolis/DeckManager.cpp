@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DeckManager.h"
+#include "Player.h"
 
 HRESULT DeckManager::init()
 {
@@ -10,12 +11,12 @@ HRESULT DeckManager::init()
 
 	_draw = 5;
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 25; i++) {
 		Card* card = CARDDICT->makeCard(31);
 		card->init();
 		addCard2Deck(card);
 	}
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 25; i++) {
 		Card* card = CARDDICT->makeCard(32);
 		card->init();
 		addCard2Deck(card);
@@ -47,8 +48,12 @@ void DeckManager::release()
 
 void DeckManager::update()
 {
+	//카드 정렬
+	sortHands();
+
 	//카드 충돌검사
-	COLLISIONMANAGER->handsWithCursor();
+	if(!GAMEMANAGER->getPlayer()->getCard())
+		COLLISIONMANAGER->handsWithCursor();
 
 	cardIter card = _currentHands.begin();
 	for (; card!=_currentHands.end(); card++)
@@ -57,11 +62,12 @@ void DeckManager::update()
 
 void DeckManager::render()
 {
+	if (UIMANAGER->getOpen()) return;
 	//if (_currentHands.size() <= 0) return;
 
-	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_UI);
+	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_CARD);
 
-	DTDMANAGER->beginDraw(false);
+	DTDMANAGER->beginDraw();
 
 	for (int i = 0; i < _currentHands.size(); i++) 
 		_currentHands[i]->render();
@@ -127,6 +133,7 @@ void DeckManager::sortHands()
 		(*card)->setX(WINSIZEX / 2 - (_currentHands.size() - 1) * _span / 2 + _span * i);
 		(*card)->setY(WINSIZEY - 100);
 		(*card)->setSelect(false);
+		(*card)->setZoom(1.0);
 	}
 }
 
@@ -135,6 +142,7 @@ void DeckManager::sortHandsSelect(int index)
 	if (_currentHands[index]->isSelect()) return;
 
 	_currentHands[index]->setSelect(true);
+	_currentHands[index]->setZoom(2.0);
 	_currentHands[index]->setY(WINSIZEY - 200);
 
 	for (int i = 0; i < index; i++)

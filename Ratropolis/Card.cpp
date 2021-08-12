@@ -7,7 +7,8 @@ HRESULT Card::init()
 	_player = GAMEMANAGER->getPlayer();
 
 	//상태
-	_select = _usable = false;
+	_zoom = 1.0;
+	_usable = _select = false;
 
 	//이펙트 이미지 & 프레임
 	_selectEffect = IMAGEMANAGER->addFrameDImage("selectEffect", L"img/card/effect/Card_SelectEffect_Blue.png", 1000, 840, 5, 3);
@@ -24,10 +25,7 @@ void Card::release()
 
 void Card::update()
 {
-	if (_select)
-		_body = RectMakeCenter(_x, _y, CARDWIDTH * 2, CARDHEIGHT * 2);
-	else
-		_body = RectMakeCenter(_x, _y, CARDWIDTH, CARDHEIGHT);
+	_body = RectMakeCenter(_x, _y, CARDWIDTH * _zoom, CARDHEIGHT * _zoom);
 }
 
 void Card::render()

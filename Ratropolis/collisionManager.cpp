@@ -15,19 +15,41 @@ void collisionManager::release()
 {
 }
 
+Card* collisionManager::cardListWithCursor(vector<Card*> cards, float x, float y)
+{
+	POINT pt = { x, y };
+
+	for (int i = 0; i < cards.size(); i++) {
+		if (PtInRect(&cards[i]->getBody(), pt))
+			return cards[i];
+	}
+
+	return NULL;
+}
+
+Card * collisionManager::selectedCard(vector<Card*> cards, float x, float y)
+{
+	POINT pt = { x, y };
+
+	for (int i = 0; i < cards.size(); i++) {
+		if (PtInRect(&cards[i]->getBody(), pt))
+			return cards[i];
+	}
+
+	return NULL;
+}
+
 void collisionManager::handsWithCursor()
 {
 	vector<Card*> hands = DECKMANAGER->getCurrentHands();
 
 	for (int i = 0; i < hands.size(); i++) {
-		POINT pt = { _player->getX(), _player->getY() };
-		if (PtInRect(&(hands[i]->getBody()), pt)) {
+		//POINT pt = { _player->getX(), _player->getY() };
+		if (PtInRect(&(hands[i]->getBody()), _ptMouse)) {
 			DECKMANAGER->sortHandsSelect(i);
 			return;
 		}
 	}
-
-	DECKMANAGER->sortHands();
 }
 
 bool collisionManager::grabbedCard()

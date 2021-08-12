@@ -3,20 +3,8 @@
 
 HRESULT Player::init()
 {
-	_cursor[CURSOR_TYPE_DEFAULT] = IMAGEMANAGER->addDImage("cursor_default",
-		L"img/player/cursor/Cursor_Default.png", 32, 32);
-	_cursor[CURSOR_TYPE_CLICK] = IMAGEMANAGER->addDImage("cursor_click",
-		L"img/player/cursor/Cursor_Click.png", 32, 32);
-	_cursor[CURSOR_TYPE_GRAB] = IMAGEMANAGER->addDImage("cursor_grab",
-		L"img/player/cursor/Cursor_Grab.png", 32, 32);
-	_cursor[CURSOR_TYPE_ATTACK] = IMAGEMANAGER->addDImage("cursor_attack",
-		L"img/player/cursor/Cursor_Attack.png", 32, 32);
-	_cursor[CURSOR_TYPE_MINING] = IMAGEMANAGER->addDImage("cursor_mining",
-		L"img/player/cursor/Cursor_Mining.png", 32, 32);
-
-	_currentCursor = _cursor[CURSOR_TYPE_DEFAULT];
-
-	_body = RectMakeCenter(_ptMouse.x, _ptMouse.y, 50, 100);
+	_cursor = new Cursor;
+	_cursor->init(this);
 
 	return S_OK;
 }
@@ -27,9 +15,6 @@ void Player::release()
 
 void Player::update()
 {
-	_x = _ptMouse.x;
-	_y = _ptMouse.y;
-
 	//testKey
 	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD1)) {
 		changeGold(-5);
@@ -41,38 +26,15 @@ void Player::update()
 	
 
 	//조작키
-	controlMouse();
+	//controlMouse();
+	_cursor->updatePosition(_ptMouse.x, _ptMouse.y);
+	_cursor->update();
 	controlKeyboard();
-
-	
-
-	_body = RectMakeCenter(_ptMouse.x, _ptMouse.y, 50, 100);
 }
 
 void Player::render()
 {
-
-	if (PRINTMANAGER->isDebug()) {
-		WCHAR tmp[128];
-		D2D1_RECT_F screen = CAMERAMANAGER->getScreen();
-
-		swprintf_s(tmp, L"x : %f", _ptMouse.x);
-		DTDMANAGER->printText(tmp, _ptMouse.x, _ptMouse.y - 120, 100, 50);
-
-		swprintf_s(tmp, L"y : %f", _ptMouse.y);
-		DTDMANAGER->printText(tmp, _ptMouse.x, _ptMouse.y - 100, 100, 50);
-
-		swprintf_s(tmp, L"cameraX : %f", screen.left);
-		DTDMANAGER->printText(tmp, _ptMouse.x, _ptMouse.y - 80, 200, 50);
-
-		swprintf_s(tmp, L"cameraY : %f", screen.top);
-		DTDMANAGER->printText(tmp, _ptMouse.x, _ptMouse.y - 60, 200, 50);
-
-		DTDMANAGER->Rectangle(_body);
-	}
-
-	_currentCursor->render(_ptMouse.x - _currentCursor->getWidth() / 2,
-		_ptMouse.y - _currentCursor->getHeight() / 2);
+	_cursor->render();
 }
 
 void Player::playGame()
@@ -102,37 +64,6 @@ void Player::playGame()
 	);
 }
 
-void Player::controlMouse()
-{
-	//Mouse
-	if (KEYMANAGER->isOnceKeyDown(VK_MBUTTON))
-		CAMERAMANAGER->resetZoom();
-
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) {
-		changeCursor(CURSOR_TYPE_CLICK);
-		COLLISIONMANAGER->buttonWithCursor();
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON)) {
-		if (COLLISIONMANAGER->grabbedCard())
-			changeCursor(CURSOR_TYPE_GRAB);
-		if (_selectedCard) {
-			_selectedCard->setX(_ptMouse.x);
-			_selectedCard->setY(_ptMouse.y);
-		}
-	}
-
-	if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON)) {
-		changeCursor(CURSOR_TYPE_DEFAULT);
-		if (_selectedCard) {
-			_x = _y = -1000;
-			//충돌검사
-			COLLISIONMANAGER->handsWithUseBox(_selectedCard);
-			_selectedCard = NULL;
-		}
-	}
-}
-
 void Player::controlKeyboard()
 {
 	//Keyboard
@@ -147,14 +78,6 @@ void Player::controlKeyboard()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
 		DECKMANAGER->drawCard();
-}
-
-void Player::changeCursor(CURSOR_TYPE type)
-{
-	if (type >= END_CURSOR_TYPE) return;
-	if (_currentCursor = _cursor[type]) return;
-
-	_currentCursor = _cursor[type];
 }
 
 void Player::changeGold(int num)

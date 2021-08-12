@@ -5,7 +5,7 @@
 
 class Cursor;
 
-class CardGraveMenu : public Menu
+class AllCardMenu : public Menu
 {
 private:
 	dImage* _back;
@@ -26,3 +26,4 @@ public:
 		return a->getCardStat()->number < b->getCardStat()->number;
 	}
 };
+

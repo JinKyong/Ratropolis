@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AllCardMenu.h" />
     <ClInclude Include="Attribute.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="cameraManager.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Card_Economy.h" />
     <ClInclude Include="Card_Millitary.h" />
     <ClInclude Include="collisionManager.h" />
+    <ClInclude Include="Cursor.h" />
     <ClInclude Include="DeckManager.h" />
     <ClInclude Include="dialogManager.h" />
     <ClInclude Include="dImage.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="video.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AllCardMenu.cpp" />
     <ClCompile Include="Attribute.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="cameraManager.cpp" />
@@ -212,6 +215,7 @@
     <ClCompile Include="Card_Economy.cpp" />
     <ClCompile Include="Card_Millitary.cpp" />
     <ClCompile Include="collisionManager.cpp" />
+    <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DeckManager.cpp" />
     <ClCompile Include="dialogManager.cpp" />
     <ClCompile Include="dImage.cpp" />

@@ -1,10 +1,8 @@
 #include "stdafx.h"
-#include "CardGraveMenu.h"
+#include "AllCardMenu.h"
 #include "Player.h"
 
-class Cursor;
-
-HRESULT CardGraveMenu::init()
+HRESULT AllCardMenu::init()
 {
 	_scrollY = 0;
 	_hide = true;
@@ -12,36 +10,40 @@ HRESULT CardGraveMenu::init()
 	_back = IMAGEMANAGER->addDImage("_darkBackground", L"img/UI/DarkBack.png", WINSIZEX, WINSIZEY);
 
 	_cursor = GAMEMANAGER->getPlayer()->getCursor();
-	_cards = DECKMANAGER->getCardGrave();
+	_card = NULL;
+	_cards = DECKMANAGER->getCurrentDeck();
 
 	//카드번호순으로 정렬
 	sort(_cards.begin(), _cards.end(), compare);
 
-	for (int i = 0; i < _cards.size(); i++) {
-		int width = i % 5;
-		int height = i / 5;
-
-		_cards[i]->setX(400 + width * 225);
-		_cards[i]->setY(200 + height * 300);
-
-		_cards[i]->update();
-		_cards[i]->setUsable(false);
-	}
+	//for (int i = 0; i < _cards.size(); i++) {
+	//	int width = i % 5;
+	//	int height = i / 5;
+	//
+	//	_cards[i]->setX(400 + width * 225);
+	//	_cards[i]->setY(200 + height * 300);
+	//
+	//	_cards[i]->setZoom(1.0);
+	//	_cards[i]->update();
+	//	_cards[i]->setUsable(false);
+	//}
 
 	UIMANAGER->setOpen(true);
 
 	return S_OK;
 }
 
-void CardGraveMenu::release()
+void AllCardMenu::release()
 {
 	for (int i = 0; i < _cards.size(); i++) {
 		_cards[i]->setX(5000);
 		_cards[i]->setY(500);
+
+		_cards[i]->setZoom(1.0);
 	}
 }
 
-void CardGraveMenu::update()
+void AllCardMenu::update()
 {
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y + _scrollY);
 	_cursor->update();
@@ -73,14 +75,14 @@ void CardGraveMenu::update()
 	}
 }
 
-void CardGraveMenu::render()
+void AllCardMenu::render()
 {
 	_back->render(0, _scrollY, 0.8);
 
 	//카드 render
 	for (int i = 0; i < _cards.size(); i++) {
 		if (_cards[i] == _card) continue;
-
+		
 		_cards[i]->render();
 	}
 
@@ -101,7 +103,7 @@ void CardGraveMenu::render()
 	_cursor->render();
 }
 
-void CardGraveMenu::changeScroll(float num)
+void AllCardMenu::changeScroll(float num)
 {
 	Menu::changeScroll(num);
 

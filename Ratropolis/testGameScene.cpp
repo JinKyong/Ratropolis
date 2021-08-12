@@ -34,23 +34,26 @@ void testGameScene::release()
 
 void testGameScene::update()
 {
+	if (!UIMANAGER->getOpen()) {
+		DECKMANAGER->update();
+		GAMEMANAGER->update();
+		CAMERAMANAGER->updateScreen(_player->getCamX(), _player->getCamY());
+	}
+
 	UIMANAGER->update();
-	GAMEMANAGER->update();
-	CAMERAMANAGER->updateScreen(_player->getCamX(), _player->getCamY());
-	DECKMANAGER->update();
 }
 
 void testGameScene::render()
 {
 	if (PRINTMANAGER->isDebug()) {
-		WCHAR tmp[128];
+		//WCHAR tmp[128];
 
 
 	}
 
-	UIMANAGER->render();
 	DECKMANAGER->render();
 	GAMEMANAGER->render();
+	UIMANAGER->render();
 }
 
 void testGameScene::changeScene()

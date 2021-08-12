@@ -78,10 +78,12 @@ void dtdManager::release()
 	if (_dBitRenderTarget)	SAFE_RELEASE2(_dBitRenderTarget);
 	if (_dBackRenderTarget) SAFE_RELEASE2(_dBackRenderTarget);
 	if (_dUIRenderTarget)	SAFE_RELEASE2(_dUIRenderTarget);
+	if (_dCardRenderTarget)	SAFE_RELEASE2(_dCardRenderTarget);
 
 	if (_dBitmap)			SAFE_RELEASE2(_dBitmap);
 	if (_dBackBitmap)		SAFE_RELEASE2(_dBackBitmap);
 	if (_dUIBitmap)			SAFE_RELEASE2(_dUIBitmap);
+	if (_dCardBitmap)		SAFE_RELEASE2(_dCardBitmap);
 	if (_dBrush)			SAFE_RELEASE2(_dBrush);
 
 	if (_dWFactory)			SAFE_RELEASE2(_dWFactory);
@@ -97,9 +99,16 @@ void dtdManager::render(float destX, float destY, float width, float height)
 	_dRenderTarget->Clear(ColorF(ColorF::Black));
 
 	//(실제 게임 화면)
-	D2D1_RECT_F dest = { destX, destY, destX + width, destY + height };
+	D2D1_RECT_F dest = dRectMake(destX, destY, destX + width, destY + height);
 	D2D1_RECT_F sour = CAMERAMANAGER->getScreen();
-	D2D1_RECT_F sourUI = { 0, 0, WINSIZEX, WINSIZEY };
+	D2D1_RECT_F sourUI = dRectMake(0, 0, WINSIZEX, WINSIZEY);
+	D2D1_RECT_F sourCard;
+
+	//메뉴가 열려있냐 여부에 따라서
+	if (UIMANAGER->getOpen())
+		sourCard = dRectMake(0, UIMANAGER->getCurrentMenu()->getScrollY(), WINSIZEX, WINSIZEY);
+	else
+		sourCard = dRectMake(0, 0, WINSIZEX, WINSIZEY);
 
 	//배경
 	_dRenderTarget->DrawBitmap(_dBackBitmap, dest,
@@ -107,9 +116,12 @@ void dtdManager::render(float destX, float destY, float width, float height)
 	//오브젝트
 	_dRenderTarget->DrawBitmap(_dBitmap, dest,
 		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
-	//UI
+	//UI(inGame)
 	_dRenderTarget->DrawBitmap(_dUIBitmap, dest,
 		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourUI);
+	//Card
+	_dRenderTarget->DrawBitmap(_dCardBitmap, dest,
+		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourCard);
 
 	//CAMERAMANAGER->fade();
 
@@ -129,14 +141,16 @@ void dtdManager::endDraw()
 {
 	if (_currentRenderTarget) {
 		//Background
-		if(_currentRenderTarget == _dBackRenderTarget)
+		if (_currentRenderTarget == _dBackRenderTarget)
 			_currentRenderTarget->GetBitmap(&_dBackBitmap);
 		//BackBuffer
 		else if (_currentRenderTarget == _dBitRenderTarget)
 			_currentRenderTarget->GetBitmap(&_dBitmap);
 		//UI
-		else if(_currentRenderTarget == _dUIRenderTarget)
+		else if (_currentRenderTarget == _dUIRenderTarget)
 			_currentRenderTarget->GetBitmap(&_dUIBitmap);
+		else if (_currentRenderTarget == _dCardRenderTarget)
+			_currentRenderTarget->GetBitmap(&_dCardBitmap);
 
 		_currentRenderTarget->EndDraw();
 	}
@@ -159,6 +173,9 @@ void dtdManager::changeRenderTarget(RENDERTARGET_TYPE type)
 	case RENDERTARGET_TYPE_UI:
 		_currentRenderTarget = _dUIRenderTarget;
 		break;
+
+	case RENDERTARGET_TYPE_CARD:
+		_currentRenderTarget = _dCardRenderTarget;
 
 	default:
 		break;
@@ -395,11 +412,13 @@ void dtdManager::setBackBuffer(float width, float height)
 	SAFE_RELEASE2(_dBitRenderTarget);
 	SAFE_RELEASE2(_dBackRenderTarget);
 	SAFE_RELEASE2(_dUIRenderTarget);
+	SAFE_RELEASE2(_dCardRenderTarget);
 
 	if (_dRenderTarget) {
 		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(width, height), &_dBitRenderTarget);
 		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(width, height), &_dBackRenderTarget);
 		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(WINSIZEX, WINSIZEY), &_dUIRenderTarget);
+		_dRenderTarget->CreateCompatibleRenderTarget(SizeF(WINSIZEX, WINSIZEY * 5), &_dCardRenderTarget);
 
 		changeRenderTarget(RENDERTARGET_TYPE_BACKBUFFER);
 	}

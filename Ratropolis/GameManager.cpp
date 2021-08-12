@@ -20,7 +20,9 @@ void GameManager::update()
 
 void GameManager::render()
 {
-	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_UI);
+	if (UIMANAGER->getOpen()) return;
+
+	DTDMANAGER->changeRenderTarget(RENDERTARGET_TYPE_CARD);
 
 	DTDMANAGER->beginDraw(false);
 

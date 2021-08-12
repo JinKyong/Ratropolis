@@ -125,7 +125,10 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	case WM_MOUSEWHEEL:
 		delta = HIWORD(wParam);
 		delta = delta / WHEEL_DELTA;
-		CAMERAMANAGER->changeZoom((float)delta / 10);
+		if (UIMANAGER->getOpen())
+			UIMANAGER->getCurrentMenu()->changeScroll((float)delta * 40);
+		else
+			CAMERAMANAGER->changeZoom((float)delta / 10);
 		break;
 
 
