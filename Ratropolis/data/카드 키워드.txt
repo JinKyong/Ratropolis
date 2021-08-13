@@ -1,0 +1,27 @@
+경제 카드/ 기술 카드
+노동 -> ui에 노동 로딩 추가		//labor
+
+군사 카드
+고용 -> npc에 시간제한 추가		//hire
+후방배치 -> npc에 위치 추가		//Rear Rank
+
+건물 카드
+수동 -> 직접 눌러줘야함		//Active
+
+
+모든 카드
+일회성-> 사라짐			//one-off
+ephemeral(일회성?)
+armor(방어력)
+unplayable(사용불가)
+bounty(현상금)
+support(지원)
+growth(성장)
+
+
+세금 Tax
+추가 카드 Hoard
+
+
+속성 업데이트? 할거 없음
+속성 렌더? 툴팁 설명 필요하면 함

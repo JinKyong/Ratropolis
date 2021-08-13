@@ -5,6 +5,7 @@ HRESULT CardDict::init()
 {
 	setCardImage();
 
+	addCard(1, &CardDict::card1);
 	addCard(31, &CardDict::card31);
 	addCard(32, &CardDict::card32);
 
@@ -37,7 +38,7 @@ void CardDict::registerCardFrameImage()
 	IMAGEMANAGER->addDImage("techFrame", L"img/card/frame/CardFrame4.png", 200, 280);
 
 	//404, 140
-	IMAGEMANAGER->addDImage("nameTag", L"img/card/frame/Ribbon #2426.png", 162, 56);
+	IMAGEMANAGER->addDImage("nameTag", L"img/component/tooltip/Ribbon #2426.png", 162, 56);
 }
 
 void CardDict::registerCardGemImage()

@@ -94,6 +94,8 @@ HRESULT uiManager::changeMenu(string menuName)
 		_open = false;
 
 		_currentMenu = NULL;
+
+		return S_OK;
 	}
 
 	menuIter find = _menuList.find(menuName);

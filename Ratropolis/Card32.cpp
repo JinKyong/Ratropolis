@@ -5,23 +5,25 @@
 #include "Icon_Gold.h"
 #include "Icon_Civil.h"
 
-Card32::Card32()
+Card32::Card32(int level)
 {
 	//카드 내용
 	_cardStat.number = 32;					//번호
-	_cardStat.level = 1;					//레벨(최대 2)
+	_cardStat.level = level;				//레벨(최대 2)
 	_cardStat.rarity = CARD_GRADE_COMMON;	//등급
-	_cardStat.desc = L"들고있는 치즈마다 +30 금화";		//설명
 
+	_reward = 30 + (_cardStat.level - 1) * 15;
+	//설명
+	swprintf_s(_cardStat.desc, L"들고있는 치즈마다 +%d 금화", _reward);
+
+	//이름
 	_name = new NameTag;
-	_name->init(L"치즈");		//이름
+	_name->init(L"치즈", _cardStat.level);
 
+	//비용
 	_cost = new Icon_Gold;
-	_cost->init(40);
-	_civilCost = NULL;			//비용
-
-	//속성(카드 키워드)
-	//_atbList;
+	_cost->init(40 + (_cardStat.level - 1) * 20);
+	_civilCost = NULL;			
 }
 
 Card32::~Card32()
@@ -37,7 +39,7 @@ void Card32::update()
 	_sum = 0;
 	for (int i = 0; i < hands.size(); i++)
 		if (hands[i]->getCardStat()->number == _cardStat.number)
-			_sum += 30;
+			_sum += _reward;
 
 	//WCHAR tmp[128];
 	//tmp

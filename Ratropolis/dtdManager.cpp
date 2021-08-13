@@ -42,7 +42,7 @@ HRESULT dtdManager::init()
 	//Text Factory가 생성되었으면 Text Format 생성
 	if (SUCCEEDED(hr)) {
 		hr = _dWFactory->CreateTextFormat(
-			L"모리스9",
+			L"배달의민족 주아",
 			nullptr,
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
@@ -66,6 +66,44 @@ HRESULT dtdManager::init()
 	CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
 	_pastRenderTarget = _currentRenderTarget = NULL;
+
+
+	//D2D1_FACTORY_OPTIONS options;
+	//options.debugLevel = D2D1_DEBUG_LEVEL_ERROR;
+	//D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &_dFactory1);
+	//
+	//UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+
+	//D3D_FEATURE_LEVEL featureLevels[] = {
+	//	D3D_FEATURE_LEVEL_11_1,
+	//	D3D_FEATURE_LEVEL_11_0,
+	//	D3D_FEATURE_LEVEL_10_1,
+	//	D3D_FEATURE_LEVEL_10_0,
+	//	D3D_FEATURE_LEVEL_9_3,
+	//	D3D_FEATURE_LEVEL_9_2,
+	//	D3D_FEATURE_LEVEL_9_1,
+	//};
+
+	//D3D11CreateDevice(
+	//	nullptr,
+	//	D3D_DRIVER_TYPE_HARDWARE,
+	//	0,
+	//	creationFlags,
+	//	featureLevels,
+	//	ARRAYSIZE(featureLevels),
+	//	D3D11_SDK_VERSION,
+	//	&_d3Device,
+	//	&_d3FeatureLevel,
+	//	&_d3Context
+	//);
+
+	//_d3Device->As(&_d3DxgiDevice);
+
+	//_dFactory1->CreateDevice(_d3DxgiDevice->Get(), &_dDevice);
+	//_dDevice->CreateDeviceContext(
+	//	D2D1_DEVICE_CONTEXT_OPTIONS_NONE,
+	//	&_dContext
+	//);
 
 	return S_OK;
 }
@@ -214,7 +252,7 @@ void dtdManager::printTextF(LPCWCHAR text, float x, float y, int width, int heig
 			SAFE_RELEASE2(_dWCustomFormat);
 
 			_dWFactory->CreateTextFormat(
-				L"모리스9",
+				L"배달의민족 주아",
 				nullptr,
 				DWRITE_FONT_WEIGHT_NORMAL,
 				DWRITE_FONT_STYLE_NORMAL,
@@ -227,7 +265,7 @@ void dtdManager::printTextF(LPCWCHAR text, float x, float y, int width, int heig
 	}
 	else {
 		_dWFactory->CreateTextFormat(
-			L"모리스9",
+			L"배달의민족 주아",
 			nullptr,
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
@@ -253,7 +291,7 @@ void dtdManager::printTextF(LPCWCHAR text, D2D1_RECT_F rc, float size)
 			SAFE_RELEASE2(_dWCustomFormat);
 
 			_dWFactory->CreateTextFormat(
-				L"모리스9",
+				L"배달의민족 주아",
 				nullptr,
 				DWRITE_FONT_WEIGHT_NORMAL,
 				DWRITE_FONT_STYLE_NORMAL,
@@ -266,7 +304,7 @@ void dtdManager::printTextF(LPCWCHAR text, D2D1_RECT_F rc, float size)
 	}
 	else {
 		_dWFactory->CreateTextFormat(
-			L"모리스9",
+			L"배달의민족 주아",
 			nullptr,
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
@@ -285,14 +323,14 @@ void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int heigh
 	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, dRectMakeCenter(x, y, width, height), _dBrush);
 }
 
-void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int height, float size, bool central)
+void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int height, float size, bool centralW, bool centralH)
 {
 	if (_dWCustomFormat) {
 		if (_dWCustomFormat->GetFontSize() != size) {
 			SAFE_RELEASE2(_dWCustomFormat);
 
 			_dWFactory->CreateTextFormat(
-				L"모리스9",
+				L"배달의민족 주아",
 				nullptr,
 				DWRITE_FONT_WEIGHT_NORMAL,
 				DWRITE_FONT_STYLE_NORMAL,
@@ -305,7 +343,7 @@ void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int heigh
 	}
 	else {
 		_dWFactory->CreateTextFormat(
-			L"모리스9",
+			L"배달의민족 주아",
 			nullptr,
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
@@ -316,10 +354,10 @@ void dtdManager::printText(LPCWCHAR text, float x, float y, int width, int heigh
 		);
 	}
 
-	if (central) {
+	if (centralW)
 		_dWCustomFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	if (centralH)
 		_dWCustomFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	}
 
 	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, dRectMakeCenter(x, y, width, height), _dBrush);
 
@@ -331,14 +369,14 @@ void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc)
 	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, rc, _dBrush);
 }
 
-void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool central)
+void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centralW, bool centralH)
 {
 	if (_dWCustomFormat) {
 		if (_dWCustomFormat->GetFontSize() != size) {
 			SAFE_RELEASE2(_dWCustomFormat);
 
 			_dWFactory->CreateTextFormat(
-				L"모리스9",
+				L"배달의민족 주아",
 				nullptr,
 				DWRITE_FONT_WEIGHT_NORMAL,
 				DWRITE_FONT_STYLE_NORMAL,
@@ -351,7 +389,7 @@ void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centr
 	}
 	else {
 		_dWFactory->CreateTextFormat(
-			L"모리스9",
+			L"배달의민족 주아",
 			nullptr,
 			DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
@@ -362,10 +400,10 @@ void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centr
 		);
 	}
 	
-	if (central) {
+	if (centralW)
 		_dWCustomFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	if (centralH)
 		_dWCustomFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	}
 
 	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, rc, _dBrush);
 

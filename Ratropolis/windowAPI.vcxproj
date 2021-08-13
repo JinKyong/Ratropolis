@@ -152,6 +152,7 @@
     <ClInclude Include="Building.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Card1.h" />
     <ClInclude Include="Card31.h" />
     <ClInclude Include="Card32.h" />
     <ClInclude Include="CardBagMenu.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="InGameMenu.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="Labor.h" />
     <ClInclude Include="macroFunc.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuHeader.h" />
@@ -196,6 +198,7 @@
     <ClInclude Include="testGameScene.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="ToolTip.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="uiManager.h" />
     <ClInclude Include="utils.h" />
@@ -207,6 +210,7 @@
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Card1.cpp" />
     <ClCompile Include="Card31.cpp" />
     <ClCompile Include="Card32.cpp" />
     <ClCompile Include="CardBagMenu.cpp" />
@@ -230,6 +234,7 @@
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="Labor.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NameTag.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -248,6 +253,7 @@
     <ClCompile Include="testGameScene.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="ToolTip.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="uiManager.cpp" />
     <ClCompile Include="utils.cpp" />

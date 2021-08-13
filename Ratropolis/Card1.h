@@ -1,14 +1,13 @@
 #pragma once
 #include "Card_Economy.h"
 
-class Card32 : public Card_Economy
+class Card1 : public Card_Economy
 {
 private:
-	int _sum;
 
 public:
-	Card32(int level);
-	~Card32();
+	Card1(int level);
+	~Card1();
 
 	void update();
 	void useCard();

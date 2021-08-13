@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Card.h"
+#include "ToolTip.h"
 
 HRESULT Card::init()
 {
@@ -31,6 +32,12 @@ void Card::update()
 void Card::render()
 {
 	controlFrame();
+}
+
+void Card::renderDetailed()
+{
+	for (int i = 0; i < _atbList.size(); i++)
+		_atbList[i]->getToolTip()->render(_body.right, _body.top + 10 + i * 140);
 }
 
 void Card::controlFrame()

@@ -75,7 +75,7 @@ void Card_Millitary::render()
 
 	//텍스트
 	D2D1_RECT_F tmpRect = dRectMakeCenter(_x, _y + 62, 120, 60);
-	DTDMANAGER->printText(_cardStat.desc.c_str(), tmpRect, 10, true);
+	DTDMANAGER->printText(_cardStat.desc, tmpRect, 10, true);
 
 	//디버깅
 	if (PRINTMANAGER->isDebug()) {

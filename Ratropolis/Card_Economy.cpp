@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "NameTag.h"
 #include "Icon.h"
+#include "ToolTip.h"
 
 HRESULT Card_Economy::init()
 {
@@ -69,14 +70,32 @@ void Card_Economy::render()
 
 	//이름태그 및 코스트(+ 스탯)
 	_name->render(_x, _y - _frame->getHeight() / 2);
+
 	_cost->render(_x - CARDWIDTH / 2 + 16, _y - CARDHEIGHT / 2 + 22);
 	if (_civilCost)
 		_civilCost->render(_x + CARDWIDTH / 2 - 16,	_y - CARDHEIGHT / 2 + 22);
 
+	DTDMANAGER->resetBrushColor();
 
-	//텍스트
-	D2D1_RECT_F tmpRect = dRectMakeCenter(_x, _y + 62, 120, 60);
-	DTDMANAGER->printText(_cardStat.desc.c_str(), tmpRect, 10, true);
+
+	//설명
+	D2D1_RECT_F	tmpRECT = dRectMakeCenter(_x, _y + 64, 120, 58);
+
+	if (_atbList.size()) {
+		LPWSTR atb = new WCHAR[128];
+		lstrcpyW(atb, L" ");
+		for (int i = 0; i < _atbList.size(); i++) {
+			if(i > 0)
+				lstrcatW(atb, L", ");
+			lstrcatW(atb, _atbList[i]->getToolTip()->getName());
+		}
+
+		DTDMANAGER->setBrushColor(ColorF(ColorF::Red));
+		DTDMANAGER->printText(atb, tmpRECT, 10, true, false);
+		DTDMANAGER->resetBrushColor();
+	}
+
+	DTDMANAGER->printText(_cardStat.desc, tmpRECT, 10, true, true);
 
 	//디버깅
 	if (PRINTMANAGER->isDebug()) {
@@ -84,7 +103,7 @@ void Card_Economy::render()
 		WCHAR tmp[128];
 		swprintf_s(tmp, L"x : %f", _x);
 		DTDMANAGER->printText(tmp, _x, _body.top, CARDWIDTH, 20, 10);
-		DTDMANAGER->Rectangle(tmpRect);
+		DTDMANAGER->Rectangle(tmpRECT);
 	}
 
 	DTDMANAGER->resetTransform();

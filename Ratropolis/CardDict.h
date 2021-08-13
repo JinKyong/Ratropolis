@@ -7,7 +7,7 @@
 class CardDict : public singletonBase<CardDict>
 {
 private:
-	typedef Card*(CardDict::*func)();
+	typedef Card*(CardDict::*func)(int level);
 	typedef map<int, func>		cardList;
 
 private:
@@ -18,7 +18,7 @@ public:
 	void release();
 
 	void addCard(int num, func f);
-	Card* makeCard(int num) { return (this->*_cardList[num])(); }
+	Card* makeCard(int num, int level = 1) { return (this->*_cardList[num])(level); }
 
 
 
@@ -29,7 +29,8 @@ public:
 	void registerCardCostImage();			//카드 cost		(비용)
 
 	//======================== 카드 도감 ========================//
-	Card* card31() { return new Card31; }
-	Card* card32() { return new Card32; }
+	Card* card1(int level) { return new Card1(level); }
+	Card* card31(int level) { return new Card31(level); }
+	Card* card32(int level) { return new Card32(level); }
 };
 

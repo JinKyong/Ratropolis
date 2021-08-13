@@ -7,7 +7,7 @@ private:
 	int _sum;
 
 public:
-	Card31();
+	Card31(int level);
 	~Card31();
 
 	void update();

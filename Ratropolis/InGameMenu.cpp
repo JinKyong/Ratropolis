@@ -43,7 +43,7 @@ void InGameMenu::render()
 	//LEFT TOP HUD
 	_topHUD->render(0, 0);
 	_goldIcon->render(30, 20);
-	_ratsIcon->render(150, 20);
+	_ratsIcon->render(160, 20);
 	_waveIcon->render(50, 62);
 	//_poisonIcon;
 
@@ -51,9 +51,11 @@ void InGameMenu::render()
 	//Other HUD
 	for (int i = 0; i < END_HUD_TYPE; i++) {
 		//Button
-		if (PtInRect(&_defaultHUDButton[i].body, _ptMouse))
-			_defaultHUDHigh->render(_defaultHUDButton[i].body.left - 15,
-				_defaultHUDButton[i].body.top - 15);
+		if (!UIMANAGER->getOpen()) {
+			if (PtInRect(&_defaultHUDButton[i].body, _ptMouse))
+				_defaultHUDHigh->render(_defaultHUDButton[i].body.left - 15,
+					_defaultHUDButton[i].body.top - 15);
+		}
 		_defaultHUD->render(_defaultHUDButton[i].body.left,
 			_defaultHUDButton[i].body.top);
 
@@ -170,15 +172,28 @@ void InGameMenu::leftTopText()
 {
 	//TEXT
 	DEFAULT_STAT stat = GAMEMANAGER->getPlayer()->getDefaultStat();
-	D2D1_RECT_F tmpRECT = dRectMake(70, 25, 100, 50);
-
+	D2D1_RECT_F tmpRECT = dRectMake(65, 27, 80, 20);
 	WCHAR tmp[128];
+
+	DTDMANAGER->setBrushColor(ColorF(ColorF::PaleGoldenrod));
 	swprintf_s(tmp, L"%d", stat.gold);
 	//DTDMANAGER->setBrushColor(ColorF(ColorF::DarkGoldenrod));
-	DTDMANAGER->printText(tmp, tmpRECT, 20);
+	DTDMANAGER->printText(tmp, tmpRECT, 18);
+
+	//tax
+	DTDMANAGER->setBrushColor(ColorF(ColorF::GhostWhite));
+	tmpRECT = dRectMake(120, 23, 80, 20);
+	swprintf_s(tmp, L"+%d", stat.tax);
+	DTDMANAGER->printText(tmp, tmpRECT, 12);
+
+	//civil
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Green));
+	tmpRECT = dRectMake(195, 27, 80, 20);
+	swprintf_s(tmp, L"%d/%d", stat.currentCivil, stat.maxCivil);
+	DTDMANAGER->printText(tmp, tmpRECT, 18);
 
 
-	//DTDMANAGER->resetBrushColor();
+	DTDMANAGER->resetBrushColor();
 }
 
 void InGameMenu::leftBottomText()

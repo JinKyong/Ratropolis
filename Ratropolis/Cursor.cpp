@@ -8,15 +8,15 @@ HRESULT Cursor::init(Player* player)
 	_player = player;
 
 	_images[CURSOR_TYPE_DEFAULT] = IMAGEMANAGER->addDImage("cursor_default",
-		L"img/player/cursor/Cursor_Default.png", 32, 32);
+		L"img/component/cursor/Cursor_Default.png", 32, 32);
 	_images[CURSOR_TYPE_CLICK] = IMAGEMANAGER->addDImage("cursor_click",
-		L"img/player/cursor/Cursor_Click.png", 32, 32);
+		L"img/component/cursor/Cursor_Click.png", 32, 32);
 	_images[CURSOR_TYPE_GRAB] = IMAGEMANAGER->addDImage("cursor_grab",
-		L"img/player/cursor/Cursor_Grab.png", 32, 32);
+		L"img/component/cursor/Cursor_Grab.png", 32, 32);
 	_images[CURSOR_TYPE_ATTACK] = IMAGEMANAGER->addDImage("cursor_attack",
-		L"img/player/cursor/Cursor_Attack.png", 32, 32);
+		L"img/component/cursor/Cursor_Attack.png", 32, 32);
 	_images[CURSOR_TYPE_MINING] = IMAGEMANAGER->addDImage("cursor_mining",
-		L"img/player/cursor/Cursor_Mining.png", 32, 32);
+		L"img/component/cursor/Cursor_Mining.png", 32, 32);
 
 	_currentImage = _images[CURSOR_TYPE_DEFAULT];
 

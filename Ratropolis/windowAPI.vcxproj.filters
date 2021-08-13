@@ -121,9 +121,6 @@
     <Filter Include="playGround\Component\Icon\base">
       <UniqueIdentifier>{9f1c6881-0e5d-435d-9f6c-733380699a26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Component\ToolTip\NameTag">
-      <UniqueIdentifier>{d6d49fae-73f7-42a6-9d09-1f251c192b69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Component\Attribtue">
       <UniqueIdentifier>{d4340d18-38af-475f-a349-e04d706ee73c}</UniqueIdentifier>
     </Filter>
@@ -267,9 +264,6 @@
     <ClInclude Include="Icon_Civil.h">
       <Filter>playGround\Component\Icon\cost</Filter>
     </ClInclude>
-    <ClInclude Include="NameTag.h">
-      <Filter>playGround\Component\ToolTip\NameTag</Filter>
-    </ClInclude>
     <ClInclude Include="Card_Millitary.h">
       <Filter>playGround\Deck\Card\Millitary\base</Filter>
     </ClInclude>
@@ -293,6 +287,18 @@
     </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>playGround\Component\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="NameTag.h">
+      <Filter>playGround\Component\ToolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolTip.h">
+      <Filter>playGround\Component\ToolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="Labor.h">
+      <Filter>playGround\Component\Attribtue</Filter>
+    </ClInclude>
+    <ClInclude Include="Card1.h">
+      <Filter>playGround\Deck\Card\Economy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +416,6 @@
     <ClCompile Include="Icon_Civil.cpp">
       <Filter>playGround\Component\Icon\cost</Filter>
     </ClCompile>
-    <ClCompile Include="NameTag.cpp">
-      <Filter>playGround\Component\ToolTip\NameTag</Filter>
-    </ClCompile>
     <ClCompile Include="Card_Millitary.cpp">
       <Filter>playGround\Deck\Card\Millitary\base</Filter>
     </ClCompile>
@@ -433,6 +436,18 @@
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>playGround\Component\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="NameTag.cpp">
+      <Filter>playGround\Component\ToolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolTip.cpp">
+      <Filter>playGround\Component\ToolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="Labor.cpp">
+      <Filter>playGround\Component\Attribtue</Filter>
+    </ClCompile>
+    <ClCompile Include="Card1.cpp">
+      <Filter>playGround\Deck\Card\Economy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

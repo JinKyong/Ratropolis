@@ -12,7 +12,7 @@ enum RENDERTARGET_TYPE {
 class dtdManager : public singletonBase<dtdManager>
 {
 private:
-	//Factory, RenderTarget
+	//Factory, RenderTarget(그려주는 객체)
 	ID2D1Factory			*_dFactory;
 	ID2D1HwndRenderTarget	*_dRenderTarget;
 	ID2D1BitmapRenderTarget	*_dBitRenderTarget;
@@ -23,19 +23,32 @@ private:
 	ID2D1BitmapRenderTarget	*_pastRenderTarget;
 	ID2D1BitmapRenderTarget	*_currentRenderTarget;
 
+	//Bitmap(도화지)
 	ID2D1Bitmap				*_dBitmap;
 	ID2D1Bitmap				*_dBackBitmap;
 	ID2D1Bitmap				*_dUIBitmap;
 	ID2D1Bitmap				*_dCardBitmap;
 
-	//Brush
+	//Brush(붓)
 	ID2D1BitmapBrush		*_dBitmapBrush;
 	ID2D1SolidColorBrush	*_dBrush;
 
-	//Text
+	//Text(폰트 포맷)
 	IDWriteFactory			*_dWFactory;
 	IDWriteTextFormat		*_dWDefaultFormat;
 	IDWriteTextFormat		*_dWCustomFormat;
+
+	//Device Context
+	//int m_dpi = 96;
+	//ComPtr<ID2D1Factory1>			_dFactory1;
+	//ComPtr<D3D_FEATURE_LEVEL>		_d3FeatureLevel;
+	//ComPtr<ID2D1Device>				_dDevice;
+	//ComPtr<ID2D1DeviceContext>		_dContext;
+	//ComPtr<IDXGISwapChain1>			_d3SwapChain;
+	//ComPtr<ID2D1Bitmap1>			_dTargetBitmap;
+	//ComPtr<ID3D11Device>			_d3Device;
+	//ComPtr<ID3D11DeviceContext>		_d3Context;
+	//ComPtr<IDXGIDevice1>			_d3DxgiDevice;
 
 	bool _clear;
 
@@ -61,9 +74,9 @@ public:
 
 	//텍스트 출력(backBuffer)
 	void printText(LPCWCHAR text, float x, float y, int width, int height);
-	void printText(LPCWCHAR text, float x, float y, int width, int height, float size, bool central = false);
+	void printText(LPCWCHAR text, float x, float y, int width, int height, float size, bool centralW = false, bool centralH = false);
 	void printText(LPCWCHAR text, D2D1_RECT_F rc);
-	void printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool central = false);
+	void printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centralW = false, bool centralH = false);
 
 
 	//각종 변환
@@ -72,6 +85,12 @@ public:
 	void setScale(float sizeX, float sizeY, float x, float y);		//크기조절
 	//리셋
 	void resetTransform();
+
+	//각종 효과
+
+
+
+
 
 	//백버퍼 사이즈 재설정
 	void setBackBuffer(float width, float height);

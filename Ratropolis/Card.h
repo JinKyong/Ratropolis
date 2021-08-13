@@ -32,7 +32,7 @@ typedef struct tagCard {
 	CARD_TYPE type;			//카드 타입
 	CARD_GRADE rarity;		//등급
 
-	wstring desc;			//설명
+	WCHAR desc[128];			//설명
 }CARD_INFO, *PCARD_INFO;
 
 class Card
@@ -79,6 +79,7 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+	virtual void renderDetailed();
 
 	virtual void useCard() = 0;
 

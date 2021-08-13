@@ -40,6 +40,7 @@ void AllCardMenu::release()
 		_cards[i]->setY(500);
 
 		_cards[i]->setZoom(1.0);
+		//_cards[i]->update();
 	}
 }
 
@@ -47,13 +48,6 @@ void AllCardMenu::update()
 {
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y + _scrollY);
 	_cursor->update();
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON)) {
-		if (!_hide)
-			_hide = true;
-		else
-			UIMANAGER->changeMenu("null");
-	}
 
 	if (_hide) {
 		//카드 위치 조정
@@ -72,6 +66,13 @@ void AllCardMenu::update()
 		//충돌 검사
 		_card = COLLISIONMANAGER->cardListWithCursor(_cards, _cursor->getX(), _cursor->getY());
 		if (_card) _card->setZoom(1.5);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON)) {
+		if (!_hide)
+			_hide = true;
+		else
+			UIMANAGER->changeMenu("null");
 	}
 }
 
@@ -95,8 +96,13 @@ void AllCardMenu::render()
 		//카드 상세설명
 		_card->setX(WINSIZEX / 2);
 		_card->setY(WINSIZEY / 2 + _scrollY);
+
 		_card->setZoom(2.0);
+		_card->update();
+		_card->setUsable(false);
+
 		_card->render();
+		_card->renderDetailed();
 	}
 
 	//커서 render

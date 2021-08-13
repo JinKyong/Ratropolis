@@ -54,6 +54,7 @@ void testGameScene::render()
 	DECKMANAGER->render();
 	GAMEMANAGER->render();
 	UIMANAGER->render();
+
 }
 
 void testGameScene::changeScene()

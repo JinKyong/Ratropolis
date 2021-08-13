@@ -11,13 +11,18 @@ HRESULT DeckManager::init()
 
 	_draw = 5;
 
-	for (int i = 0; i < 25; i++) {
-		Card* card = CARDDICT->makeCard(31);
+	for (int i = 0; i < 10; i++) {
+		Card* card = CARDDICT->makeCard(1, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
-	for (int i = 0; i < 25; i++) {
-		Card* card = CARDDICT->makeCard(32);
+	for (int i = 0; i < 10; i++) {
+		Card* card = CARDDICT->makeCard(31, RND->getInt(2) + 1);
+		card->init();
+		addCard2Deck(card);
+	}
+	for (int i = 0; i < 10; i++) {
+		Card* card = CARDDICT->makeCard(32, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
