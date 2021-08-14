@@ -61,11 +61,13 @@ void AllCardMenu::update()
 			_cards[i]->setZoom(1.0);
 			_cards[i]->update();
 			_cards[i]->setUsable(false);
-		}
 
-		//충돌 검사
-		_card = COLLISIONMANAGER->cardListWithCursor(_cards, _cursor->getX(), _cursor->getY());
-		if (_card) _card->setZoom(1.5);
+			//충돌 검사
+			if (COLLISIONMANAGER->cardListWithCursor(_cards[i], _cursor->getX(), _cursor->getY())) {
+				_card = _cards[i];
+				_card->setZoom(1.5);
+			}
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON)) {

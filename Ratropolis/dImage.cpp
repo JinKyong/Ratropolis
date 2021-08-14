@@ -150,7 +150,7 @@ void dImage::render(float opacity)
 	DTDMANAGER->getCurrentRenderTarget()->DrawBitmap(_imageInfo->bitMap, destRect, opacity);
 }
 
-void dImage::render(int destX, int destY, float opacity)
+void dImage::render(float destX, float destY, float opacity)
 {
 	D2D1_RECT_F destRect = dRectMake(destX, destY, _imageInfo->width, _imageInfo->height);
 
@@ -159,10 +159,15 @@ void dImage::render(int destX, int destY, float opacity)
 	DTDMANAGER->getCurrentRenderTarget()->DrawBitmap(_imageInfo->bitMap, destRect, opacity);
 }
 
-void dImage::render(int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, float opacity)
+void dImage::render(float destX, float destY, float sourX, float sourY, float sourWidth, float sourHeight, float opacity)
 {
 	D2D1_RECT_F destRect = dRectMake(destX, destY, sourWidth, sourHeight);
-	D2D1_RECT_F sourRect = dRectMake(sourX, sourY, sourWidth, sourHeight);
+	//D2D1_RECT_F sourRect = dRectMake(sourX, sourY, sourWidth, sourHeight);
+
+	D2D1_SIZE_F size = _imageInfo->bitMap->GetSize();
+	float ratioX = size.width / _imageInfo->width;
+	float ratioY = size.height / _imageInfo->height;
+	D2D1_RECT_F sourRect = dRectMake(sourX * ratioX, sourY * ratioY, sourWidth * ratioX, sourHeight * ratioY);
 
 	//rendertarget을 불러와서 이미지의 비트맵을 그려준다
 	DTDMANAGER->getCurrentRenderTarget()->DrawBitmap(_imageInfo->bitMap, destRect,
@@ -176,7 +181,7 @@ void dImage::render(D2D1_RECT_F destRECT, D2D1_RECT_F sourRECT, float opacity)
 		opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourRECT);
 }
 
-void dImage::frameRender(int destX, int destY, float opacity)
+void dImage::frameRender(float destX, float destY, float opacity)
 {
 	D2D1_RECT_F destRect = dRectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
 	D2D1_RECT_F sourRect = dRectMake(
@@ -188,7 +193,7 @@ void dImage::frameRender(int destX, int destY, float opacity)
 		opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourRect);
 }
 
-void dImage::frameRender(int destX, int destY, int currentFrameX, int currentFrameY, float opacity)
+void dImage::frameRender(float destX, float destY, int currentFrameX, int currentFrameY, float opacity)
 {
 	D2D1_RECT_F destRect = dRectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
 	D2D1_RECT_F sourRect = dRectMake(
@@ -200,7 +205,7 @@ void dImage::frameRender(int destX, int destY, int currentFrameX, int currentFra
 		opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourRect);
 }
 
-void dImage::frameRender(int destX, int destY, int currentFrameX, int currentFrameY, int sizeX, int sizeY, float opacity)
+void dImage::frameRender(float destX, float destY, int currentFrameX, int currentFrameY, float sizeX, float sizeY, float opacity)
 {
 	D2D1_RECT_F destRect = dRectMake(destX, destY, sizeX, sizeY);
 	D2D1_RECT_F sourRect = dRectMake(

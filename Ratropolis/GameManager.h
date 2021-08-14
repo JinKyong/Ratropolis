@@ -1,6 +1,6 @@
 #pragma once
 #include "singletonBase.h"
-#include "Building.h"
+#include "BuildManager.h"
 #include <vector>
 
 class Player;
@@ -8,19 +8,12 @@ class Player;
 class GameManager : public singletonBase<GameManager>
 {
 private:
-	typedef vector<Building*>				buildList;
-	typedef vector<Building*>::iterator		buildIter;
-
-private:
 	RECT _useBox;
 
 	Player* _player;
-
-	buildList	_buildings;
-	buildIter	_building;
-
-	//enemyManager
-	//npcManager
+	BuildManager* _buildManager;
+	//enemyManager;
+	//npcManager;
 
 public:
 	HRESULT init(Player* player);
@@ -39,6 +32,6 @@ public:
 	RECT getUseBox() { return _useBox; }
 
 	Player* getPlayer() { return _player; }
-
+	BuildManager* getBuildManager() { return _buildManager; }
 };
 

@@ -2,6 +2,7 @@
 #include "collisionManager.h"
 #include "Player.h"
 #include "Card.h"
+#include "Building.h"
 #include "MenuHeader.h"
 
 HRESULT collisionManager::init()
@@ -15,14 +16,20 @@ void collisionManager::release()
 {
 }
 
-Card* collisionManager::cardListWithCursor(vector<Card*> cards, float x, float y)
+void collisionManager::buildingsWithCursor(Building* building, float x, float y)
+{
+	POINT pt = { x, y };
+	
+	if (PtInRect(&building->getBody(), pt))
+		DTDMANAGER->FillRectangle(building->getBody());
+}
+
+Card* collisionManager::cardListWithCursor(Card* card, float x, float y)
 {
 	POINT pt = { x, y };
 
-	for (int i = 0; i < cards.size(); i++) {
-		if (PtInRect(&cards[i]->getBody(), pt))
-			return cards[i];
-	}
+	if (PtInRect(&card->getBody(), pt))
+		return card;
 
 	return NULL;
 }
@@ -31,7 +38,7 @@ Card * collisionManager::selectedCard(vector<Card*> cards, float x, float y)
 {
 	POINT pt = { x, y };
 
-	for (int i = 0; i < cards.size(); i++) {
+	for (int i = 0; i < cards.size(); ++i) {
 		if (PtInRect(&cards[i]->getBody(), pt))
 			return cards[i];
 	}

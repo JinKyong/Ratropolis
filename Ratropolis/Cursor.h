@@ -24,6 +24,10 @@ private:
 	float _x, _y;
 	RECT _body;
 
+	//상대위치좌표
+	float _backX, _backY;
+	RECT _backBody;
+
 public:
 	HRESULT init(Player* player);
 	void release();
@@ -46,5 +50,12 @@ public:
 	void setY(float y) { _y = y; }
 
 	RECT getBody() { return _body; }
+
+	float getBackX() { return _backX; }
+	void setBackX(float backX) { _backX = backX; }
+	float getBackY() { return _backY; }
+	void setBackY(float backY) { _backY = backY; }
+
+	RECT getBackBody() { return _backBody; }
 };
 

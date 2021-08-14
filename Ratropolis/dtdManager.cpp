@@ -240,6 +240,20 @@ void dtdManager::Rectangle(RECT rc)
 		_currentRenderTarget->DrawRectangle(rect, _dBrush);
 }
 
+void dtdManager::FillRectangle(D2D1_RECT_F rc)
+{
+	if (_currentRenderTarget)
+		_currentRenderTarget->FillRectangle(rc, _dBrush);
+}
+
+void dtdManager::FillRectangle(RECT rc)
+{
+	D2D1_RECT_F rect = { rc.left, rc.top, rc.right, rc.bottom };
+
+	if (_currentRenderTarget)
+		_currentRenderTarget->FillRectangle(rect, _dBrush);
+}
+
 void dtdManager::printTextF(LPCWCHAR text, float x, float y, int width, int height)
 {
 	_dRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, dRectMakeCenter(x, y, width, height), _dBrush);

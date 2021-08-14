@@ -130,6 +130,9 @@
     <Filter Include="playGround\Component\ToolTip\base">
       <UniqueIdentifier>{72d5c71c-8e99-4254-b477-120e5f951162}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Dictionary">
+      <UniqueIdentifier>{f195ef4b-0861-47c3-b1a3-4e29d658a04b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -279,9 +282,6 @@
     <ClInclude Include="AllCardMenu.h">
       <Filter>playGround\UI\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="CardDict.h">
-      <Filter>playGround\Deck\Card</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>playGround\Component\Cursor</Filter>
     </ClInclude>
@@ -313,6 +313,12 @@
       <Filter>playGround\Object\Building\base</Filter>
     </ClInclude>
     <ClInclude Include="Building3.h">
+      <Filter>playGround\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>playGround\Dictionary</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildManager.h">
       <Filter>playGround\Object\Building</Filter>
     </ClInclude>
   </ItemGroup>
@@ -398,9 +404,6 @@
     <ClCompile Include="Card_Economy.cpp">
       <Filter>playGround\Deck\Card\Economy\base</Filter>
     </ClCompile>
-    <ClCompile Include="CardDict.cpp">
-      <Filter>playGround\Deck\Card</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>playGround\UI\Menu\base</Filter>
     </ClCompile>
@@ -471,6 +474,12 @@
       <Filter>playGround\Object\Building</Filter>
     </ClCompile>
     <ClCompile Include="Building3.cpp">
+      <Filter>playGround\Object\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="Dictionary.cpp">
+      <Filter>playGround\Dictionary</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildManager.cpp">
       <Filter>playGround\Object\Building</Filter>
     </ClCompile>
   </ItemGroup>

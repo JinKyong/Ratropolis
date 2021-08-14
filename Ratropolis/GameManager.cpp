@@ -7,6 +7,7 @@ HRESULT GameManager::init(Player * player)
 {
 	_player = player;
 	
+	_buildManager = new BuildManager;
 
 	return S_OK;
 }
@@ -17,22 +18,14 @@ void GameManager::release()
 
 void GameManager::update()
 {
-	_building = _buildings.begin();
-	for (; _building != _buildings.end();) {
-		(*_building)->update();
-		++_building;
-	}
+	_buildManager->update();
 
 	_player->update();
 }
 
 void GameManager::render()
 {
-	_building = _buildings.begin();
-	for (; _building != _buildings.end();) {
-		(*_building)->render();
-		++_building;
-	}
+	_buildManager->render();
 
 	renderPlayer();
 
@@ -45,18 +38,7 @@ void GameManager::playGame()
 	_player->setCamX(44 * 90);
 	_player->setCamY(CAMERAMANAGER->getBackScreenHeight() / 2 + 300);
 
-	_buildings.push_back(new CityHall);
-	_buildings.push_back(new Building3);
-	_buildings.push_back(new Building3);
-	_buildings.push_back(new Building3);
-	_buildings.push_back(new Building3);
-	
-	_buildings[0]->init(42);
-	_buildings[1]->init(41);
-	_buildings[2]->init(40);
-	_buildings[3]->init(46);
-	_buildings[4]->init(47);
-
+	_buildManager->init();
 }
 
 void GameManager::renderPlayer()

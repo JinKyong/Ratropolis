@@ -151,13 +151,13 @@
     <ClInclude Include="Building.h" />
     <ClInclude Include="Building3.h" />
     <ClInclude Include="BuildingHeader.h" />
+    <ClInclude Include="BuildManager.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Card1.h" />
     <ClInclude Include="Card31.h" />
     <ClInclude Include="Card32.h" />
     <ClInclude Include="CardBagMenu.h" />
-    <ClInclude Include="CardDict.h" />
     <ClInclude Include="CardGraveMenu.h" />
     <ClInclude Include="CardHeader.h" />
     <ClInclude Include="Card_Economy.h" />
@@ -168,6 +168,7 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DeckManager.h" />
     <ClInclude Include="dialogManager.h" />
+    <ClInclude Include="Dictionary.h" />
     <ClInclude Include="dImage.h" />
     <ClInclude Include="dtdManager.h" />
     <ClInclude Include="GameManager.h" />
@@ -213,13 +214,13 @@
     <ClCompile Include="AllCardMenu.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Building3.cpp" />
+    <ClCompile Include="BuildManager.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Card1.cpp" />
     <ClCompile Include="Card31.cpp" />
     <ClCompile Include="Card32.cpp" />
     <ClCompile Include="CardBagMenu.cpp" />
-    <ClCompile Include="CardDict.cpp" />
     <ClCompile Include="CardGraveMenu.cpp" />
     <ClCompile Include="Card_Economy.cpp" />
     <ClCompile Include="Card_Millitary.cpp" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DeckManager.cpp" />
     <ClCompile Include="dialogManager.cpp" />
+    <ClCompile Include="Dictionary.cpp" />
     <ClCompile Include="dImage.cpp" />
     <ClCompile Include="dtdManager.cpp" />
     <ClCompile Include="GameManager.cpp" />

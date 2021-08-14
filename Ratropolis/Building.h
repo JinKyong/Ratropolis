@@ -1,6 +1,7 @@
 #pragma once
 
 #define EACH_SPACE		90
+#define GROUND			1500 - 300
 
 class Building
 {
@@ -10,7 +11,7 @@ protected:
 
 
 	//Poistion
-	float _x, _y;		//위치 좌표
+	int _idX;			//위치 좌표
 	int _space;			//차지 공간
 	RECT _body;			//충돌 RECT
 
@@ -27,9 +28,17 @@ protected:
 	//refairIcon
 
 public:
-	virtual HRESULT init(float idX, int level = 1);
+	virtual HRESULT init(int idX);
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+
+
+
+
+
+
+	RECT getBody() { return _body; }
 };
 

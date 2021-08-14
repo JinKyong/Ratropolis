@@ -48,7 +48,7 @@
 #include "dialogManager.h"
 #include "soundManager.h"
 #include "DeckManager.h"
-#include "CardDict.h"
+#include "Dictionary.h"
 #include "GameManager.h"
 
 
@@ -83,7 +83,7 @@ using namespace Microsoft::WRL;
 #define DIALOGMANAGER dialogManager::getSingleton()
 #define SOUNDMANAGER soundManager::getSingleton()
 #define DECKMANAGER DeckManager::getSingleton()
-#define CARDDICT CardDict::getSingleton()
+#define DICTIONARY Dictionary::getSingleton()
 #define GAMEMANAGER GameManager::getSingleton()
 
 #define SAFE_DELETE(p) { if(p) { delete(p); (p) = nullptr; } }

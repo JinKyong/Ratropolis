@@ -7,9 +7,9 @@ private:
 	dImage *_door;
 
 public:
-	HRESULT init(float idX, int level = 1);
-	void release();
-	void update();
+	CityHall(int level);
+	~CityHall();
+
 	void render();
 };
 

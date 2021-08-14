@@ -1,9 +1,14 @@
 #pragma once
 
+class Cursor;
+
 class Menu
 {
 protected:
+	dImage* _back;
 	float _scrollY;
+
+	Cursor* _cursor;
 
 	bool _hide;
 

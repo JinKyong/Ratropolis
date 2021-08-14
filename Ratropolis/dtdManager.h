@@ -65,6 +65,8 @@ public:
 	//사각형
 	void Rectangle(D2D1_RECT_F rc);
 	void Rectangle(RECT rc);
+	void FillRectangle(D2D1_RECT_F rc);
+	void FillRectangle(RECT rc);
 
 	//텍스트 출력(front)
 	void printTextF(LPCWCHAR text, float x, float y, int width, int height);

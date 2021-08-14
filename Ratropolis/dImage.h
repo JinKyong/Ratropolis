@@ -18,14 +18,14 @@ public:
 		ID2D1Bitmap	*bitMap;//이미지 비트맵
 		float x;			//이미지 x좌표
 		float y;			//이미지 y좌표
-		int width;			//이미지 전체 가로크기
-		int height;			//이미지 전체 세로크기
+		float width;		//이미지 전체 가로크기
+		float height;		//이미지 전체 세로크기
 		int currentFrameX;	//현재 프레임 번호(가로)
 		int currentFrameY;	//현재 프레임 번호(세로)
 		int maxFrameX;		//최대 프레임 번호(가로)
 		int maxFrameY;		//최대 프레임 번호(세로)
-		int frameWidth;		//1프레임 당 가로크기
-		int frameHeight;	//1프레임 당 세로크기
+		float frameWidth;	//1프레임 당 가로크기
+		float frameHeight;	//1프레임 당 세로크기
 		BYTE loadType;
 
 		tagImageInfo()
@@ -75,26 +75,26 @@ public:
 	void release();
 
 	void render(float opacity = 1.0);
-	void render(int destX, int destY, float opacity = 1.0);
-	void render(int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, float opacity = 1.0);
-	/*				│			│			│			│			│			│				│					*/
-	/*				│			│			│			│			│			│				└──〉	 투명도			*/
-	/*				│			│			│			│			│			│									*/
-	/*				│			│			│			│			│			└──〉	 이미지에서 복사해올 사이즈(y축)	*/
-	/*				│			│			│			│			│												*/
-	/*				│			│			│			│			└──〉	 이미지에서 복사해올 사이즈(x축)				*/
-	/*				│			│			│			│															*/
-	/*				│			│			│			└──〉	 이미지에서 복사해올 시작좌표(y축)							*/
-	/*				│			│			│																		*/
-	/*				│			│			└──〉	 이미지에서 복사해올 시작좌표(x축)										*/
-	/*				│			│																					*/
-	/*				│			└──〉	 출력할 좌표(y축)																	*/
-	/*				│																								*/
-	/*				└──〉 출력할 좌표(x축)																				*/
+	void render(float destX, float destY, float opacity = 1.0);
+	void render(float destX, float destY, float sourX, float sourY, float sourWidth, float sourHeight, float opacity = 1.0);
+	/*				│			│			│			│				│				│				│					*/
+	/*				│			│			│			│				│				│				└──〉	 투명도			*/
+	/*				│			│			│			│				│				│									*/
+	/*				│			│			│			│				│				└──〉	 이미지에서 복사해올 사이즈(y축)	*/
+	/*				│			│			│			│				│													*/
+	/*				│			│			│			│				└──〉	 이미지에서 복사해올 사이즈(x축)					*/
+	/*				│			│			│			│																	*/
+	/*				│			│			│			└──〉	 이미지에서 복사해올 시작좌표(y축)									*/
+	/*				│			│			│																				*/
+	/*				│			│			└──〉	 이미지에서 복사해올 시작좌표(x축)												*/
+	/*				│			│																							*/
+	/*				│			└──〉	 출력할 좌표(y축)																			*/
+	/*				│																										*/
+	/*				└──〉 출력할 좌표(x축)																						*/
 	void render(D2D1_RECT_F destRECT, D2D1_RECT_F sourRECT, float opacity = 1.0);
 
-	void frameRender(int destX, int destY, float opacity = 1.0);
-	void frameRender(int destX, int destY, int currentFrameX, int currentFrameY, float opacity = 1.0);
+	void frameRender(float destX, float destY, float opacity = 1.0);
+	void frameRender(float destX, float destY, int currentFrameX, int currentFrameY, float opacity = 1.0);
 	/*					│			│				│				│					│				*/
 	/*					│			│				│				│					└──〉	 투명도		*/
 	/*					│			│				│				│									*/
@@ -105,7 +105,7 @@ public:
 	/*					│			└──〉	 출력할 좌표(y축)													*/
 	/*					│																				*/
 	/*					└──〉 출력할 좌표(x축)																*/
-	void frameRender(int destX, int destY, int currentFrameX, int currentFrameY, int sizeX, int sizeY, float opacity = 1.0);
+	void frameRender(float destX, float destY, int currentFrameX, int currentFrameY, float sizeX, float sizeY, float opacity = 1.0);
 
 
 	//===============================================

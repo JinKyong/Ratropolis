@@ -53,9 +53,7 @@ void CircleBar::render(float x, float y)
 	_backBar->render(x - _backBar->getWidth() / 2, y - _backBar->getHeight() / 2);
 
 	float ratio = _elapsedTime / _duration;
-	D2D1_RECT_F destRECT = dRectMake(x - _frontBar->getWidth() / 2 + 10, (y + _frontBar->getHeight() / 2 - 10) - (_frontBar->getHeight() - 20) * ratio,
-		_frontBar->getWidth() - 20, (_frontBar->getHeight() - 20) * ratio);
-	D2D1_RECT_F sourRECT = dRectMake(20, 180 - 160 * ratio,	160, 160 * ratio);
-	_frontBar->render(destRECT, sourRECT);
+	_frontBar->render(x - _frontBar->getWidth() / 2 + 10, y + _frontBar->getHeight() / 2 - 10 - (_frontBar->getHeight() - 20) * ratio,
+		10, _frontBar->getHeight() - 10 - (_frontBar->getHeight() - 20) * ratio, _frontBar->getWidth() - 20, (_frontBar->getHeight() - 20) * ratio);
 
 }

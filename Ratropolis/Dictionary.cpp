@@ -1,35 +1,75 @@
 #include "stdafx.h"
-#include "CardDict.h"
+#include "Dictionary.h"
 
-HRESULT CardDict::init()
+HRESULT Dictionary::init()
 {
-	setCardImage();
-
-	addCard(1, &CardDict::card1);
-	addCard(31, &CardDict::card31);
-	addCard(32, &CardDict::card32);
-
-	return S_OK;
-}
-
-void CardDict::release()
-{
-}
-
-void CardDict::addCard(int num, func f)
-{
-	_cardList.insert(make_pair(num, f));
-}
-
-void CardDict::setCardImage()
-{
+#pragma region cardInit
+	registerCard();
 	registerCardFrameImage();
 	registerCardGemImage();
 	registerCardIlluste();
 	registerCardCostImage();
+#pragma endregion
+
+#pragma region buildingInit
+	registerBuilding();
+#pragma endregion
+
+#pragma region NPCInit
+
+#pragma endregion
+
+
+
+	return S_OK;
 }
 
-void CardDict::registerCardFrameImage()
+void Dictionary::release()
+{
+}
+
+void Dictionary::addCard(int num, funcCard f)
+{
+	if (!f) return;
+
+	_cardList.insert(make_pair(num, f));
+}
+
+Card * Dictionary::makeCard(int num, int level)
+{
+	cardIter find = _cardList.find(num);
+
+	if (find == _cardList.end()) return NULL;
+	
+	return (this->*find->second)(level);
+}
+
+void Dictionary::addBuilding(int num, funcBuilding f)
+{
+	if (!f) return;
+
+	_buildingList.insert(make_pair(num, f));
+}
+
+Building * Dictionary::makeBuilding(int num, int level)
+{
+	buildingIter find = _buildingList.find(num);
+
+	if (find == _buildingList.end()) return NULL;
+
+	return (this->*find->second)(level);
+}
+
+#pragma region Cards
+void Dictionary::registerCard()
+{
+
+	addCard(1, &Dictionary::card1);
+	addCard(31, &Dictionary::card31);
+	addCard(32, &Dictionary::card32);
+}
+
+void Dictionary::registerCardFrameImage()
 {
 	//500, 700
 	IMAGEMANAGER->addDImage("economyFrame", L"img/card/frame/CardFrame1.png", 200, 280);
@@ -41,7 +81,7 @@ void CardDict::registerCardFrameImage()
 	IMAGEMANAGER->addDImage("nameTag", L"img/component/tooltip/Ribbon #2426.png", 162, 56);
 }
 
-void CardDict::registerCardGemImage()
+void Dictionary::registerCardGemImage()
 {
 	//32, 38
 	IMAGEMANAGER->addDImage("card_rarity0", L"img/card/gem/Card_Rarity2_1.png", 13, 15);
@@ -50,7 +90,7 @@ void CardDict::registerCardGemImage()
 	IMAGEMANAGER->addDImage("card_rarity3", L"img/card/gem/Card_Rarity2_4.png", 13, 15);
 }
 
-void CardDict::registerCardIlluste()
+void Dictionary::registerCardIlluste()
 {
 	for (int i = 0; i < 33; i++) {
 		char key[128];
@@ -66,7 +106,7 @@ void CardDict::registerCardIlluste()
 	}
 }
 
-void CardDict::registerCardCostImage()
+void Dictionary::registerCardCostImage()
 {
 	//70, 70
 	IMAGEMANAGER->addDImage("cost_gold", L"img/card/cost/GoldFrame.png", 28, 28);
@@ -78,3 +118,19 @@ void CardDict::registerCardCostImage()
 	IMAGEMANAGER->addDImage("cost_assist", L"img/card/cost/Card2_Assist.png", 193, 313);
 	IMAGEMANAGER->addDImage("cost_defense", L"img/card/cost/Card2_Deffense.png", 130, 135);
 }
+#pragma endregion
+
+#pragma region Buildings
+
+void Dictionary::registerBuilding()
+{
+	addBuilding(0, &Dictionary::cityHall);
+	addBuilding(3, &Dictionary::building3);
+}
+
+#pragma endregion
+
+#pragma region NPCs
+
+#pragma endregion
+

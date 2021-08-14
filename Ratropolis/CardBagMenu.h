@@ -3,14 +3,9 @@
 #include <vector>
 #include <algorithm>
 
-class Cursor;
-
 class CardBagMenu : public Menu
 {
 private:
-	dImage* _back;
-
-	Cursor* _cursor;
 	Card* _card;
 	vector<Card*> _cards;
 
