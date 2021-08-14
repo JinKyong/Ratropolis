@@ -1,17 +1,35 @@
 #pragma once
 
+#define EACH_SPACE		90
+
 class Building
 {
-private:
+protected:
+	//Images
 	dImage* _bodyImage;
 
-	int _hp;
-	int _spaceCost;		//공간 비용
+
+	//Poistion
+	float _x, _y;		//위치 좌표
+	int _space;			//차지 공간
+	RECT _body;			//충돌 RECT
+
+
+	//Stat
+	int _hp;			//일반적으로 3 ~ 4
+	int _level;
+
+	bool _active;		//active효과 있는지 여부
+
+
+	//Icon
+	//activeIcon
+	//refairIcon
 
 public:
-	HRESULT init();
-	void release();
-	void update();
-	void render();
+	virtual HRESULT init(float idX, int level = 1);
+	virtual void release();
+	virtual void update();
+	virtual void render();
 };
 

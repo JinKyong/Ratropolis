@@ -8,10 +8,13 @@
 건물 카드
 수동 -> 직접 눌러줘야함		//Active
 
+추가 카드 Hoard
 
 모든 카드
 일회성-> 사라짐			//one-off
 ephemeral(일회성?)
+
+
 armor(방어력)
 unplayable(사용불가)
 bounty(현상금)
@@ -20,7 +23,6 @@ growth(성장)
 
 
 세금 Tax
-추가 카드 Hoard
 
 
 속성 업데이트? 할거 없음

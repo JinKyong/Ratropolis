@@ -2,27 +2,12 @@
 #include "Labor.h"
 #include "ToolTip.h"
 
-HRESULT Labor::init(int value, float duration)
+HRESULT Labor::init()
 {
-	Attribute::init(value, duration);
+	ToolTip::init();
 
-	_type = ATTRIBUTE_TYPE_LABOR;
-
-	_toolTip = new ToolTip;
-	_toolTip->init(L"노동", L"효과가 지속되는 동안 시민 사용이 제한됩니다.");
+	_name = L"노동";
+	_desc = L"효과가 지속되는 동안 시민 사용이 제한됩니다.";
 
 	return S_OK;
-}
-
-void Labor::release()
-{
-}
-
-void Labor::update()
-{
-	Attribute::update();
-}
-
-void Labor::render()
-{
 }

@@ -8,7 +8,7 @@ class Card_Economy : public Card
 protected:
 	Icon* _civilCost;
 
-	int _reward;
+	int _reward[END_REWARD_TYPE] = { 0, };
 
 public:
 	virtual HRESULT init();

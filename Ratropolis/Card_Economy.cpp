@@ -87,7 +87,7 @@ void Card_Economy::render()
 		for (int i = 0; i < _atbList.size(); i++) {
 			if(i > 0)
 				lstrcatW(atb, L", ");
-			lstrcatW(atb, _atbList[i]->getToolTip()->getName());
+			lstrcatW(atb, _atbList[i]->getName());
 		}
 
 		DTDMANAGER->setBrushColor(ColorF(ColorF::Red));

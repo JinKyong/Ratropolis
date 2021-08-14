@@ -23,6 +23,7 @@ private:
 
 	DEFAULT_STAT _defaultStat;		//기본 스탯(돈, 시민 등)
 	int _level;						//지도자 레벨
+	float _count;					//세금 카운트
 
 	//선택 카드
 	Card* _selectedCard;
@@ -42,10 +43,6 @@ public:
 	void changeCard(Card* card);
 
 
-
-
-
-	static DWORD CALLBACK threadCollectTax(LPVOID lpParameter);
 
 
 	//======================================== 접근자 ========================================//

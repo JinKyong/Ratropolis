@@ -1,5 +1,6 @@
 #pragma once
-#include "Attribute.h"
+#include "ToolTip.h"
+#include "rewardType.h"
 #include <vector>
 
 class Player;
@@ -72,7 +73,7 @@ protected:
 
 
 	//속성(카드 키워드)
-	vector<Attribute*> _atbList;
+	vector<ToolTip*> _atbList;
 
 public:
 	virtual HRESULT init();

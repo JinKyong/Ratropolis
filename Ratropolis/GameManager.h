@@ -1,15 +1,24 @@
 #pragma once
 #include "singletonBase.h"
+#include "Building.h"
+#include <vector>
 
 class Player;
 
 class GameManager : public singletonBase<GameManager>
 {
 private:
-	Player* _player;
+	typedef vector<Building*>				buildList;
+	typedef vector<Building*>::iterator		buildIter;
+
+private:
 	RECT _useBox;
 
-	//buildManager
+	Player* _player;
+
+	buildList	_buildings;
+	buildIter	_building;
+
 	//enemyManager
 	//npcManager
 
@@ -21,12 +30,15 @@ public:
 
 	void playGame();
 
+	void renderPlayer();
 
 
 
+
+
+	RECT getUseBox() { return _useBox; }
 
 	Player* getPlayer() { return _player; }
 
-	RECT getUseBox() { return _useBox; }
 };
 

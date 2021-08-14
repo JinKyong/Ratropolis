@@ -121,14 +121,14 @@
     <Filter Include="playGround\Component\Icon\base">
       <UniqueIdentifier>{9f1c6881-0e5d-435d-9f6c-733380699a26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\Component\Attribtue">
-      <UniqueIdentifier>{d4340d18-38af-475f-a349-e04d706ee73c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\Component\Attribtue\base">
-      <UniqueIdentifier>{602fecec-4d6c-442f-8e8b-db459ffdfce4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="playGround\Component\Cursor">
       <UniqueIdentifier>{643a5402-e409-482f-ae52-31664ffa21a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\ProgressBar\base">
+      <UniqueIdentifier>{e98738ba-ba0b-4779-8302-41ca73959e73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Component\ToolTip\base">
+      <UniqueIdentifier>{72d5c71c-8e99-4254-b477-120e5f951162}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +222,6 @@
     <ClInclude Include="Card.h">
       <Filter>playGround\Deck\Card\base</Filter>
     </ClInclude>
-    <ClInclude Include="Attribute.h">
-      <Filter>playGround\Component\Attribtue\base</Filter>
-    </ClInclude>
     <ClInclude Include="Card_Economy.h">
       <Filter>playGround\Deck\Card\Economy\base</Filter>
     </ClInclude>
@@ -288,17 +285,35 @@
     <ClInclude Include="Cursor.h">
       <Filter>playGround\Component\Cursor</Filter>
     </ClInclude>
-    <ClInclude Include="NameTag.h">
+    <ClInclude Include="Card1.h">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>playGround\Component\ProgressBar\base</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleBar.h">
+      <Filter>playGround\Component\ProgressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="rewardType.h">
+      <Filter>playGround\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Labor.h">
       <Filter>playGround\Component\ToolTip</Filter>
     </ClInclude>
     <ClInclude Include="ToolTip.h">
-      <Filter>playGround\Component\ToolTip</Filter>
+      <Filter>playGround\Component\ToolTip\base</Filter>
     </ClInclude>
-    <ClInclude Include="Labor.h">
-      <Filter>playGround\Component\Attribtue</Filter>
+    <ClInclude Include="NameTag.h">
+      <Filter>playGround\Component\ToolTip\base</Filter>
     </ClInclude>
-    <ClInclude Include="Card1.h">
-      <Filter>playGround\Deck\Card\Economy</Filter>
+    <ClInclude Include="CityHall.h">
+      <Filter>playGround\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingHeader.h">
+      <Filter>playGround\Object\Building\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Building3.h">
+      <Filter>playGround\Object\Building</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -380,9 +395,6 @@
     <ClCompile Include="DeckManager.cpp">
       <Filter>playGround\Deck</Filter>
     </ClCompile>
-    <ClCompile Include="Attribute.cpp">
-      <Filter>playGround\Component\Attribtue\base</Filter>
-    </ClCompile>
     <ClCompile Include="Card_Economy.cpp">
       <Filter>playGround\Deck\Card\Economy\base</Filter>
     </ClCompile>
@@ -437,17 +449,29 @@
     <ClCompile Include="Cursor.cpp">
       <Filter>playGround\Component\Cursor</Filter>
     </ClCompile>
-    <ClCompile Include="NameTag.cpp">
+    <ClCompile Include="Card1.cpp">
+      <Filter>playGround\Deck\Card\Economy</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>playGround\Component\ProgressBar\base</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleBar.cpp">
+      <Filter>playGround\Component\ProgressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Labor.cpp">
       <Filter>playGround\Component\ToolTip</Filter>
     </ClCompile>
     <ClCompile Include="ToolTip.cpp">
-      <Filter>playGround\Component\ToolTip</Filter>
+      <Filter>playGround\Component\ToolTip\base</Filter>
     </ClCompile>
-    <ClCompile Include="Labor.cpp">
-      <Filter>playGround\Component\Attribtue</Filter>
+    <ClCompile Include="NameTag.cpp">
+      <Filter>playGround\Component\ToolTip\base</Filter>
     </ClCompile>
-    <ClCompile Include="Card1.cpp">
-      <Filter>playGround\Deck\Card\Economy</Filter>
+    <ClCompile Include="CityHall.cpp">
+      <Filter>playGround\Object\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="Building3.cpp">
+      <Filter>playGround\Object\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

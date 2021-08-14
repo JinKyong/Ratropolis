@@ -127,3 +127,13 @@ void uiManager::playGame()
 	_inGame = new InGameMenu;
 	_inGame->init();
 }
+
+void uiManager::useButton(int index)
+{
+	_inGame->useButton(index);
+}
+
+void uiManager::addCircleBar(int cost, float duration, int * reward)
+{
+	_inGame->addCircleBar(cost, duration, reward);
+}

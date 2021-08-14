@@ -36,6 +36,16 @@ void InGameMenu::release()
 
 void InGameMenu::update()
 {
+	//ม๘วเ
+	progressIter progress = _progress.begin();
+	for (; progress != _progress.end();) {
+		(*progress)->update();
+
+		if ((*progress)->getFin())
+			progress = _progress.erase(progress);
+		else
+			++progress;
+	}
 }
 
 void InGameMenu::render()
@@ -47,7 +57,18 @@ void InGameMenu::render()
 	_waveIcon->render(50, 62);
 	//_poisonIcon;
 
-	
+
+	//progress
+	progressIter progress = _progress.begin();
+	int width, height;
+	for (int i = 0; progress != _progress.end(); ++progress, ++i) {
+		width = i % 7;
+		height = i / 7;
+
+		(*progress)->render(360 + width * 110, 60 + height * 110);
+	}
+
+
 	//Other HUD
 	for (int i = 0; i < END_HUD_TYPE; i++) {
 		//Button
@@ -114,6 +135,13 @@ void InGameMenu::useButton(int index)
 	}
 }
 
+void InGameMenu::addCircleBar(int cost, float duration, int * reward)
+{
+	CircleBar* bar = new CircleBar;
+	bar->init(cost, duration, reward);
+	_progress.push_back(bar);
+}
+
 void InGameMenu::leftTopInit()
 {
 	//LEFT TOP HUD
@@ -172,24 +200,45 @@ void InGameMenu::leftTopText()
 {
 	//TEXT
 	DEFAULT_STAT stat = GAMEMANAGER->getPlayer()->getDefaultStat();
-	D2D1_RECT_F tmpRECT = dRectMake(65, 27, 80, 20);
+	D2D1_RECT_F tmpRECT;
 	WCHAR tmp[128];
 
-	DTDMANAGER->setBrushColor(ColorF(ColorF::PaleGoldenrod));
+
+
+	//gold
 	swprintf_s(tmp, L"%d", stat.gold);
-	//DTDMANAGER->setBrushColor(ColorF(ColorF::DarkGoldenrod));
+
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
+	tmpRECT = dRectMake(65 + 1, 27 + 1, 80, 20);
 	DTDMANAGER->printText(tmp, tmpRECT, 18);
 
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Goldenrod));
+	tmpRECT = dRectMake(65, 27, 80, 20);
+	DTDMANAGER->printText(tmp, tmpRECT, 18);
+
+
+
 	//tax
+	swprintf_s(tmp, L"+%d", stat.tax);
+
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
+	tmpRECT = dRectMake(120 + 1, 23 + 1, 80, 20);
+	DTDMANAGER->printText(tmp, tmpRECT, 13);
+
 	DTDMANAGER->setBrushColor(ColorF(ColorF::GhostWhite));
 	tmpRECT = dRectMake(120, 23, 80, 20);
-	swprintf_s(tmp, L"+%d", stat.tax);
-	DTDMANAGER->printText(tmp, tmpRECT, 12);
+	DTDMANAGER->printText(tmp, tmpRECT, 13);
+
+
 
 	//civil
+	swprintf_s(tmp, L"%d/%d", stat.currentCivil, stat.maxCivil);
+
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
+	tmpRECT = dRectMake(195 + 1, 27 + 1, 80, 20);
+	DTDMANAGER->printText(tmp, tmpRECT, 18);
 	DTDMANAGER->setBrushColor(ColorF(ColorF::Green));
 	tmpRECT = dRectMake(195, 27, 80, 20);
-	swprintf_s(tmp, L"%d/%d", stat.currentCivil, stat.maxCivil);
 	DTDMANAGER->printText(tmp, tmpRECT, 18);
 
 

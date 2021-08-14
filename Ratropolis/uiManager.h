@@ -30,6 +30,8 @@ public:
 	HRESULT changeMenu(string menuName);
 
 	void playGame();
+	void useButton(int index);
+	void addCircleBar(int cost, float duration, int* reward);
 
 
 

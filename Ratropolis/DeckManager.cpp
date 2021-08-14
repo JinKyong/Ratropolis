@@ -53,16 +53,18 @@ void DeckManager::release()
 
 void DeckManager::update()
 {
+	cardIter card = _currentHands.begin();
+	for (; card != _currentHands.end(); card++)
+		(*card)->update();
+
 	//카드 정렬
 	sortHands();
 
 	//카드 충돌검사
-	if(!GAMEMANAGER->getPlayer()->getCard())
+	if (GAMEMANAGER->getPlayer()->getCard())
+		GAMEMANAGER->getPlayer()->getCard()->setSelect(true);
+	else
 		COLLISIONMANAGER->handsWithCursor();
-
-	cardIter card = _currentHands.begin();
-	for (; card!=_currentHands.end(); card++)
-		(*card)->update();
 }
 
 void DeckManager::render()

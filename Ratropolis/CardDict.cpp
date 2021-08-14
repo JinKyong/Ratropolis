@@ -61,6 +61,8 @@ void CardDict::registerCardIlluste()
 
 		//340, 250
 		IMAGEMANAGER->addDImage(key, dir, 136, 100);
+		sprintf_s(key, "UI_illuste%d", i);
+		IMAGEMANAGER->addDImage(key, dir, 68, 50);
 	}
 }
 

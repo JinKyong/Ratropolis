@@ -91,6 +91,7 @@ public:
 	/*				│			└──〉	 출력할 좌표(y축)																	*/
 	/*				│																								*/
 	/*				└──〉 출력할 좌표(x축)																				*/
+	void render(D2D1_RECT_F destRECT, D2D1_RECT_F sourRECT, float opacity = 1.0);
 
 	void frameRender(int destX, int destY, float opacity = 1.0);
 	void frameRender(int destX, int destY, int currentFrameX, int currentFrameY, float opacity = 1.0);

@@ -12,9 +12,9 @@ Card32::Card32(int level)
 	_cardStat.level = level;				//레벨(최대 2)
 	_cardStat.rarity = CARD_GRADE_COMMON;	//등급
 
-	_reward = 30 + (_cardStat.level - 1) * 15;
+	_reward[REWARD_TYPE_GOLD] = 30 + (_cardStat.level - 1) * 15;
 	//설명
-	swprintf_s(_cardStat.desc, L"들고있는 치즈마다 +%d 금화", _reward);
+	swprintf_s(_cardStat.desc, L"들고있는 치즈마다 +%d 금화", _reward[REWARD_TYPE_GOLD]);
 
 	//이름
 	_name = new NameTag;
@@ -39,7 +39,7 @@ void Card32::update()
 	_sum = 0;
 	for (int i = 0; i < hands.size(); i++)
 		if (hands[i]->getCardStat()->number == _cardStat.number)
-			_sum += _reward;
+			_sum += _reward[REWARD_TYPE_GOLD];
 
 	//WCHAR tmp[128];
 	//tmp

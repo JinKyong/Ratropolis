@@ -37,7 +37,7 @@ void Card::render()
 void Card::renderDetailed()
 {
 	for (int i = 0; i < _atbList.size(); i++)
-		_atbList[i]->getToolTip()->render(_body.right, _body.top + 10 + i * 140);
+		_atbList[i]->render(_body.right, _body.top + 10 + i * 140);
 }
 
 void Card::controlFrame()

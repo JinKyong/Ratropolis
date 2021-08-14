@@ -2,21 +2,21 @@
 
 class ToolTip
 {
-private:
+protected:
 	dImage* _frame;
 
-	LPWSTR _name;
-	LPWSTR _desc;
+	LPCWCHAR _name;
+	LPCWCHAR _desc;
 
 public:
-	HRESULT init(LPCWCHAR name, LPCWCHAR desc);
-	void release();
-	void update();
-	void render(float x, float y);
+	virtual HRESULT init();
+	virtual void release();
+	virtual void update();
+	virtual void render(float x, float y);
 
 
 
-	LPWSTR getName() { return _name; }
-	LPWSTR getDesc() { return _desc; }
+	LPCWCHAR getName() { return _name; }
+	LPCWCHAR getDesc() { return _desc; }
 };
 

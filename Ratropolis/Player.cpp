@@ -23,6 +23,11 @@ void Player::update()
 		changeGold(+5);
 	}
 
+	_count += TIMEMANAGER->getElapsedTime();
+	if (_count >= 5) {
+		changeGold(_defaultStat.tax);
+		_count = 0;
+	}
 	
 
 	//조작키
@@ -52,16 +57,7 @@ void Player::playGame()
 
 	_selectedCard = NULL;
 
-
-	//세금 징수 쓰레드
-	CreateThread(
-		NULL,			//스레드의 보안속성(자신윈도우가 존재할때)
-		NULL,			//스레드의 스택크기(NULL로 두면 메인쓰레드)
-		threadCollectTax,	//사용할 함수
-		this,			//스레드 매개변수(this로 뒀으니 본 클래스)
-		NULL,			//스레드 특성(기다릴지 바로실행할지(NULL))
-		NULL			//스레드 생성 후 스레드의 ID 넘겨줌
-	);
+	_count = 0;
 }
 
 void Player::controlKeyboard()
@@ -92,8 +88,8 @@ void Player::changeCivil(int num)
 {
 	_defaultStat.currentCivil += num;
 
-	if (_defaultStat.currentCivil >= 200)
-		_defaultStat.currentCivil = 200;
+	if (_defaultStat.currentCivil >= _defaultStat.maxCivil)
+		_defaultStat.currentCivil = _defaultStat.maxCivil;
 }
 
 void Player::changeMaxCivil(int num)
@@ -102,6 +98,8 @@ void Player::changeMaxCivil(int num)
 
 	if (_defaultStat.maxCivil >= 200)
 		_defaultStat.maxCivil = 200;
+
+	changeCivil(num);
 }
 
 void Player::changeCard(Card * card)
@@ -109,18 +107,4 @@ void Player::changeCard(Card * card)
 	if (_selectedCard == card) return;
 
 	_selectedCard = card;
-}
-
-DWORD Player::threadCollectTax(LPVOID lpParameter)
-{
-	Player* playerHelper = (Player*)lpParameter;
-
-	while (1) {
-		//5초마다 세금 징수
-		Sleep(5000);
-
-		playerHelper->changeGold(playerHelper->getDefaultStat().tax);
-	}
-
-	return 0;
 }

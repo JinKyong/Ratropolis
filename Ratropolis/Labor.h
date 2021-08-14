@@ -1,14 +1,10 @@
 #pragma once
-#include "Attribute.h"
+#include "ToolTip.h"
 
-class Labor : public Attribute
+class Labor : public ToolTip
 {
-private:
 
 public:
-	virtual HRESULT init(int value = 0, float duration = 0);
-	virtual void release();
-	virtual void update();
-	virtual void render();
+	HRESULT init();
 };
 
