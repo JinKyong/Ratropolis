@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "Card_Economy.h"
+#include "Card_Build.h"
 #include "Player.h"
 #include "NameTag.h"
 #include "Icon.h"
 #include "ToolTip.h"
 
-HRESULT Card_Economy::init()
+HRESULT Card_Build::init()
 {
 	Card::init();
 
@@ -16,12 +16,12 @@ HRESULT Card_Economy::init()
 
 
 	//경제 카드
-	_cardStat.type = CARD_TYPE_ECONOMY;
+	_cardStat.type = CARD_TYPE_BUILD;
 
 
 
 	//이미지 할당
-	_frame = IMAGEMANAGER->findDImage("economyFrame");
+	_frame = IMAGEMANAGER->findDImage("buildFrame");
 
 	char tmp[128];
 	sprintf_s(tmp, "card_rarity%d", _cardStat.rarity);
@@ -34,28 +34,22 @@ HRESULT Card_Economy::init()
 	return S_OK;
 }
 
-void Card_Economy::release()
+void Card_Build::release()
 {
 	Card::release();
 }
 
-void Card_Economy::update()
+void Card_Build::update()
 {
 	Card::update();
 
-	if (_cost->getValue() <= _player->getDefaultStat().gold) {
-		if (_civilCost) {
-			if (_civilCost->getValue() <= _player->getDefaultStat().currentCivil)
-				_usable = true;
-		}
-		else
-			_usable = true;
-	}
+	if (_cost->getValue() <= _player->getDefaultStat().gold)
+		_usable = true;
 	else
 		_usable = false;
 }
 
-void Card_Economy::render()
+void Card_Build::render()
 {
 	if (_hide) return;
 
@@ -74,8 +68,8 @@ void Card_Economy::render()
 	_name->render(_x, _y - _frame->getHeight() / 2);
 
 	_cost->render(_x - CARDWIDTH / 2 + 16, _y - CARDHEIGHT / 2 + 22);
-	if (_civilCost)
-		_civilCost->render(_x + CARDWIDTH / 2 - 16,	_y - CARDHEIGHT / 2 + 22);
+	if (_spaceCost)
+		_spaceCost->render(_x + CARDWIDTH / 2 - 16, _y - CARDHEIGHT / 2 + 22);
 
 	DTDMANAGER->resetBrushColor();
 
@@ -87,7 +81,7 @@ void Card_Economy::render()
 		LPWSTR atb = new WCHAR[128];
 		lstrcpyW(atb, L" ");
 		for (int i = 0; i < _atbList.size(); i++) {
-			if(i > 0)
+			if (i > 0)
 				lstrcatW(atb, L", ");
 			lstrcatW(atb, _atbList[i]->getName());
 		}
@@ -111,12 +105,10 @@ void Card_Economy::render()
 	DTDMANAGER->resetTransform();
 }
 
-void Card_Economy::useCard()
+void Card_Build::useCard()
 {
 	//cost
 	_player->changeGold(-_cost->getValue());
-	if(_civilCost)
-		_player->changeCivil(-_civilCost->getValue());
 
 	DECKMANAGER->useCard(this);
 }

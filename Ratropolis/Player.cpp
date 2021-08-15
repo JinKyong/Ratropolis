@@ -72,8 +72,10 @@ void Player::controlKeyboard()
 
 
 
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
-		DECKMANAGER->drawCard();
+	if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
+		if(!_selectedCard)
+			DECKMANAGER->drawCard();
+	}
 }
 
 void Player::changeGold(int num)
@@ -82,6 +84,22 @@ void Player::changeGold(int num)
 
 	if (_defaultStat.gold >= 99999)
 		_defaultStat.gold = 99999;
+}
+
+void Player::changePrize(int num)
+{
+	_defaultStat.prize += num;
+
+	if (_defaultStat.prize >= 99999)
+		_defaultStat.prize = 99999;
+}
+
+void Player::changeTax(int num)
+{
+	_defaultStat.tax += num;
+
+	if (_defaultStat.tax >= 99999)
+		_defaultStat.tax = 99999;
 }
 
 void Player::changeCivil(int num)
@@ -107,4 +125,7 @@ void Player::changeCard(Card * card)
 	if (_selectedCard == card) return;
 
 	_selectedCard = card;
+
+	if (_selectedCard->getCardStat()->type == CARD_TYPE_BUILD)
+		GAMEMANAGER->getBuildManager()->grabBcard();
 }

@@ -22,7 +22,6 @@ public:
 	void render();
 
 	void playGame();
-
 	void renderPlayer();
 
 

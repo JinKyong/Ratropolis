@@ -63,8 +63,8 @@ Building * Dictionary::makeBuilding(int num, int level)
 #pragma region Cards
 void Dictionary::registerCard()
 {
-
 	addCard(1, &Dictionary::card1);
+	addCard(3, &Dictionary::card3);
 	addCard(31, &Dictionary::card31);
 	addCard(32, &Dictionary::card32);
 }
@@ -109,14 +109,14 @@ void Dictionary::registerCardIlluste()
 void Dictionary::registerCardCostImage()
 {
 	//70, 70
-	IMAGEMANAGER->addDImage("cost_gold", L"img/card/cost/GoldFrame.png", 28, 28);
-	IMAGEMANAGER->addDImage("cost_civil", L"img/card/cost/CostFrame.png", 28, 28);
-	IMAGEMANAGER->addDImage("cost_ground", L"img/card/cost/GroundFrame.png", 28, 28);
+	IMAGEMANAGER->addDImage("cost_gold", L"img/component/cost/GoldFrame.png", 28, 28);
+	IMAGEMANAGER->addDImage("cost_civil", L"img/component/cost/CostFrame.png", 28, 28);
+	IMAGEMANAGER->addDImage("cost_space", L"img/component/cost/GroundFrame.png", 28, 28);
 
-	IMAGEMANAGER->addDImage("cost_sword", L"img/card/cost/Card2_Attack.png", 130, 250);
-	IMAGEMANAGER->addDImage("cost_bow", L"img/card/cost/Card2_AttackBow.png", 193, 313);
-	IMAGEMANAGER->addDImage("cost_assist", L"img/card/cost/Card2_Assist.png", 193, 313);
-	IMAGEMANAGER->addDImage("cost_defense", L"img/card/cost/Card2_Deffense.png", 130, 135);
+	IMAGEMANAGER->addDImage("cost_sword", L"img/component/cost/Card2_Attack.png", 130, 250);
+	IMAGEMANAGER->addDImage("cost_bow", L"img/component/cost/Card2_AttackBow.png", 193, 313);
+	IMAGEMANAGER->addDImage("cost_assist", L"img/component/cost/Card2_Assist.png", 193, 313);
+	IMAGEMANAGER->addDImage("cost_defense", L"img/component/cost/Card2_Deffense.png", 130, 135);
 }
 #pragma endregion
 

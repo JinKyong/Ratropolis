@@ -38,8 +38,11 @@ public:
 	void controlKeyboard();
 
 	void changeGold(int num);
+	void changePrize(int num);
+	void changeTax(int num);
 	void changeCivil(int num);
 	void changeMaxCivil(int num);
+
 	void changeCard(Card* card);
 
 

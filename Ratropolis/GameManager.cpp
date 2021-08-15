@@ -38,7 +38,7 @@ void GameManager::playGame()
 	_player->setCamX(44 * 90);
 	_player->setCamY(CAMERAMANAGER->getBackScreenHeight() / 2 + 300);
 
-	_buildManager->init();
+	_buildManager->init(88);
 }
 
 void GameManager::renderPlayer()

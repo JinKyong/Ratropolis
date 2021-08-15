@@ -5,8 +5,8 @@
 HRESULT CircleBar::init(int cost, float duration, int* reward)
 {
 	//image
-	_backBar = IMAGEMANAGER->addDImage("circleBar_back", L"img/UI/CircleGauge_FrameNew.png", 100, 100);
-	_frontBar = IMAGEMANAGER->addDImage("circleBar_front", L"img/UI/CircleGauge_Gauge_G.png", 100, 100);
+	_backBar = IMAGEMANAGER->addDImage("circleBar_back", L"img/component/progressBar/CircleGauge_FrameNew.png", 100, 100);
+	_frontBar = IMAGEMANAGER->addDImage("circleBar_front", L"img/component/progressBar/CircleGauge_Gauge_G.png", 100, 100);
 	char tmp[128];
 	sprintf_s(tmp, "UI_illuste%d", GAMEMANAGER->getPlayer()->getCard()->getCardStat()->number);
 	_image = IMAGEMANAGER->findDImage(tmp);

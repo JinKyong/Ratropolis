@@ -2,7 +2,7 @@
 #include "collisionManager.h"
 #include "Player.h"
 #include "Card.h"
-#include "Building.h"
+#include "BuildManager.h"
 #include "MenuHeader.h"
 
 HRESULT collisionManager::init()
@@ -22,6 +22,15 @@ void collisionManager::buildingsWithCursor(Building* building, float x, float y)
 	
 	if (PtInRect(&building->getBody(), pt))
 		DTDMANAGER->FillRectangle(building->getBody());
+}
+
+bool collisionManager::spaceWithCursor(RECT space, float x, float y)
+{
+	POINT pt = { x, y };
+
+	if (PtInRect(&space, pt))	return true;
+
+	return false;
 }
 
 Card* collisionManager::cardListWithCursor(Card* card, float x, float y)
@@ -81,6 +90,14 @@ void collisionManager::handsWithUseBox(Card* card)
 	case CARD_TYPE_ECONOMY:
 		if (PtInRect(&GAMEMANAGER->getUseBox(), _ptMouse))
 			card->useCard();
+		break;
+
+	case CARD_TYPE_BUILD:
+		card->setHide(false);
+		if (GAMEMANAGER->getBuildManager()->getPossible())
+			card->useCard();
+		else
+			GAMEMANAGER->getBuildManager()->putBcard();
 		break;
 
 	default:

@@ -52,6 +52,9 @@ public:
 	void addCard2Bag();
 	void addCard2Grave(Card* card);
 
+	//카드 삭제
+	void eraseCard(Card* card);
+
 	//카드 정렬
 	void sortHands();
 	void sortHandsSelect(int index);

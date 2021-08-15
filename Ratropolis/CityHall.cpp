@@ -6,6 +6,7 @@ CityHall::CityHall(int level)
 	_bodyImage = IMAGEMANAGER->addDImage("cityHall", L"img/build/cityhall/Cityhall_1_0.png", 360, 410);
 	_door = IMAGEMANAGER->addDImage("cityHall_door", L"img/build/cityHall/Door_1_0.png", 100, 90);
 
+	_space = _bodyImage->getWidth() / EACH_SPACE;
 	_hp = 4;
 	_level = level;
 

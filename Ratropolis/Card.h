@@ -66,6 +66,7 @@ protected:
 	//컴포넌트
 	NameTag* _name;			//이름
 	Icon* _cost;			//비용
+	int _reward[END_REWARD_TYPE] = { 0, };	//보상
 
 
 	//카드 내용
@@ -74,6 +75,9 @@ protected:
 
 	//속성(카드 키워드)
 	vector<ToolTip*> _atbList;
+
+	//카드 보일지 말지
+	bool _hide;
 
 public:
 	virtual HRESULT init();
@@ -102,5 +106,10 @@ public:
 	bool isSelect() { return _select; }
 	void setSelect(bool select) { _select = select; }
 
+	int* getReward() { return _reward; }
+
 	PCARD_INFO getCardStat() { return &_cardStat; }
+
+	bool getHide() { return _hide; }
+	void setHide(bool hide) { _hide = hide; }
 };

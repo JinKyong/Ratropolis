@@ -155,11 +155,13 @@
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Card1.h" />
+    <ClInclude Include="Card3.h" />
     <ClInclude Include="Card31.h" />
     <ClInclude Include="Card32.h" />
     <ClInclude Include="CardBagMenu.h" />
     <ClInclude Include="CardGraveMenu.h" />
     <ClInclude Include="CardHeader.h" />
+    <ClInclude Include="Card_Build.h" />
     <ClInclude Include="Card_Economy.h" />
     <ClInclude Include="Card_Millitary.h" />
     <ClInclude Include="CircleBar.h" />
@@ -218,10 +220,12 @@
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Card1.cpp" />
+    <ClCompile Include="Card3.cpp" />
     <ClCompile Include="Card31.cpp" />
     <ClCompile Include="Card32.cpp" />
     <ClCompile Include="CardBagMenu.cpp" />
     <ClCompile Include="CardGraveMenu.cpp" />
+    <ClCompile Include="Card_Build.cpp" />
     <ClCompile Include="Card_Economy.cpp" />
     <ClCompile Include="Card_Millitary.cpp" />
     <ClCompile Include="CircleBar.cpp" />

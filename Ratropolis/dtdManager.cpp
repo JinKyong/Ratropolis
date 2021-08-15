@@ -67,44 +67,6 @@ HRESULT dtdManager::init()
 
 	_pastRenderTarget = _currentRenderTarget = NULL;
 
-
-	//D2D1_FACTORY_OPTIONS options;
-	//options.debugLevel = D2D1_DEBUG_LEVEL_ERROR;
-	//D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &_dFactory1);
-	//
-	//UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
-
-	//D3D_FEATURE_LEVEL featureLevels[] = {
-	//	D3D_FEATURE_LEVEL_11_1,
-	//	D3D_FEATURE_LEVEL_11_0,
-	//	D3D_FEATURE_LEVEL_10_1,
-	//	D3D_FEATURE_LEVEL_10_0,
-	//	D3D_FEATURE_LEVEL_9_3,
-	//	D3D_FEATURE_LEVEL_9_2,
-	//	D3D_FEATURE_LEVEL_9_1,
-	//};
-
-	//D3D11CreateDevice(
-	//	nullptr,
-	//	D3D_DRIVER_TYPE_HARDWARE,
-	//	0,
-	//	creationFlags,
-	//	featureLevels,
-	//	ARRAYSIZE(featureLevels),
-	//	D3D11_SDK_VERSION,
-	//	&_d3Device,
-	//	&_d3FeatureLevel,
-	//	&_d3Context
-	//);
-
-	//_d3Device->As(&_d3DxgiDevice);
-
-	//_dFactory1->CreateDevice(_d3DxgiDevice->Get(), &_dDevice);
-	//_dDevice->CreateDeviceContext(
-	//	D2D1_DEVICE_CONTEXT_OPTIONS_NONE,
-	//	&_dContext
-	//);
-
 	return S_OK;
 }
 

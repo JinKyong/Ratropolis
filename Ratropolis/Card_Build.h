@@ -1,10 +1,10 @@
 #pragma once
 #include "Card.h"
 
-class Card_Economy : public Card
+class Card_Build : public Card
 {
 protected:
-	Icon* _civilCost;
+	Icon* _spaceCost;
 
 public:
 	virtual HRESULT init();

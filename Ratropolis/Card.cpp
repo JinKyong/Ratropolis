@@ -17,6 +17,10 @@ HRESULT Card::init()
 	_frameX = _frameY = 0;
 	_count = 0;
 
+
+
+	_hide = false;
+
 	return S_OK;
 }
 

@@ -11,18 +11,23 @@ HRESULT DeckManager::init()
 
 	_draw = 5;
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {
 		Card* card = DICTIONARY->makeCard(1, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {
 		Card* card = DICTIONARY->makeCard(31, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {
 		Card* card = DICTIONARY->makeCard(32, RND->getInt(2) + 1);
+		card->init();
+		addCard2Deck(card);
+	}
+	for (int i = 0; i < 5; i++) {
+		Card* card = DICTIONARY->makeCard(3, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
@@ -76,7 +81,7 @@ void DeckManager::render()
 
 	DTDMANAGER->beginDraw();
 
-	for (int i = 0; i < _currentHands.size(); i++) 
+	for (int i = 0; i < _currentHands.size(); i++)
 		_currentHands[i]->render();
 
 
@@ -102,9 +107,23 @@ void DeckManager::useCard(Card * card)
 	cardIter hand = _currentHands.begin();
 	for (; hand != _currentHands.end(); ++hand) {
 		if ((*hand) == card) {
-			addCard2Grave((*hand));
-			(*hand)->init();
-			_currentHands.erase(hand);
+			switch ((*hand)->getCardStat()->type) {
+			case CARD_TYPE_BUILD:
+				//덱에서 삭제
+				eraseCard((*hand));
+
+				//카드 지우고
+				SAFE_RELEASE((*hand));
+				//손에서 삭제
+				_currentHands.erase(hand);
+				break;
+
+			default:
+				addCard2Grave((*hand));
+				(*hand)->init();
+				_currentHands.erase(hand);
+				break;
+			}
 			break;
 		}
 	}
@@ -129,6 +148,17 @@ void DeckManager::addCard2Bag()
 void DeckManager::addCard2Grave(Card * card)
 {
 	_cardGrave.push_back(card);
+}
+
+void DeckManager::eraseCard(Card * card)
+{
+	cardIter deck = _currentDeck.begin();
+	for (; deck != _currentDeck.end(); ++deck) {
+		if ((*deck) == card) {
+			_currentDeck.erase(deck);
+			break;
+		}
+	}
 }
 
 void DeckManager::sortHands()

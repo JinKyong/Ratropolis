@@ -54,6 +54,7 @@ public:
 	//======================== µµ°¨ ========================//
 #pragma region Card
 	Card* card1(int level) { return new Card1(level); }
+	Card* card3(int level) { return new Card3(level); }
 	Card* card31(int level) { return new Card31(level); }
 	Card* card32(int level) { return new Card32(level); }
 #pragma endregion

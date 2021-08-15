@@ -8,8 +8,6 @@ typedef struct tagButton {
 
 	float x, y;
 	RECT body;
-
-	void useButton() {};
 }BUTTON;
 
 enum HUD_TYPE {

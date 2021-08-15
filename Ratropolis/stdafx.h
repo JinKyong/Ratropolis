@@ -8,19 +8,10 @@
 
 //d2d lib
 #include <d2d1.h>
-#include <d2d1_1.h>
-#include <d3d11.h>
-#include <dxgi.h>
-#include <dxgi1_2.h>
-#include <wrl.h>
 #include <dwrite.h>
 #include <wincodec.h>
 
 #pragma comment(lib, "d2d1.lib")
-//#pragma comment(lib, "d2d1effects.lib")
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dwrite.lib")
 #pragma comment(lib, "WindowsCodecs.lib")
 
@@ -55,7 +46,6 @@
 using namespace std;
 using namespace MACRO_FUNC;
 using namespace D2D1;
-using namespace Microsoft::WRL;
 
 //==================================
 // ## 매크로 처리 ##

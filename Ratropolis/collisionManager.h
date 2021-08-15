@@ -20,6 +20,7 @@ public:
 	
 	//커서와 배경(건물) 충돌(backRT)
 	void buildingsWithCursor(Building* building, float x, float y);
+	bool spaceWithCursor(RECT space, float x, float y);
 
 
 	//커서와 카드(리스트) 충돌(UIRT)

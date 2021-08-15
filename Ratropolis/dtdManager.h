@@ -38,18 +38,6 @@ private:
 	IDWriteTextFormat		*_dWDefaultFormat;
 	IDWriteTextFormat		*_dWCustomFormat;
 
-	//Device Context
-	//int m_dpi = 96;
-	//ComPtr<ID2D1Factory1>			_dFactory1;
-	//ComPtr<D3D_FEATURE_LEVEL>		_d3FeatureLevel;
-	//ComPtr<ID2D1Device>				_dDevice;
-	//ComPtr<ID2D1DeviceContext>		_dContext;
-	//ComPtr<IDXGISwapChain1>			_d3SwapChain;
-	//ComPtr<ID2D1Bitmap1>			_dTargetBitmap;
-	//ComPtr<ID3D11Device>			_d3Device;
-	//ComPtr<ID3D11DeviceContext>		_d3Context;
-	//ComPtr<IDXGIDevice1>			_d3DxgiDevice;
-
 	bool _clear;
 
 public:
