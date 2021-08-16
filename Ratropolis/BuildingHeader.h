@@ -15,3 +15,4 @@ typedef struct tagSpace {
 
 #include "CityHall.h"
 #include "Building3.h"
+#include "Building18.h"

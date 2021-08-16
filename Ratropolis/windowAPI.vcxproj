@@ -149,12 +149,14 @@
   <ItemGroup>
     <ClInclude Include="AllCardMenu.h" />
     <ClInclude Include="Building.h" />
+    <ClInclude Include="Building18.h" />
     <ClInclude Include="Building3.h" />
     <ClInclude Include="BuildingHeader.h" />
     <ClInclude Include="BuildManager.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Card1.h" />
+    <ClInclude Include="Card18.h" />
     <ClInclude Include="Card3.h" />
     <ClInclude Include="Card31.h" />
     <ClInclude Include="Card32.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="rewardType.h" />
+    <ClInclude Include="sampleScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneHeader.h" />
     <ClInclude Include="sceneManager.h" />
@@ -215,11 +218,13 @@
   <ItemGroup>
     <ClCompile Include="AllCardMenu.cpp" />
     <ClCompile Include="Building.cpp" />
+    <ClCompile Include="Building18.cpp" />
     <ClCompile Include="Building3.cpp" />
     <ClCompile Include="BuildManager.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Card1.cpp" />
+    <ClCompile Include="Card18.cpp" />
     <ClCompile Include="Card3.cpp" />
     <ClCompile Include="Card31.cpp" />
     <ClCompile Include="Card32.cpp" />
@@ -254,6 +259,7 @@
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="printManager.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="sampleScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="soundManager.cpp" />

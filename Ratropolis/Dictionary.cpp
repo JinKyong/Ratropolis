@@ -13,6 +13,7 @@ HRESULT Dictionary::init()
 
 #pragma region buildingInit
 	registerBuilding();
+	registerBuildEffect();
 #pragma endregion
 
 #pragma region NPCInit
@@ -65,6 +66,7 @@ void Dictionary::registerCard()
 {
 	addCard(1, &Dictionary::card1);
 	addCard(3, &Dictionary::card3);
+	addCard(18, &Dictionary::card18);
 	addCard(31, &Dictionary::card31);
 	addCard(32, &Dictionary::card32);
 }
@@ -126,6 +128,16 @@ void Dictionary::registerBuilding()
 {
 	addBuilding(0, &Dictionary::cityHall);
 	addBuilding(3, &Dictionary::building3);
+	addBuilding(18, &Dictionary::building18);
+}
+
+void Dictionary::registerBuildEffect()
+{
+	IMAGEMANAGER->addDImage("buildSign", L"img/build/effect/Build_Effect.png", 60, 69);
+	IMAGEMANAGER->addDImage("buildEffect1", L"img/build/effect/Build_Effect1.png", 90, 99);
+	IMAGEMANAGER->addDImage("buildEffect2", L"img/build/effect/Build_Effect2.png", 180, 186);
+	IMAGEMANAGER->addDImage("buildEffect3", L"img/build/effect/Build_Effect3.png", 270, 237);
+	IMAGEMANAGER->addDImage("buildEffect4", L"img/build/effect/Build_Effect4.png", 360, 326);
 }
 
 #pragma endregion

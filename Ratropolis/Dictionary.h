@@ -47,6 +47,8 @@ public:
 
 #pragma region RegisterBuilding
 	void registerBuilding();				//빌딩 등록
+
+	void registerBuildEffect();				//빌드 effect	(생성 이미지)
 #pragma endregion
 
 
@@ -55,6 +57,7 @@ public:
 #pragma region Card
 	Card* card1(int level) { return new Card1(level); }
 	Card* card3(int level) { return new Card3(level); }
+	Card* card18(int level) { return new Card18(level); }
 	Card* card31(int level) { return new Card31(level); }
 	Card* card32(int level) { return new Card32(level); }
 #pragma endregion
@@ -62,6 +65,7 @@ public:
 #pragma region Building
 	Building* cityHall(int level) { return new CityHall(level); }
 	Building* building3(int level) { return new Building3(level); }
+	Building* building18(int level) { return new Building18(level); }
 #pragma endregion
 
 #pragma region NPC

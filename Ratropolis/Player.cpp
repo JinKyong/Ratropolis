@@ -63,18 +63,26 @@ void Player::playGame()
 void Player::controlKeyboard()
 {
 	//Keyboard
-	if (KEYMANAGER->isStayKeyDown('D')) {
-		_camX += 10;
+	if (KEYMANAGER->isStayKeyDown('D') && _camX < CAMERAMANAGER->getBackScreenWidth() - WINSIZEX / 2) {
+		_camX += 20;
 	}
-	if (KEYMANAGER->isStayKeyDown('A')) {
-		_camX -= 10;
+	if (KEYMANAGER->isOnceKeyDown('Q')) {
+		_camX = (GAMEMANAGER->getBuildManager()->getLeftWall() + 8) * 90;
 	}
+	if (KEYMANAGER->isStayKeyDown('A') && _camX > WINSIZEX / 2) {
+		_camX -= 20;
+	}
+	if (KEYMANAGER->isOnceKeyDown('E')) {
+		_camX = (GAMEMANAGER->getBuildManager()->getRightWall() - 8) * 90;
+	}
+
+
 
 
 
 	if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
 		if(!_selectedCard)
-			DECKMANAGER->drawCard();
+			DECKMANAGER->redrawCard();
 	}
 }
 

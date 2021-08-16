@@ -17,18 +17,26 @@ HRESULT BuildManager::init(int num)
 		_space.push_back(new SPACE(i));
 	_building = NULL;
 
-	_groundLight = IMAGEMANAGER->addDImage("groundHighlight", L"img/groundhighlight.png", 90, 120);
+	_groundLight = IMAGEMANAGER->addDImage("groundHighlight", L"img/build/effect/groundhighlight.png", 90, 120);
+	_wall = IMAGEMANAGER->addDImage("wallReady", L"img/build/effect/WallReady.png", 134, 78);
+	_wallLight = IMAGEMANAGER->addDImage("wallReadyHighlight", L"img/build/effect/WallReady_Highlight.png", 134, 78);
 
 	//처음 위치기준 좌우 7칸 남는 공간으로
 	for (int i = num / 2 - 9; i < num / 2 + 9; i++)
 		_space[i]->empty = true;
 
-
 	//cityHall
 	addBuilding(num / 2 - 2, 0);
+	addBuilding(num / 2 - 10, 18);
+	addBuilding(num / 2 + 9, 18);
+
+	//벽
+	_leftWall = num / 2 - 18;
+	_rightWall = num / 2 + 17;
 
 	_cursor = GAMEMANAGER->getPlayer()->getCursor();
 
+	_getWall = 0;
 	_possible = false;
 
 	return S_OK;
@@ -46,7 +54,8 @@ void BuildManager::update()
 		++building;
 	}
 
-	if (_building) isPossible();
+	if (_getWall) isPossibleWall();
+	else if (_building) isPossible();
 }
 
 void BuildManager::render()
@@ -57,7 +66,44 @@ void BuildManager::render()
 		//COLLISIONMANAGER->buildingsWithCursor(*building, _cursor->getBackX(), _cursor->getBackY());
 	}
 
-	if (_building) spaceRender();
+	//벽 && 빈 공간 highlight
+	if (_getWall) wallRender();
+	else if (_building) spaceRender();
+
+	//벽 출력
+	for (int i = _leftWall; i > 8; i -= 8) {
+		if (i == _getWall) continue;
+		_wall->render(i * 90, GROUND - 78);
+	}
+	for (int i = _rightWall; i < _space.size() - 8; i += 8) {
+		if (i == _getWall) continue;
+		_wall->render(i * 90, GROUND - 78);
+	}
+}
+
+void BuildManager::isPossibleWall()
+{
+	GAMEMANAGER->getPlayer()->getCard()->setHide(false);
+	_possible = false;
+
+	if (_leftWall > 8 &&
+		COLLISIONMANAGER->spaceWithCursor(_space[_leftWall]->body, _cursor->getBackX(), _cursor->getBackY())) {
+
+		GAMEMANAGER->getPlayer()->getCard()->setHide(true);
+		_building->setIdX(_space[_leftWall]->idX);
+		_getWall = _leftWall;
+		_possible = true;
+	}
+	else if (_rightWall < _space.size() - 8 &&
+		COLLISIONMANAGER->spaceWithCursor(_space[_rightWall]->body, _cursor->getBackX(), _cursor->getBackY())) {
+
+		GAMEMANAGER->getPlayer()->getCard()->setHide(true);
+		_building->setIdX(_space[_rightWall]->idX);
+		_getWall = _rightWall;
+		_possible = true;
+	}
+	else
+		_getWall = 1;
 }
 
 void BuildManager::isPossible()
@@ -77,7 +123,7 @@ void BuildManager::isPossible()
 
 			int spaceCost = _building->getSpace();
 			_possible = true;
-			_building->init((*space)->idX);
+			_building->setIdX((*space)->idX);
 
 			for (int i = 1; i < spaceCost; ++i) {
 				if ((*(space + i))->empty) continue;
@@ -87,6 +133,16 @@ void BuildManager::isPossible()
 			}
 		}
 	}
+}
+
+void BuildManager::wallRender()
+{
+	if (_leftWall != _getWall)
+		_wallLight->render(_leftWall * 90, GROUND - 78);
+	if (_rightWall != _getWall)
+		_wallLight->render(_rightWall * 90, GROUND - 78);
+
+	if (_possible) _building->preview();
 }
 
 void BuildManager::spaceRender()
@@ -118,13 +174,48 @@ void BuildManager::grabBcard()
 
 	if (!_building) {
 		_building = DICTIONARY->makeBuilding(card->getCardStat()->number, card->getCardStat()->level);
-		_building->init(card->getReward());
+		//_building->init(0);
+
+		if (card->getCardStat()->number == 18)
+			_getWall = 1;
 	}
 }
 
 void BuildManager::putBcard()
 {
+	_getWall = 0;
 	SAFE_DELETE(_building);
+}
+
+void BuildManager::addWall()
+{
+	if (!_possible) return;
+
+	//공간 확장
+	int idX = _building->getIdX();
+
+	if (idX == _leftWall) {
+		for (int i = 1; i < 8; i++)
+			_space[_leftWall + i]->empty = true;
+		_leftWall -= 8;
+	}
+	else if (idX == _rightWall) {
+		for (int i = 1; i < 8; i++)
+			_space[_rightWall - i]->empty = true;
+		_rightWall += 8;
+	}
+
+	Card* card = GAMEMANAGER->getPlayer()->getCard();
+	card->setHide(false);
+
+	//건물 추가
+	_building->init(idX);
+	_building->setReward(card->getReward());
+	_building->setOnBuild(true);
+	_buildings.push_back(_building);
+
+	_getWall = 0;
+	_building = NULL;
 }
 
 void BuildManager::addBuilding()
@@ -137,13 +228,14 @@ void BuildManager::addBuilding()
 	for (int i = idX; i < idX + space; i++)
 		_space[i]->empty = false;
 
-	GAMEMANAGER->getPlayer()->getCard()->setHide(false);
-	_buildings.push_back(_building);
+	Card* card = GAMEMANAGER->getPlayer()->getCard();
+	card->setHide(false);
 
-	GAMEMANAGER->getPlayer()->changeGold(_building->getReward()[REWARD_TYPE_GOLD]);
-	GAMEMANAGER->getPlayer()->changePrize(_building->getReward()[REWARD_TYPE_PRIZE]);
-	GAMEMANAGER->getPlayer()->changeTax(_building->getReward()[REWARD_TYPE_TAX]);
-	GAMEMANAGER->getPlayer()->changeMaxCivil(_building->getReward()[REWARD_TYPE_CIVIL]);
+	//건물 추가
+	_building->init(idX);
+	_building->setReward(card->getReward());
+	_building->setOnBuild(true);
+	_buildings.push_back(_building);
 
 	_building = NULL;
 }

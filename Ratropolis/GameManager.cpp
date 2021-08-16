@@ -5,6 +5,8 @@
 
 HRESULT GameManager::init(Player * player)
 {
+	_fadeImage = IMAGEMANAGER->addDImage("fade_B", L"img/fade_B.png", WINSIZEX, WINSIZEY);
+
 	_player = player;
 	
 	_buildManager = new BuildManager;
@@ -27,8 +29,11 @@ void GameManager::render()
 {
 	_buildManager->render();
 
-	renderPlayer();
 
+	//배경 시야
+	renderSight();
+
+	renderPlayer();
 }
 
 void GameManager::playGame()
@@ -39,6 +44,37 @@ void GameManager::playGame()
 	_player->setCamY(CAMERAMANAGER->getBackScreenHeight() / 2 + 300);
 
 	_buildManager->init(88);
+}
+
+void GameManager::renderSight()
+{
+	int left = _buildManager->getLeftWall();
+	int right = _buildManager->getRightWall();
+	float width = CAMERAMANAGER->getBackScreenWidth();
+	float height = CAMERAMANAGER->getBackScreenHeight();
+	D2D1_RECT_F tmpRECT, tmpRECT2;
+	float alpha;
+	tmpRECT2 = dRectMake(0, 0, _fadeImage->getWidth(), _fadeImage->getHeight());
+
+	//left
+	alpha = 1;
+	tmpRECT = dRectMake(0, 0, (left + 3) * 90, height);
+	_fadeImage->render(tmpRECT, tmpRECT2, alpha);
+	for (int i = 1; i <= 100; i++) {
+		tmpRECT = dRectMake(tmpRECT.right, tmpRECT.top, 2, height);
+		_fadeImage->render(tmpRECT, tmpRECT2, alpha);
+		alpha -= 0.01;
+	}
+
+	//right
+	alpha = 1;
+	tmpRECT = dRectMake((right - 2) * 90, 0, width - (right - 2) * 90, height);
+	_fadeImage->render(tmpRECT, tmpRECT2, alpha);
+	for (int i = 1; i <= 100; i++) {
+		tmpRECT = dRectMake(tmpRECT.left - 2, tmpRECT.top, 2, height);
+		_fadeImage->render(tmpRECT, tmpRECT2, alpha);
+		alpha -= 0.01;
+	}
 }
 
 void GameManager::renderPlayer()

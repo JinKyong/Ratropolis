@@ -48,9 +48,12 @@ public:
 
 	//카드 추가하기
 	void addCard2Deck(Card* card);
-	void addCard2Hand();
-	void addCard2Bag();
+	void addCard2Hand(Card* card);
+	void addCard2Bag(Card* card);
 	void addCard2Grave(Card* card);
+
+	//카드 드로우
+	void drawCard(int num = 1);
 
 	//카드 삭제
 	void eraseCard(Card* card);
@@ -61,12 +64,12 @@ public:
 
 	//카드 셔플 및 드로우
 	void shuffle();
-	void drawCard();
+	void redrawCard();
 
 	static DWORD CALLBACK threadShuffle(LPVOID lpParameter);
 	void releaseShuffleThread();
-	static DWORD CALLBACK threadDrawCard(LPVOID lpParameter);
-	void releaseDrawThread();
+	static DWORD CALLBACK threadRedrawCard(LPVOID lpParameter);
+	void releaseRedrawThread();
 
 
 

@@ -327,6 +327,15 @@
     <ClInclude Include="Card3.h">
       <Filter>playGround\Deck\Card\Build</Filter>
     </ClInclude>
+    <ClInclude Include="Card18.h">
+      <Filter>playGround\Deck\Card\Build</Filter>
+    </ClInclude>
+    <ClInclude Include="Building18.h">
+      <Filter>playGround\Object\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="sampleScene.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -493,6 +502,15 @@
     </ClCompile>
     <ClCompile Include="Card3.cpp">
       <Filter>playGround\Deck\Card\Build</Filter>
+    </ClCompile>
+    <ClCompile Include="Card18.cpp">
+      <Filter>playGround\Deck\Card\Build</Filter>
+    </ClCompile>
+    <ClCompile Include="Building18.cpp">
+      <Filter>playGround\Object\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="sampleScene.cpp">
+      <Filter>playGround\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,12 +11,12 @@ HRESULT DeckManager::init()
 
 	_draw = 5;
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		Card* card = DICTIONARY->makeCard(1, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 1; i++) {
 		Card* card = DICTIONARY->makeCard(31, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
@@ -26,8 +26,13 @@ HRESULT DeckManager::init()
 		card->init();
 		addCard2Deck(card);
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 4; i++) {
 		Card* card = DICTIONARY->makeCard(3, RND->getInt(2) + 1);
+		card->init();
+		addCard2Deck(card);
+	}
+	for (int i = 0; i < 2; i++) {
+		Card* card = DICTIONARY->makeCard(18, RND->getInt(2) + 1);
 		card->init();
 		addCard2Deck(card);
 	}
@@ -113,7 +118,7 @@ void DeckManager::useCard(Card * card)
 				eraseCard((*hand));
 
 				//카드 지우고
-				SAFE_RELEASE((*hand));
+				SAFE_DELETE((*hand));
 				//손에서 삭제
 				_currentHands.erase(hand);
 				break;
@@ -132,22 +137,36 @@ void DeckManager::useCard(Card * card)
 void DeckManager::addCard2Deck(Card * card)
 {
 	_currentDeck.push_back(card);
+	addCard2Bag(card);
+}
+
+void DeckManager::addCard2Hand(Card* card)
+{
+	_currentHands.push_back(card);
+}
+
+void DeckManager::addCard2Bag(Card* card)
+{
 	_cardBag.push_back(card);
-}
-
-void DeckManager::addCard2Hand()
-{
-	_currentHands.push_back(_cardBag[0]);
-	_cardBag.erase(_cardBag.begin());
-}
-
-void DeckManager::addCard2Bag()
-{
 }
 
 void DeckManager::addCard2Grave(Card * card)
 {
 	_cardGrave.push_back(card);
+}
+
+void DeckManager::drawCard(int num)
+{
+	//뽑을 카드가 없으면 다시 셔플
+	if (getCardBag().size() <= 0) {
+		shuffle();
+		return;
+	}
+
+	for (int i = 0; i < num; i++) {
+		addCard2Hand(_cardBag[0]);
+		_cardBag.erase(_cardBag.begin());
+	}
 }
 
 void DeckManager::eraseCard(Card * card)
@@ -213,7 +232,7 @@ void DeckManager::shuffle()
 	);
 }
 
-void DeckManager::drawCard()
+void DeckManager::redrawCard()
 {
 	//예외처리
 	//이미 드로우중이면 드로우 안 함
@@ -230,7 +249,7 @@ void DeckManager::drawCard()
 	_threads[DECK_THREAD_TYPE_DRAW] = CreateThread(
 		NULL,			//스레드의 보안속성(자신윈도우가 존재할때)
 		NULL,			//스레드의 스택크기(NULL로 두면 메인쓰레드)
-		threadDrawCard,	//사용할 함수
+		threadRedrawCard,	//사용할 함수
 		this,			//스레드 매개변수(this로 뒀으니 본 클래스)
 		true,			//스레드 특성(기다릴지 바로실행할지(NULL))
 		NULL			//스레드 생성 후 스레드의 ID 넘겨줌
@@ -240,6 +259,7 @@ void DeckManager::drawCard()
 DWORD DeckManager::threadShuffle(LPVOID lpParameter)
 {
 	DeckManager* deckHelper = (DeckManager*)lpParameter;
+	srand(time(NULL));
 
 	int index1, index2;
 	Card* tmp;
@@ -266,7 +286,7 @@ void DeckManager::releaseShuffleThread()
 	_threads[DECK_THREAD_TYPE_SHUFFLE] = NULL;
 }
 
-DWORD DeckManager::threadDrawCard(LPVOID lpParameter)
+DWORD DeckManager::threadRedrawCard(LPVOID lpParameter)
 {
 	DeckManager* deckHelper = (DeckManager*)lpParameter;
 
@@ -276,25 +296,26 @@ DWORD DeckManager::threadDrawCard(LPVOID lpParameter)
 	while (number > 0)
 	{
 		if (deckHelper->getThreads()[DECK_THREAD_TYPE_SHUFFLE])	continue;
-
+		
+		//뽑을 카드가 없으면 다시 셔플
 		if (deckHelper->getCardBag().size() <= 0) {
 			deckHelper->shuffle();
 			continue;
 		}
 
-		deckHelper->addCard2Hand();
+		deckHelper->drawCard();
 
 		Sleep(250);
 
 		number--;
 	}
 
-	deckHelper->releaseDrawThread();
+	deckHelper->releaseRedrawThread();
 
 	return 0;
 }
 
-void DeckManager::releaseDrawThread()
+void DeckManager::releaseRedrawThread()
 {
 	_threads[DECK_THREAD_TYPE_DRAW] = NULL;
 }

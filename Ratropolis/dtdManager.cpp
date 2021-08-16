@@ -73,22 +73,22 @@ HRESULT dtdManager::init()
 void dtdManager::release()
 {
 	//동적 할당한 객체들 모두 해제
-	if (_dFactory)			SAFE_RELEASE2(_dFactory);
-	if (_dRenderTarget)		SAFE_RELEASE2(_dRenderTarget);
-	if (_dBitRenderTarget)	SAFE_RELEASE2(_dBitRenderTarget);
-	if (_dBackRenderTarget) SAFE_RELEASE2(_dBackRenderTarget);
-	if (_dUIRenderTarget)	SAFE_RELEASE2(_dUIRenderTarget);
-	if (_dCardRenderTarget)	SAFE_RELEASE2(_dCardRenderTarget);
+	SAFE_RELEASE2(_dFactory);
+	SAFE_RELEASE2(_dRenderTarget);
+	SAFE_RELEASE2(_dBitRenderTarget);
+	SAFE_RELEASE2(_dBackRenderTarget);
+	SAFE_RELEASE2(_dUIRenderTarget);
+	SAFE_RELEASE2(_dCardRenderTarget);
 
-	if (_dBitmap)			SAFE_RELEASE2(_dBitmap);
-	if (_dBackBitmap)		SAFE_RELEASE2(_dBackBitmap);
-	if (_dUIBitmap)			SAFE_RELEASE2(_dUIBitmap);
-	if (_dCardBitmap)		SAFE_RELEASE2(_dCardBitmap);
-	if (_dBrush)			SAFE_RELEASE2(_dBrush);
+	SAFE_RELEASE2(_dBitmap);
+	SAFE_RELEASE2(_dBackBitmap);
+	SAFE_RELEASE2(_dUIBitmap);
+	SAFE_RELEASE2(_dCardBitmap);
+	SAFE_RELEASE2(_dBrush);
 
-	if (_dWFactory)			SAFE_RELEASE2(_dWFactory);
-	if (_dWDefaultFormat)	SAFE_RELEASE2(_dWDefaultFormat);
-	if (_dWCustomFormat)	SAFE_RELEASE2(_dWCustomFormat);
+	SAFE_RELEASE2(_dWFactory);
+	SAFE_RELEASE2(_dWDefaultFormat);
+	SAFE_RELEASE2(_dWCustomFormat);
 }
 
 void dtdManager::render(float destX, float destY, float width, float height)
@@ -111,17 +111,21 @@ void dtdManager::render(float destX, float destY, float width, float height)
 		sourCard = dRectMake(0, 0, WINSIZEX, WINSIZEY);
 
 	//배경
-	_dRenderTarget->DrawBitmap(_dBackBitmap, dest,
-		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
+	if (_dBackBitmap)
+		_dRenderTarget->DrawBitmap(_dBackBitmap, dest,
+			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
 	//오브젝트
-	_dRenderTarget->DrawBitmap(_dBitmap, dest,
-		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
+	if (_dBitmap)
+		_dRenderTarget->DrawBitmap(_dBitmap, dest,
+			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
 	//UI(inGame)
-	_dRenderTarget->DrawBitmap(_dUIBitmap, dest,
-		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourUI);
+	if (_dUIBitmap)
+		_dRenderTarget->DrawBitmap(_dUIBitmap, dest,
+			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourUI);
 	//Card
-	_dRenderTarget->DrawBitmap(_dCardBitmap, dest,
-		1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourCard);
+	if (_dCardBitmap)
+		_dRenderTarget->DrawBitmap(_dCardBitmap, dest,
+			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourCard);
 
 	//CAMERAMANAGER->fade();
 

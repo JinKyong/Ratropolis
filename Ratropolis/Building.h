@@ -3,12 +3,15 @@
 
 #define EACH_SPACE		90
 #define GROUND			1500 - 300
+#define BUILD_COUNT		3
 
 class Building
 {
 protected:
 	//Images
 	dImage* _bodyImage;
+	dImage* _buildEffect;
+	dImage* _buildSign;
 
 
 	//Poistion
@@ -20,10 +23,13 @@ protected:
 	int _space;			//차지 공간
 	int _hp;			//일반적으로 3 ~ 4
 	int _level;
-	int* _reward;
+	int _reward[END_REWARD_TYPE] = { 0, };
 
 	bool _active;		//active효과 있는지 여부
 
+	//
+	float _count;
+	bool _onBuild;		//지어지는 중
 
 	//Icon
 	//activeIcon
@@ -31,12 +37,12 @@ protected:
 
 public:
 	virtual HRESULT init(int idX);
-	virtual HRESULT init(int* reward);
 	virtual void release();
 	virtual void update();
 	virtual void render();
 
 	virtual void preview();
+	void addReward();
 
 
 
@@ -53,5 +59,14 @@ public:
 	void setSpace(int space) { _space = space; }
 
 	int* getReward() { return _reward; }
+	void setReward(int* reward) { 
+		for (int i = 0; i < END_REWARD_TYPE; i++)
+			_reward[i] = reward[i];
+	}
+
+	bool getActive() { return _active; }
+	void setActive(bool active) { _active = active; }
+	bool getOnBuild() { return _onBuild; }
+	void setOnBuild(bool onBuild) { _onBuild = onBuild; }
 };
 

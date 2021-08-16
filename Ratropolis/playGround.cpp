@@ -22,7 +22,7 @@ HRESULT playGround::init()
 	GAMEMANAGER->init(_player);
 
 	SCENEMANAGER->init();
-	SCENEMANAGER->changeScene("test");
+	SCENEMANAGER->changeScene("sample");
 
 	_debug = false;
 

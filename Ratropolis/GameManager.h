@@ -8,6 +8,8 @@ class Player;
 class GameManager : public singletonBase<GameManager>
 {
 private:
+	dImage* _fadeImage;
+
 	RECT _useBox;
 
 	Player* _player;
@@ -22,6 +24,7 @@ public:
 	void render();
 
 	void playGame();
+	void renderSight();
 	void renderPlayer();
 
 

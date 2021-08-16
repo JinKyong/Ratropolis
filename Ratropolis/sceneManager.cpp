@@ -17,6 +17,7 @@ sceneManager::~sceneManager()
 HRESULT sceneManager::init()
 {
 	addScene("test", new testGameScene);
+	addScene("sample", new sampleScene);
 
 	return S_OK;
 }
