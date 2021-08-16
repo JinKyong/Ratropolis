@@ -16,18 +16,6 @@ HRESULT AllCardMenu::init()
 	//카드번호순으로 정렬
 	sort(_cards.begin(), _cards.end(), compare);
 
-	//for (int i = 0; i < _cards.size(); i++) {
-	//	int width = i % 5;
-	//	int height = i / 5;
-	//
-	//	_cards[i]->setX(400 + width * 225);
-	//	_cards[i]->setY(200 + height * 300);
-	//
-	//	_cards[i]->setZoom(1.0);
-	//	_cards[i]->update();
-	//	_cards[i]->setUsable(false);
-	//}
-
 	UIMANAGER->setOpen(true);
 
 	return S_OK;
@@ -68,13 +56,6 @@ void AllCardMenu::update()
 				_card->setZoom(1.5);
 			}
 		}
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON)) {
-		if (!_hide)
-			_hide = true;
-		else
-			UIMANAGER->changeMenu("null");
 	}
 }
 

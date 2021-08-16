@@ -1,4 +1,5 @@
 #pragma once
+#include "ControlKey.h"
 
 class Player;
 
@@ -34,8 +35,14 @@ public:
 	void update();
 	void render();
 
+	//control
+	void controlMouse();
+	void controlMouseUI();
+
+	//cursor
 	void updatePosition(float x, float y);
 	void changeCursor(CURSOR_TYPE type);
+
 
 
 

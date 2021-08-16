@@ -111,7 +111,13 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	{
 		//윈도우 생성시 호출
 	case WM_CREATE:
-		//ShowCursor(false);
+
+#ifdef _DEBUG
+		
+#else
+		ShowCursor(false);
+#endif // DEBUG
+
 		break;
 
 		//마우스 움직이면 호출

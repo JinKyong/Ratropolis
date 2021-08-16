@@ -34,7 +34,9 @@ void Building::update()
 		if (_count >= BUILD_COUNT) {
 			_onBuild = false;
 			_count = 0;
+
 			addReward();
+			GAMEMANAGER->getBuildManager()->expandSpace(_idX);
 		}
 	}
 }

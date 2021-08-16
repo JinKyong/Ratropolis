@@ -1,4 +1,5 @@
 #pragma once
+#include "ControlKey.h"
 #include "Cursor.h"
 
 class Card;
@@ -20,6 +21,7 @@ private:
 
 	//camera중점
 	float _camX, _camY;
+	float _maxRight, _maxLeft;
 
 	DEFAULT_STAT _defaultStat;		//기본 스탯(돈, 시민 등)
 	int _level;						//지도자 레벨
@@ -37,12 +39,16 @@ public:
 	void playGame();
 	void controlKeyboard();
 
+	void changeMaxRight(int idX);
+	void changeMaxLeft(int idX);
+
 	void changeGold(int num);
 	void changePrize(int num);
 	void changeTax(int num);
 	void changeCivil(int num);
 	void changeMaxCivil(int num);
 
+	void cancleCard();
 	void changeCard(Card* card);
 
 
@@ -55,6 +61,9 @@ public:
 	void setCamX(float camX) { _camX = camX; }
 	float getCamY() { return _camY; }
 	void setCamY(float camY) { _camY = camY; }
+
+	float getMaxLeft() { return _maxLeft; }
+	float getMaxRight() { return _maxRight; }
 
 	DEFAULT_STAT getDefaultStat() { return _defaultStat; }
 

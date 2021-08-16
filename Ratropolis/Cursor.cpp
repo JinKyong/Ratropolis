@@ -31,66 +31,10 @@ void Cursor::release()
 
 void Cursor::update()
 {
-	//Mouse
-	if (KEYMANAGER->isOnceKeyDown(VK_MBUTTON)) {
-		//메뉴 열려있을때와 아닐때
-		if (UIMANAGER->getOpen()) {
-
-		}
-		else {
-			CAMERAMANAGER->resetZoom();
-		}
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) {
-		changeCursor(CURSOR_TYPE_CLICK);
-
-		//메뉴 열려있을때와 아닐때
-		if (UIMANAGER->getOpen()) {
-			if (UIMANAGER->getCurrentMenu()->getHide()) {
-				if (COLLISIONMANAGER->selectedCard(DECKMANAGER->getCurrentDeck(), _x, _y))
-					UIMANAGER->getCurrentMenu()->setHide(false);
-				else
-					UIMANAGER->getCurrentMenu()->setHide(true);
-			}
-		}
-		else {
-			COLLISIONMANAGER->buttonWithCursor();
-		}
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON)) {
-
-		//메뉴 열려있을때와 아닐때
-		if (UIMANAGER->getOpen()) {
-
-		}
-		else {
-			if (COLLISIONMANAGER->grabbedCard())
-				changeCursor(CURSOR_TYPE_GRAB);
-			if (_player->getCard()) {
-				_player->getCard()->setX(_ptMouse.x);
-				_player->getCard()->setY(_ptMouse.y);
-			}
-		}
-	}
-
-	if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON)) {
-		changeCursor(CURSOR_TYPE_DEFAULT);
-
-		//메뉴 열려있을때와 아닐때
-		if (UIMANAGER->getOpen()) {
-
-		}
-		else {
-			if (_player->getCard()) {
-				_x = _y = -1000;
-				//충돌검사
-				COLLISIONMANAGER->handsWithUseBox(_player->getCard());
-				_player->setCard(NULL);
-			}
-		}
-	}
+	if (UIMANAGER->getOpen())
+		controlMouseUI();
+	else
+		controlMouse();
 
 }
 
@@ -116,6 +60,78 @@ void Cursor::render()
 	}
 
 	_currentImage->render(_x - _currentImage->getWidth() / 2, _y - _currentImage->getHeight() / 2);
+}
+
+void Cursor::controlMouse()
+{
+	//not UI Open
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_WHEEL_CLICK)) {
+		CAMERAMANAGER->resetZoom();
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_CLICK);
+
+		COLLISIONMANAGER->buttonWithCursor();
+	}
+
+	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {
+		if (COLLISIONMANAGER->grabbedCard())
+			changeCursor(CURSOR_TYPE_GRAB);
+	}
+
+	if (KEYMANAGER->isOnceKeyUp(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_DEFAULT);
+
+		if (_player->getCard()) {
+			_x = _y = -1000;
+			//충돌검사
+			COLLISIONMANAGER->handsWithUseBox(_player->getCard());
+			_player->setCard(NULL);
+		}
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
+		if (_player->getCard()) {
+			changeCursor(CURSOR_TYPE_DEFAULT);
+
+			_player->cancleCard();
+		}
+	}
+}
+
+void Cursor::controlMouseUI()
+{
+	//UI open
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_WHEEL_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_CLICK);
+
+		if (UIMANAGER->getCurrentMenu()->getHide()) {
+			if (COLLISIONMANAGER->selectedCard(DECKMANAGER->getCurrentDeck(), _x, _y))
+				UIMANAGER->getCurrentMenu()->setHide(false);
+			else
+				UIMANAGER->getCurrentMenu()->setHide(true);
+		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyUp(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_DEFAULT);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
+		if (!UIMANAGER->getCurrentMenu()->getHide())
+			UIMANAGER->getCurrentMenu()->setHide(true);
+		else
+			UIMANAGER->changeMenu("null");
+	}
 }
 
 void Cursor::updatePosition(float x, float y)

@@ -50,7 +50,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -169,6 +169,7 @@
     <ClInclude Include="CircleBar.h" />
     <ClInclude Include="CityHall.h" />
     <ClInclude Include="collisionManager.h" />
+    <ClInclude Include="ControlKey.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DeckManager.h" />
     <ClInclude Include="dialogManager.h" />

@@ -47,8 +47,9 @@ public:
 	void grabBcard();
 	void putBcard();
 
-	void addWall();			//방어선 추가
-	void addBuilding();		//건물 추가
+	void expandSpace(int idX);	//공간 확장
+	void addWall();				//방어선 추가
+	void addBuilding();			//건물 추가
 	Building* addBuilding(int idX, int num, int level = 1);
 
 

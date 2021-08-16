@@ -93,7 +93,6 @@ void collisionManager::handsWithUseBox(Card* card)
 		break;
 
 	case CARD_TYPE_BUILD:
-		card->setHide(false);
 		if (GAMEMANAGER->getBuildManager()->getPossible())
 			card->useCard();
 		else

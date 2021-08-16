@@ -41,7 +41,7 @@ void uiManager::release()
 
 void uiManager::update()
 {
-	if (_start)_inGame->update();
+	if (_start && !_open)_inGame->update();
 	if (_currentMenu) _currentMenu->update();
 }
 

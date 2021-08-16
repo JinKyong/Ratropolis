@@ -34,7 +34,11 @@ HRESULT BuildManager::init(int num)
 	_leftWall = num / 2 - 18;
 	_rightWall = num / 2 + 17;
 
-	_cursor = GAMEMANAGER->getPlayer()->getCursor();
+	//플레이어 설정
+	Player* player = GAMEMANAGER->getPlayer();
+	player->changeMaxLeft(_leftWall);
+	player->changeMaxRight(_rightWall);
+	_cursor = player->getCursor();
 
 	_getWall = 0;
 	_possible = false;
@@ -60,12 +64,6 @@ void BuildManager::update()
 
 void BuildManager::render()
 {
-	buildIter building = _buildings.begin();
-	for (; building != _buildings.end(); ++building) {
-		(*building)->render();
-		//COLLISIONMANAGER->buildingsWithCursor(*building, _cursor->getBackX(), _cursor->getBackY());
-	}
-
 	//벽 && 빈 공간 highlight
 	if (_getWall) wallRender();
 	else if (_building) spaceRender();
@@ -78,6 +76,13 @@ void BuildManager::render()
 	for (int i = _rightWall; i < _space.size() - 8; i += 8) {
 		if (i == _getWall) continue;
 		_wall->render(i * 90, GROUND - 78);
+	}
+
+	//건물 출력
+	buildIter building = _buildings.begin();
+	for (; building != _buildings.end(); ++building) {
+		(*building)->render();
+		//COLLISIONMANAGER->buildingsWithCursor(*building, _cursor->getBackX(), _cursor->getBackY());
 	}
 }
 
@@ -183,30 +188,44 @@ void BuildManager::grabBcard()
 
 void BuildManager::putBcard()
 {
+	GAMEMANAGER->getPlayer()->getCard()->setHide(false);
 	_getWall = 0;
 	SAFE_DELETE(_building);
+}
+
+void BuildManager::expandSpace(int idX)
+{
+	if( !((idX - _leftWall) == 8 ||
+		(_rightWall - idX) == 8) ) return;
+
+	//true는 left, false는 right
+	bool direct = (idX - _leftWall) == 8 ? true : false;
+
+	if (direct) {
+		for (int i = 1; i < 8; i++)
+			_space[idX + i]->empty = true;
+		GAMEMANAGER->getPlayer()->changeMaxLeft(_leftWall);
+	}
+	else {
+		for (int i = 1; i < 8; i++)
+			_space[idX - i]->empty = true;
+		GAMEMANAGER->getPlayer()->changeMaxRight(_rightWall);
+	}
 }
 
 void BuildManager::addWall()
 {
 	if (!_possible) return;
 
-	//공간 확장
-	int idX = _building->getIdX();
-
-	if (idX == _leftWall) {
-		for (int i = 1; i < 8; i++)
-			_space[_leftWall + i]->empty = true;
-		_leftWall -= 8;
-	}
-	else if (idX == _rightWall) {
-		for (int i = 1; i < 8; i++)
-			_space[_rightWall - i]->empty = true;
-		_rightWall += 8;
-	}
-
 	Card* card = GAMEMANAGER->getPlayer()->getCard();
 	card->setHide(false);
+
+	//벽 변경
+	int idX = _building->getIdX();
+	if (idX == _leftWall)
+		_leftWall -= 8;
+	else if (idX == _rightWall)
+		_rightWall += 8;
 
 	//건물 추가
 	_building->init(idX);

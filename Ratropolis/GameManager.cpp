@@ -48,8 +48,8 @@ void GameManager::playGame()
 
 void GameManager::renderSight()
 {
-	int left = _buildManager->getLeftWall();
-	int right = _buildManager->getRightWall();
+	int left = _player->getMaxLeft();
+	int right = _player->getMaxRight();
 	float width = CAMERAMANAGER->getBackScreenWidth();
 	float height = CAMERAMANAGER->getBackScreenHeight();
 	D2D1_RECT_F tmpRECT, tmpRECT2;
@@ -58,7 +58,7 @@ void GameManager::renderSight()
 
 	//left
 	alpha = 1;
-	tmpRECT = dRectMake(0, 0, (left + 3) * 90, height);
+	tmpRECT = dRectMake(left - 630, 0, 630 + 180, height);
 	_fadeImage->render(tmpRECT, tmpRECT2, alpha);
 	for (int i = 1; i <= 100; i++) {
 		tmpRECT = dRectMake(tmpRECT.right, tmpRECT.top, 2, height);
@@ -68,7 +68,7 @@ void GameManager::renderSight()
 
 	//right
 	alpha = 1;
-	tmpRECT = dRectMake((right - 2) * 90, 0, width - (right - 2) * 90, height);
+	tmpRECT = dRectMake(right - 180, 0, 630 + 180, height);
 	_fadeImage->render(tmpRECT, tmpRECT2, alpha);
 	for (int i = 1; i <= 100; i++) {
 		tmpRECT = dRectMake(tmpRECT.left - 2, tmpRECT.top, 2, height);
