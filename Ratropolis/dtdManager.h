@@ -1,6 +1,9 @@
 #pragma once
 #include "singletonBase.h"
 
+#define REVERSE_LR	0
+#define REVERSE_UD	1
+
 enum RENDERTARGET_TYPE {
 	RENDERTARGET_TYPE_STATIC,
 	RENDERTARGET_TYPE_BACKBUFFER,

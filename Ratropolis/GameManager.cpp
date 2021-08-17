@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameManager.h"
 #include "Player.h"
-#include "BuildingHeader.h"
 
 HRESULT GameManager::init(Player * player)
 {
@@ -10,17 +9,21 @@ HRESULT GameManager::init(Player * player)
 	_player = player;
 	
 	_buildManager = new BuildManager;
+	_NPCManager = new NPCManager;
 
 	return S_OK;
 }
 
 void GameManager::release()
 {
+	_buildManager->release();
+	_NPCManager->release();
 }
 
 void GameManager::update()
 {
 	_buildManager->update();
+	_NPCManager->update();
 
 	_player->update();
 }
@@ -28,6 +31,7 @@ void GameManager::update()
 void GameManager::render()
 {
 	_buildManager->render();
+	_NPCManager->render();
 
 
 	//배경 시야
@@ -44,6 +48,7 @@ void GameManager::playGame()
 	_player->setCamY(CAMERAMANAGER->getBackScreenHeight() / 2 + 300);
 
 	_buildManager->init(88);
+	_NPCManager->init();
 }
 
 void GameManager::renderSight()

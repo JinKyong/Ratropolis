@@ -18,8 +18,8 @@ HRESULT BuildManager::init(int num)
 	_building = NULL;
 
 	_groundLight = IMAGEMANAGER->addDImage("groundHighlight", L"img/build/effect/groundhighlight.png", 90, 120);
-	_wall = IMAGEMANAGER->addDImage("wallReady", L"img/build/effect/WallReady.png", 134, 78);
-	_wallLight = IMAGEMANAGER->addDImage("wallReadyHighlight", L"img/build/effect/WallReady_Highlight.png", 134, 78);
+	_wall = IMAGEMANAGER->addDImage("wallReady", L"img/build/effect/WallReady.png", 268, 156);
+	_wallLight = IMAGEMANAGER->addDImage("wallReadyHighlight", L"img/build/effect/WallReady_Highlight.png", 268, 156);
 
 	//처음 위치기준 좌우 7칸 남는 공간으로
 	for (int i = num / 2 - 9; i < num / 2 + 9; i++)
@@ -27,12 +27,12 @@ HRESULT BuildManager::init(int num)
 
 	//cityHall
 	addBuilding(num / 2 - 2, 0);
-	addBuilding(num / 2 - 10, 18);
-	addBuilding(num / 2 + 9, 18);
+	addBuilding(num / 2 - 11, 18, 1);
+	addBuilding(num / 2 + 9, 18, 1, true);
 
 	//벽
-	_leftWall = num / 2 - 18;
-	_rightWall = num / 2 + 17;
+	_leftWall = num / 2 - 20;
+	_rightWall = num / 2 + 18;
 
 	//플레이어 설정
 	Player* player = GAMEMANAGER->getPlayer();
@@ -48,6 +48,13 @@ HRESULT BuildManager::init(int num)
 
 void BuildManager::release()
 {
+	buildIter build = _buildings.begin();
+	for (; build != _buildings.end();) {
+		SAFE_RELEASE(*build);
+		build = _buildings.erase(build);
+	}
+
+	_buildings.clear();
 }
 
 void BuildManager::update()
@@ -69,13 +76,13 @@ void BuildManager::render()
 	else if (_building) spaceRender();
 
 	//벽 출력
-	for (int i = _leftWall; i > 8; i -= 8) {
+	for (int i = _leftWall; i > 0; i -= 9) {
 		if (i == _getWall) continue;
-		_wall->render(i * 90, GROUND - 78);
+		_wall->render(i * 90, GROUND - _wall->getHeight());
 	}
-	for (int i = _rightWall; i < _space.size() - 8; i += 8) {
+	for (int i = _rightWall; i < _space.size(); i += 9) {
 		if (i == _getWall) continue;
-		_wall->render(i * 90, GROUND - 78);
+		_wall->render(i * 90, GROUND - _wall->getHeight());
 	}
 
 	//건물 출력
@@ -92,18 +99,22 @@ void BuildManager::isPossibleWall()
 	_possible = false;
 
 	if (_leftWall > 8 &&
-		COLLISIONMANAGER->spaceWithCursor(_space[_leftWall]->body, _cursor->getBackX(), _cursor->getBackY())) {
+		( COLLISIONMANAGER->spaceWithCursor(_space[_leftWall]->body, _cursor->getBackX(), _cursor->getBackY()) ||
+		COLLISIONMANAGER->spaceWithCursor(_space[_leftWall+1]->body, _cursor->getBackX(), _cursor->getBackY()) ) ) {
 
 		GAMEMANAGER->getPlayer()->getCard()->setHide(true);
 		_building->setIdX(_space[_leftWall]->idX);
+		_building->setReverse(false);
 		_getWall = _leftWall;
 		_possible = true;
 	}
 	else if (_rightWall < _space.size() - 8 &&
-		COLLISIONMANAGER->spaceWithCursor(_space[_rightWall]->body, _cursor->getBackX(), _cursor->getBackY())) {
+		(COLLISIONMANAGER->spaceWithCursor(_space[_rightWall]->body, _cursor->getBackX(), _cursor->getBackY()) ||
+			COLLISIONMANAGER->spaceWithCursor(_space[_rightWall + 1]->body, _cursor->getBackX(), _cursor->getBackY()) ) ) {
 
 		GAMEMANAGER->getPlayer()->getCard()->setHide(true);
 		_building->setIdX(_space[_rightWall]->idX);
+		_building->setReverse(true);
 		_getWall = _rightWall;
 		_possible = true;
 	}
@@ -143,9 +154,9 @@ void BuildManager::isPossible()
 void BuildManager::wallRender()
 {
 	if (_leftWall != _getWall)
-		_wallLight->render(_leftWall * 90, GROUND - 78);
+		_wallLight->render(_leftWall * 90, GROUND - _wallLight->getHeight());
 	if (_rightWall != _getWall)
-		_wallLight->render(_rightWall * 90, GROUND - 78);
+		_wallLight->render(_rightWall * 90, GROUND - _wallLight->getHeight());
 
 	if (_possible) _building->preview();
 }
@@ -195,15 +206,15 @@ void BuildManager::putBcard()
 
 void BuildManager::expandSpace(int idX)
 {
-	if( !((idX - _leftWall) == 8 ||
-		(_rightWall - idX) == 8) ) return;
+	if( !((idX - _leftWall) == 9 ||
+		(_rightWall - idX) == 9) ) return;
 
 	//true는 left, false는 right
-	bool direct = (idX - _leftWall) == 8 ? true : false;
+	bool direct = (idX - _leftWall) == 9 ? true : false;
 
 	if (direct) {
 		for (int i = 1; i < 8; i++)
-			_space[idX + i]->empty = true;
+			_space[idX + i + 1]->empty = true;
 		GAMEMANAGER->getPlayer()->changeMaxLeft(_leftWall);
 	}
 	else {
@@ -222,13 +233,16 @@ void BuildManager::addWall()
 
 	//벽 변경
 	int idX = _building->getIdX();
-	if (idX == _leftWall)
-		_leftWall -= 8;
-	else if (idX == _rightWall)
-		_rightWall += 8;
+	if (idX == _leftWall) {
+		_leftWall -= 9;
+		_building->init(idX);
+	}
+	else if (idX == _rightWall) {
+		_rightWall += 9;
+		_building->init(idX, true);
+	}
 
 	//건물 추가
-	_building->init(idX);
 	_building->setReward(card->getReward());
 	_building->setOnBuild(true);
 	_buildings.push_back(_building);
@@ -259,14 +273,14 @@ void BuildManager::addBuilding()
 	_building = NULL;
 }
 
-Building * BuildManager::addBuilding(int idX, int num, int level)
+Building * BuildManager::addBuilding(int idX, int num, int level, bool reverse)
 {
 	Building* building = DICTIONARY->makeBuilding(num, level);
 
 	//제대로 못불러왔으면 NULL
 	if (!building) return building;
 
-	building->init(idX);
+	building->init(idX, reverse);
 	int space = building->getSpace();
 	for (int i = idX; i < idX + space; i++)
 		_space[i]->empty = false;

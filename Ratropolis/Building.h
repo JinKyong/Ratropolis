@@ -30,13 +30,14 @@ protected:
 	//
 	float _count;
 	bool _onBuild;		//지어지는 중
+	bool _reverse;		//좌우반전
 
 	//Icon
 	//activeIcon
 	//refairIcon
 
 public:
-	virtual HRESULT init(int idX);
+	virtual HRESULT init(int idX, bool reverse = false);
 	virtual void release();
 	virtual void update();
 	virtual void render();
@@ -68,5 +69,7 @@ public:
 	void setActive(bool active) { _active = active; }
 	bool getOnBuild() { return _onBuild; }
 	void setOnBuild(bool onBuild) { _onBuild = onBuild; }
+	bool getReverse() { return _reverse; }
+	void setReverse(bool reverse) { _reverse = reverse; }
 };
 

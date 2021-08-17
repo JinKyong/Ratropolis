@@ -167,6 +167,7 @@
     <ClInclude Include="Card_Economy.h" />
     <ClInclude Include="Card_Millitary.h" />
     <ClInclude Include="CircleBar.h" />
+    <ClInclude Include="Citizen.h" />
     <ClInclude Include="CityHall.h" />
     <ClInclude Include="collisionManager.h" />
     <ClInclude Include="ControlKey.h" />
@@ -191,6 +192,9 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuHeader.h" />
     <ClInclude Include="NameTag.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="NPCHeader.h" />
+    <ClInclude Include="NPCManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="playGround.h" />
     <ClInclude Include="printManager.h" />
@@ -235,6 +239,7 @@
     <ClCompile Include="Card_Economy.cpp" />
     <ClCompile Include="Card_Millitary.cpp" />
     <ClCompile Include="CircleBar.cpp" />
+    <ClCompile Include="Citizen.cpp" />
     <ClCompile Include="CityHall.cpp" />
     <ClCompile Include="collisionManager.cpp" />
     <ClCompile Include="Cursor.cpp" />
@@ -256,6 +261,8 @@
     <ClCompile Include="Labor.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NameTag.cpp" />
+    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="NPCManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="printManager.cpp" />

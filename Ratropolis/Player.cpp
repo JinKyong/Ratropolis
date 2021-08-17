@@ -78,7 +78,7 @@ void Player::controlKeyboard()
 		_camX -= 20;
 	}
 	if (KEYMANAGER->isOnceKeyDown(KEY_MAX_RIGHT)) {
-		_camX = (GAMEMANAGER->getBuildManager()->getRightWall() - 8) * 90;
+		_camX = (GAMEMANAGER->getBuildManager()->getRightWall() - 7) * 90;
 	}
 	if (KEYMANAGER->isStayKeyDown(KEY_CAM_RIGHT) && _camX < _maxRight - WINSIZEX / 2) {
 		_camX += 20;
@@ -156,7 +156,8 @@ void Player::controlKeyboard()
 
 void Player::changeMaxRight(int idX)
 {
-	_maxRight = (idX + 3) * 90;
+	//_maxRight = CAMERAMANAGER->getBackScreenWidth();
+	_maxRight = (idX + 4) * 90;
 
 	if (_maxRight > CAMERAMANAGER->getBackScreenWidth())
 		_maxRight = CAMERAMANAGER->getBackScreenWidth();
@@ -164,6 +165,7 @@ void Player::changeMaxRight(int idX)
 
 void Player::changeMaxLeft(int idX)
 {
+	//_maxLeft = 0;
 	_maxLeft = (idX - 2) * 90;
 
 	if (_maxLeft < 0)

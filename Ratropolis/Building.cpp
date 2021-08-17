@@ -2,7 +2,7 @@
 #include "Building.h"
 #include "Player.h"
 
-HRESULT Building::init(int idX)
+HRESULT Building::init(int idX, bool reverse)
 {
 	_idX = idX;
 	_body = RectMake(_idX * EACH_SPACE, GROUND - _bodyImage->getHeight(), _space * EACH_SPACE, _bodyImage->getHeight());
@@ -15,6 +15,7 @@ HRESULT Building::init(int idX)
 
 	_count = 0;
 	_onBuild = false;
+	_reverse = reverse;
 
 	return S_OK;
 }
@@ -47,8 +48,13 @@ void Building::render()
 		_buildEffect->render(_idX * EACH_SPACE, GROUND - _buildEffect->getHeight());
 		_buildSign->render(_idX * EACH_SPACE + EACH_SPACE / 2 - _buildSign->getWidth() / 2, GROUND - _buildSign->getHeight());
 	}
-	else
+	else {
+		if (_reverse)
+			DTDMANAGER->setReverse(REVERSE_LR, (_idX + (float)_space / 2) * EACH_SPACE * 2, 0);
+
 		_bodyImage->render(_idX * EACH_SPACE, GROUND - _bodyImage->getHeight());
+		DTDMANAGER->resetTransform();
+	}
 
 	if (PRINTMANAGER->isDebug()) {
 		WCHAR tmp[128];
@@ -62,7 +68,11 @@ void Building::render()
 
 void Building::preview()
 {
+	if (_reverse)
+		DTDMANAGER->setReverse(REVERSE_LR, (_idX + (float)_space / 2) * EACH_SPACE * 2, 0);
+
 	_bodyImage->render(_idX * EACH_SPACE, GROUND - _bodyImage->getHeight(), 0.5);
+	DTDMANAGER->resetTransform();
 }
 
 void Building::addReward()

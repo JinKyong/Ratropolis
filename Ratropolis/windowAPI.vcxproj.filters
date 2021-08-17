@@ -133,6 +133,9 @@
     <Filter Include="playGround\Dictionary">
       <UniqueIdentifier>{f195ef4b-0861-47c3-b1a3-4e29d658a04b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\Object\NPC\base">
+      <UniqueIdentifier>{9faee894-aad9-4ed0-a972-39c493fd1a68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -339,6 +342,18 @@
     <ClInclude Include="ControlKey.h">
       <Filter>playGround\Object\Player</Filter>
     </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>playGround\Object\NPC\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCHeader.h">
+      <Filter>playGround\Object\NPC\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Citizen.h">
+      <Filter>playGround\Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCManager.h">
+      <Filter>playGround\Object\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -514,6 +529,15 @@
     </ClCompile>
     <ClCompile Include="sampleScene.cpp">
       <Filter>playGround\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>playGround\Object\NPC\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Citizen.cpp">
+      <Filter>playGround\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCManager.cpp">
+      <Filter>playGround\Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include "BuildManager.h"
+#include "NPCManager.h"
 #include <vector>
 
 class Player;
@@ -15,7 +16,7 @@ private:
 	Player* _player;
 	BuildManager* _buildManager;
 	//enemyManager;
-	//npcManager;
+	NPCManager* _NPCManager;
 
 public:
 	HRESULT init(Player* player);
