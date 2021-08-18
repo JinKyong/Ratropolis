@@ -1,10 +1,17 @@
 #include "stdafx.h"
-#include "CardBagMenu.h"
+#include "CardMenu.h"
 #include "Player.h"
 
-class Cursor;
+CardMenu::CardMenu(int type)
+{
+	_type = type;
+}
 
-HRESULT CardBagMenu::init()
+CardMenu::~CardMenu()
+{
+}
+
+HRESULT CardMenu::init()
 {
 	_scrollY = 0;
 	_hide = true;
@@ -13,7 +20,21 @@ HRESULT CardBagMenu::init()
 
 	_cursor = GAMEMANAGER->getPlayer()->getCursor();
 	_card = NULL;
-	_cards = DECKMANAGER->getCardBag();
+
+	switch (_type) {
+		//카드 가방
+	case 1:
+		_cards = DECKMANAGER->getCardBag();
+		break;
+		//카드 무덤
+	case 2:
+		_cards = DECKMANAGER->getCardGrave();
+		break;
+		//모든 카드(현재 덱)
+	default:
+		_cards = DECKMANAGER->getCurrentDeck();
+		break;
+	}
 
 	//카드번호순으로 정렬
 	sort(_cards.begin(), _cards.end(), compare);
@@ -23,18 +44,17 @@ HRESULT CardBagMenu::init()
 	return S_OK;
 }
 
-void CardBagMenu::release()
+void CardMenu::release()
 {
 	for (int i = 0; i < _cards.size(); i++) {
 		_cards[i]->setX(5000);
 		_cards[i]->setY(500);
 
 		_cards[i]->setZoom(1.0);
-		//_cards[i]->update();
 	}
 }
 
-void CardBagMenu::update()
+void CardMenu::update()
 {
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y + _scrollY);
 	_cursor->update();
@@ -68,7 +88,7 @@ void CardBagMenu::update()
 	}
 }
 
-void CardBagMenu::render()
+void CardMenu::render()
 {
 	_back->render(0, _scrollY, 0.8);
 
@@ -101,7 +121,7 @@ void CardBagMenu::render()
 	_cursor->render();
 }
 
-void CardBagMenu::changeScroll(float num)
+void CardMenu::changeScroll(float num)
 {
 	Menu::changeScroll(num);
 

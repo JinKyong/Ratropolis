@@ -29,6 +29,7 @@ protected:
 
 	//
 	float _count;
+	float _imageY;
 	bool _onBuild;		//지어지는 중
 	bool _reverse;		//좌우반전
 

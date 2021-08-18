@@ -21,8 +21,11 @@ enum BODY_PART {
 class NPC
 {
 protected:
-	dImage* _image;					//본체 이미지
-	BPART _bPart[END_BODY_PART];	//각 몸체 파트
+	dImage* _image;							//본체 이미지
+	BPART _bPart[END_BODY_PART];			//각 몸체 파트
+	D2D1_RECT_F _destBPart[END_BODY_PART];	//각 몸체 파트 출력렉트
+	int _orderRight[END_BODY_PART];			//각 몸체 파트 렌더순서(RIGHT)
+	int _orderLeft[END_BODY_PART];			//각 몸체 파트 렌더순서(LEFT)
 
 
 	//position
@@ -35,6 +38,9 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void updatePosition();
+	void updateDirect();
 
 	void moveRight();
 	void moveLeft();

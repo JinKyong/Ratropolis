@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AllCardMenu.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Building18.h" />
     <ClInclude Include="Building3.h" />
@@ -160,9 +159,8 @@
     <ClInclude Include="Card3.h" />
     <ClInclude Include="Card31.h" />
     <ClInclude Include="Card32.h" />
-    <ClInclude Include="CardBagMenu.h" />
-    <ClInclude Include="CardGraveMenu.h" />
     <ClInclude Include="CardHeader.h" />
+    <ClInclude Include="CardMenu.h" />
     <ClInclude Include="Card_Build.h" />
     <ClInclude Include="Card_Economy.h" />
     <ClInclude Include="Card_Millitary.h" />
@@ -221,7 +219,6 @@
     <ClInclude Include="video.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AllCardMenu.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Building18.cpp" />
     <ClCompile Include="Building3.cpp" />
@@ -233,8 +230,7 @@
     <ClCompile Include="Card3.cpp" />
     <ClCompile Include="Card31.cpp" />
     <ClCompile Include="Card32.cpp" />
-    <ClCompile Include="CardBagMenu.cpp" />
-    <ClCompile Include="CardGraveMenu.cpp" />
+    <ClCompile Include="CardMenu.cpp" />
     <ClCompile Include="Card_Build.cpp" />
     <ClCompile Include="Card_Economy.cpp" />
     <ClCompile Include="Card_Millitary.cpp" />

@@ -14,6 +14,7 @@ HRESULT Building::init(int idX, bool reverse)
 	_buildSign = IMAGEMANAGER->findDImage("buildSign");
 
 	_count = 0;
+	_imageY = 0;
 	_onBuild = false;
 	_reverse = reverse;
 
@@ -32,6 +33,14 @@ void Building::update()
 {
 	if (_onBuild) {
 		_count += TIMEMANAGER->getElapsedTime();
+
+		float height = _buildEffect->getHeight();
+		if (_imageY < height) {
+			_imageY += height / 20;
+			if (_imageY >= height)
+				_imageY = height;
+		}
+
 		if (_count >= BUILD_COUNT) {
 			_onBuild = false;
 			_count = 0;
@@ -45,8 +54,9 @@ void Building::update()
 void Building::render()
 {
 	if (_onBuild) {
-		_buildEffect->render(_idX * EACH_SPACE, GROUND - _buildEffect->getHeight());
-		_buildSign->render(_idX * EACH_SPACE + EACH_SPACE / 2 - _buildSign->getWidth() / 2, GROUND - _buildSign->getHeight());
+		_buildEffect->render(_idX * EACH_SPACE, GROUND - _imageY + 3, 0, 0, _buildEffect->getWidth(), _imageY);
+		//_buildEffect->render(_idX * EACH_SPACE, GROUND - _buildEffect->getHeight());
+		_buildSign->render(_idX * EACH_SPACE + _space * EACH_SPACE / 2 - _buildSign->getWidth() / 2, GROUND - _buildSign->getHeight() + 2);
 	}
 	else {
 		if (_reverse)

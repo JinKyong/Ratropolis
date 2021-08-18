@@ -276,15 +276,6 @@
     <ClInclude Include="Icon_Space.h">
       <Filter>playGround\Component\Icon\cost</Filter>
     </ClInclude>
-    <ClInclude Include="CardGraveMenu.h">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="CardBagMenu.h">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="AllCardMenu.h">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>playGround\Component\Cursor</Filter>
     </ClInclude>
@@ -353,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="NPCManager.h">
       <Filter>playGround\Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="CardMenu.h">
+      <Filter>playGround\UI\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -473,15 +467,6 @@
     <ClCompile Include="Icon_Space.cpp">
       <Filter>playGround\Component\Icon\cost</Filter>
     </ClCompile>
-    <ClCompile Include="CardGraveMenu.cpp">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="CardBagMenu.cpp">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="AllCardMenu.cpp">
-      <Filter>playGround\UI\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>playGround\Component\Cursor</Filter>
     </ClCompile>
@@ -538,6 +523,9 @@
     </ClCompile>
     <ClCompile Include="NPCManager.cpp">
       <Filter>playGround\Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="CardMenu.cpp">
+      <Filter>playGround\UI\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

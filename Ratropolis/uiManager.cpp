@@ -8,9 +8,9 @@ HRESULT uiManager::init()
 {
 	_currentMenu = NULL;
 
-	addMenu("cardGrave", new CardGraveMenu);
-	addMenu("cardBag", new CardBagMenu);
-	addMenu("allCard", new AllCardMenu);
+	addMenu("allCard", new CardMenu);
+	addMenu("cardBag", new CardMenu(1));
+	addMenu("cardGrave", new CardMenu(2));
 
 	_start = false;
 	_open = false;

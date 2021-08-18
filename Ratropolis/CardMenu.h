@@ -3,13 +3,18 @@
 #include <vector>
 #include <algorithm>
 
-class CardGraveMenu : public Menu
+class CardMenu : public Menu
 {
 private:
+	int _type;
+
 	Card* _card;
 	vector<Card*> _cards;
 
 public:
+	CardMenu(int type = 0);
+	~CardMenu();
+
 	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
@@ -21,3 +26,4 @@ public:
 		return a->getCardStat()->number < b->getCardStat()->number;
 	}
 };
+
