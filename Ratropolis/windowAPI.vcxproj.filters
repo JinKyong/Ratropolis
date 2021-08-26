@@ -207,9 +207,6 @@
     <ClInclude Include="playGround.h">
       <Filter>playGround</Filter>
     </ClInclude>
-    <ClInclude Include="dialogManager.h">
-      <Filter>playGround\UI</Filter>
-    </ClInclude>
     <ClInclude Include="uiManager.h">
       <Filter>playGround\UI</Filter>
     </ClInclude>
@@ -336,17 +333,20 @@
     <ClInclude Include="NPC.h">
       <Filter>playGround\Object\NPC\base</Filter>
     </ClInclude>
-    <ClInclude Include="NPCHeader.h">
-      <Filter>playGround\Object\NPC\base</Filter>
-    </ClInclude>
-    <ClInclude Include="Citizen.h">
-      <Filter>playGround\Object\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="NPCManager.h">
       <Filter>playGround\Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="CardMenu.h">
       <Filter>playGround\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCHeader.h">
+      <Filter>playGround\Object\NPC\base</Filter>
+    </ClInclude>
+    <ClInclude Include="EventMenu.h">
+      <Filter>playGround\UI\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="eventManager.h">
+      <Filter>playGround\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -406,9 +406,6 @@
     </ClCompile>
     <ClCompile Include="playGround.cpp">
       <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="dialogManager.cpp">
-      <Filter>playGround\UI</Filter>
     </ClCompile>
     <ClCompile Include="uiManager.cpp">
       <Filter>playGround\UI</Filter>
@@ -518,14 +515,17 @@
     <ClCompile Include="NPC.cpp">
       <Filter>playGround\Object\NPC\base</Filter>
     </ClCompile>
-    <ClCompile Include="Citizen.cpp">
-      <Filter>playGround\Object\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="NPCManager.cpp">
       <Filter>playGround\Object\NPC</Filter>
     </ClCompile>
     <ClCompile Include="CardMenu.cpp">
       <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="EventMenu.cpp">
+      <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="eventManager.cpp">
+      <Filter>playGround\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

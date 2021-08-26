@@ -5,6 +5,8 @@
 CardMenu::CardMenu(int type)
 {
 	_type = type;
+
+	_back = IMAGEMANAGER->addDImage("darkBackground", L"img/UI/DarkBack.png", WINSIZEX, WINSIZEY);
 }
 
 CardMenu::~CardMenu()
@@ -15,8 +17,6 @@ HRESULT CardMenu::init()
 {
 	_scrollY = 0;
 	_hide = true;
-
-	_back = IMAGEMANAGER->addDImage("_darkBackground", L"img/UI/DarkBack.png", WINSIZEX, WINSIZEY);
 
 	_cursor = GAMEMANAGER->getPlayer()->getCursor();
 	_card = NULL;
@@ -78,13 +78,6 @@ void CardMenu::update()
 				_card->setZoom(1.5);
 			}
 		}
-	}
-
-	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
-		if (!_hide)
-			_hide = true;
-		else
-			UIMANAGER->changeMenu("null");
 	}
 }
 

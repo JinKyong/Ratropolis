@@ -11,6 +11,9 @@ HRESULT uiManager::init()
 	addMenu("allCard", new CardMenu);
 	addMenu("cardBag", new CardMenu(1));
 	addMenu("cardGrave", new CardMenu(2));
+	addMenu("event", new EventMenu);
+
+	EVENTMANAGER->init();
 
 	_start = false;
 	_open = false;
@@ -37,6 +40,10 @@ void uiManager::release()
 	}
 
 	_menuList.clear();
+
+
+	EVENTMANAGER->release();
+	EVENTMANAGER->releaseSingleton();
 }
 
 void uiManager::update()

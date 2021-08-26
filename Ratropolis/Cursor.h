@@ -38,6 +38,7 @@ public:
 	//control
 	void controlMouse();
 	void controlMouseUI();
+	void controlMouseEvent();
 
 	//cursor
 	void updatePosition(float x, float y);

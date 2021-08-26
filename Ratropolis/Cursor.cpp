@@ -31,7 +31,9 @@ void Cursor::release()
 
 void Cursor::update()
 {
-	if (UIMANAGER->getOpen())
+	if (EVENTMANAGER->getOpen())
+		controlMouseEvent();
+	else if (UIMANAGER->getOpen())
 		controlMouseUI();
 	else
 		controlMouse();
@@ -116,6 +118,34 @@ void Cursor::controlMouseUI()
 			else
 				UIMANAGER->getCurrentMenu()->setHide(true);
 		}
+	}
+
+	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyUp(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_DEFAULT);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
+		if (!UIMANAGER->getCurrentMenu()->getHide())
+			UIMANAGER->getCurrentMenu()->setHide(true);
+		else
+			UIMANAGER->changeMenu("null");
+	}
+}
+
+void Cursor::controlMouseEvent()
+{
+	//Event open
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_WHEEL_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_CLICK);
+
 	}
 
 	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {

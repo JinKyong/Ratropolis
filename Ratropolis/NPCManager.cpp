@@ -3,14 +3,6 @@
 
 HRESULT NPCManager::init()
 {
-	_NPCs.push_back(new Citizen);
-	_NPCs.push_back(new Citizen);
-	_NPCs.push_back(new Citizen);
-
-	_NPCs[0]->init();
-	_NPCs[1]->init();
-	_NPCs[2]->init();
-
 
 	return S_OK;
 }

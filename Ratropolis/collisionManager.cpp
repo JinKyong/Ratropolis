@@ -55,6 +55,19 @@ Card * collisionManager::selectedCard(vector<Card*> cards, float x, float y)
 	return NULL;
 }
 
+void collisionManager::selectButtonWithCursor(RECT* button, float x, float y)
+{
+	POINT pt = { x, y };
+
+	EVENTMANAGER->setSelectedButton(-1);
+	for (int i = 0; i < 3; i++) {
+		if (PtInRect(&button[i], pt)) {
+			EVENTMANAGER->setSelectedButton(i);
+			break;
+		}
+	}
+}
+
 void collisionManager::handsWithCursor()
 {
 	vector<Card*> hands = DECKMANAGER->getCurrentHands();

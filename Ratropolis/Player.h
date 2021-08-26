@@ -43,6 +43,7 @@ public:
 	void changeMaxLeft(int idX);
 
 	void changeGold(int num);
+	void changeGold(float num);
 	void changePrize(int num);
 	void changeTax(int num);
 	void changeCivil(int num);

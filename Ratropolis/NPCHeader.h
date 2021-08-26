@@ -1,3 +1,2 @@
 #pragma once
-
-#include "Citizen.h"
+#include "NPC.h"

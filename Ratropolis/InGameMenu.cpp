@@ -123,7 +123,7 @@ void InGameMenu::useButton(int index)
 		break;
 
 	case HUD_TYPE_REDRAW:
-		DECKMANAGER->drawCard();
+		DECKMANAGER->redrawCard();
 		break;
 
 	case HUD_TYPE_CARDGRAVE:

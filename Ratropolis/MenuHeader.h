@@ -5,3 +5,4 @@
 
 #include "InGameMenu.h"
 #include "CardMenu.h"
+#include "EventMenu.h"

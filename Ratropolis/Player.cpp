@@ -152,6 +152,13 @@ void Player::controlKeyboard()
 		if(!_selectedCard)
 			DECKMANAGER->redrawCard();
 	}
+
+
+
+	//Event
+	if (KEYMANAGER->isOnceKeyDown(KEY_EVENT)) {
+		UIMANAGER->changeMenu("event");
+	}
 }
 
 void Player::changeMaxRight(int idX)
@@ -175,6 +182,15 @@ void Player::changeMaxLeft(int idX)
 void Player::changeGold(int num)
 {
 	_defaultStat.gold += num;
+
+	if (_defaultStat.gold >= 99999)
+		_defaultStat.gold = 99999;
+}
+
+void Player::changeGold(float num)
+{
+	float gold = _defaultStat.gold * num;
+	_defaultStat.gold += gold;
 
 	if (_defaultStat.gold >= 99999)
 		_defaultStat.gold = 99999;

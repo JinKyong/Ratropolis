@@ -134,7 +134,7 @@ void dImage::release()
 		SAFE_DELETE(_imageInfo);
 	}
 
-	//SAFE_DELETE(_fileName);
+	SAFE_DELETE(_fileName);
 	//이미지 로드용 객체 해제
 	SAFE_RELEASE2(_wicFactory);
 	SAFE_RELEASE2(_bitDecoder);

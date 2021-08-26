@@ -28,6 +28,10 @@ public:
 	Card* selectedCard(vector<Card*> cards, float x, float y);	//카드(리스트)와 커서(선택) 충돌
 
 
+	//커서와 버튼(이벤트) 충돌(cardRT)
+	void selectButtonWithCursor(RECT* button, float x, float y);	//버튼(이벤트)과 커서 충돌
+
+
 	//커서와 카드(핸드) 충돌(cardRT)
 	void handsWithCursor();				//카드(핸드)와 커서 충돌
 	bool grabbedCard();					//카드(핸드) 드래그(선택)

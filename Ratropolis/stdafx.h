@@ -36,11 +36,11 @@
 #include "txtData.h"
 #include "streamManager.h"
 #include "dtdManager.h"
-#include "dialogManager.h"
 #include "soundManager.h"
 #include "DeckManager.h"
 #include "Dictionary.h"
 #include "GameManager.h"
+#include "eventManager.h"
 
 
 using namespace std;
@@ -70,11 +70,11 @@ using namespace D2D1;
 #define TXTDATA txtData::getSingleton()
 #define STREAMMANAGER streamManager::getSingleton()
 #define DTDMANAGER dtdManager::getSingleton()
-#define DIALOGMANAGER dialogManager::getSingleton()
 #define SOUNDMANAGER soundManager::getSingleton()
 #define DECKMANAGER DeckManager::getSingleton()
 #define DICTIONARY Dictionary::getSingleton()
 #define GAMEMANAGER GameManager::getSingleton()
+#define EVENTMANAGER eventManager::getSingleton()
 
 #define SAFE_DELETE(p) { if(p) { delete(p); (p) = nullptr; } }
 #define SAFE_DELETE_ARRAY(p) { if(p) { delete[](p); (p) = nullptr; } }
