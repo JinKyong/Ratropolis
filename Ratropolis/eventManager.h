@@ -2,7 +2,7 @@
 #include "singletonBase.h"
 #include <vector>
 
-class Cursor;
+class Player;
 
 enum EVENT_TYPE {
 	EVENT_TYPE_FIXED,
@@ -28,6 +28,7 @@ private:
 	typedef vector<wstring>::iterator	battleIter;
 
 private:
+	Player* _player;
 	Cursor* _cursor;
 
 	//다 같은 이미지 사용
@@ -70,6 +71,8 @@ public:
 
 	void loadEvent(int num, int type = EVENT_TYPE_FIXED);
 	void loadMetaData();
+
+	void getReward();
 
 	void registerIlluste();
 

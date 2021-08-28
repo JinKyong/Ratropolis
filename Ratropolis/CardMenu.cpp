@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CardMenu.h"
-#include "Player.h"
 
 CardMenu::CardMenu(int type)
 {

@@ -28,6 +28,7 @@ HRESULT dtdManager::init()
 	//RenderTarget이 생성되었으면 Brush 생성
 	if (SUCCEEDED(hr)) {
 		hr = _dRenderTarget->CreateSolidColorBrush(ColorF(ColorF::Black), &_dBrush);
+		hr = _dRenderTarget->CreateSolidColorBrush(ColorF(ColorF::Black), &_shadowBrush);
 	}
 
 	//Brush가 생성되었으면 Text Factory 생성
@@ -85,6 +86,7 @@ void dtdManager::release()
 	SAFE_RELEASE2(_dUIBitmap);
 	SAFE_RELEASE2(_dCardBitmap);
 	SAFE_RELEASE2(_dBrush);
+	SAFE_RELEASE2(_shadowBrush);
 
 	SAFE_RELEASE2(_dWFactory);
 	SAFE_RELEASE2(_dWDefaultFormat);
@@ -349,7 +351,7 @@ void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc)
 	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWDefaultFormat, rc, _dBrush);
 }
 
-void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centralW, bool centralH)
+void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centralW, bool centralH, bool shadow)
 {
 	if (_dWCustomFormat) {
 		if (_dWCustomFormat->GetFontSize() != size) {
@@ -385,6 +387,10 @@ void dtdManager::printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centr
 	if (centralH)
 		_dWCustomFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 
+	if (shadow) {
+		D2D1_RECT_F tmp = { rc.left + 1, rc.top + 1, rc.right + 1, rc.bottom + 1 };
+		_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, tmp, _shadowBrush);
+	}
 	_currentRenderTarget->DrawTextA(text, lstrlenW(text), _dWCustomFormat, rc, _dBrush);
 
 	SAFE_RELEASE2(_dWCustomFormat);

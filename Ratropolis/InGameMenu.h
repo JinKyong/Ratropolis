@@ -1,14 +1,7 @@
 #pragma once
-#include "Menu.h"
+#include "Button.h"
 #include "CircleBar.h"
 #include <vector>
-
-typedef struct tagButton {
-	dImage* icon;
-
-	float x, y;
-	RECT body;
-}BUTTON;
 
 enum HUD_TYPE {
 	HUD_TYPE_LEADERSKILL,
@@ -22,6 +15,8 @@ enum HUD_TYPE {
 	END_HUD_TYPE
 };
 
+class Cursor;
+
 class InGameMenu
 {
 private:
@@ -29,6 +24,9 @@ private:
 	typedef vector<CircleBar*>::iterator	progressIter;
 //Images
 private:
+	Cursor* _cursor;
+
+
 	//OTHER HUD
 	dImage* _defaultHUD;					//기본 HUD 이미지
 	dImage* _defaultHUDHigh;				//기본 HUD 하이라이트
@@ -55,7 +53,6 @@ public:
 
 	void useButton(int index);
 	void addCircleBar(int cost, float duration, int* reward);
-
 
 	void leftTopInit();
 	void leftBottomInit();

@@ -174,8 +174,8 @@ void eventManager::printText()
 
 void eventManager::loadEvent(int num, int type)
 {
-	//커서 등록
-	_cursor = GAMEMANAGER->getPlayer()->getCursor();
+	_player = GAMEMANAGER->getPlayer();
+	_cursor = _player->getCursor();
 
 	char tmp[128];
 

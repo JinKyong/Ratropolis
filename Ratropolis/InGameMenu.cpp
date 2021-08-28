@@ -4,18 +4,17 @@
 
 HRESULT InGameMenu::init()
 {
+	_cursor = GAMEMANAGER->getPlayer()->getCursor();
+
 	//OTHER HUD
-	_defaultHUD = IMAGEMANAGER->addDImage("defaultHUD", L"img/UI/BottomHud_Default_Full.png", 100, 100);
-	_defaultHUDHigh = IMAGEMANAGER->addDImage("defaultHUD_high", L"img/UI/BottomHud_Default_FullGlow.png", 128, 128);
+	_defaultHUD = IMAGEMANAGER->addDImage("defaultHUD", L"img/UI/menu/ingame/BottomHud_Default_Full.png", 100, 100);
+	_defaultHUDHigh = IMAGEMANAGER->addDImage("defaultHUD_high", L"img/UI/menu/ingame/BottomHud_Default_FullGlow.png", 128, 128);
 
 
 
 	leftTopInit();
-
 	leftBottomInit();
-
 	rightTopInit();
-
 	rightBottomInit();
 
 	//BUTTON BODY
@@ -24,6 +23,8 @@ HRESULT InGameMenu::init()
 		_defaultHUDButton[i].y += _defaultHUD->getHeight() / 2;
 		_defaultHUDButton[i].body = RectMakeCenter(_defaultHUDButton[i].x, _defaultHUDButton[i].y,
 			_defaultHUD->getWidth(), _defaultHUD->getHeight());
+
+		_defaultHUDButton[i].activate = false;
 	}
 
 
@@ -45,6 +46,12 @@ void InGameMenu::update()
 			progress = _progress.erase(progress);
 		else
 			++progress;
+	}
+
+	//버튼 충돌 검사
+	if (!UIMANAGER->getOpen()) {
+		for (int i = 0; i < END_HUD_TYPE; i++)
+			COLLISIONMANAGER->buttonWithCursor(&_defaultHUDButton[i], _cursor->getX(), _cursor->getY());
 	}
 }
 
@@ -72,11 +79,9 @@ void InGameMenu::render()
 	//Other HUD
 	for (int i = 0; i < END_HUD_TYPE; i++) {
 		//Button
-		if (!UIMANAGER->getOpen()) {
-			if (PtInRect(&_defaultHUDButton[i].body, _ptMouse))
-				_defaultHUDHigh->render(_defaultHUDButton[i].body.left - 15,
-					_defaultHUDButton[i].body.top - 15);
-		}
+		if(_defaultHUDButton[i].activate)
+			_defaultHUDHigh->render(_defaultHUDButton[i].body.left - 15,
+				_defaultHUDButton[i].body.top - 15);
 		_defaultHUD->render(_defaultHUDButton[i].body.left,
 			_defaultHUDButton[i].body.top);
 
@@ -145,10 +150,10 @@ void InGameMenu::addCircleBar(int cost, float duration, int * reward)
 void InGameMenu::leftTopInit()
 {
 	//LEFT TOP HUD
-	_topHUD = IMAGEMANAGER->addDImage("topHUD", L"img/UI/TopHud2.png", 300, 110);
-	_goldIcon = IMAGEMANAGER->addDImage("goldIcon", L"img/UI/UI_Icon_Economy.png", 30, 30);
-	_ratsIcon = IMAGEMANAGER->addDImage("ratsIcon", L"img/UI/Icon_Mouse.png", 30, 30);
-	_waveIcon = IMAGEMANAGER->addDImage("waveIcon", L"img/UI/EasyIcon.png", 30, 30);
+	_topHUD = IMAGEMANAGER->addDImage("topHUD", L"img/UI/menu/ingame/TopHud2.png", 300, 110);
+	_goldIcon = IMAGEMANAGER->addDImage("goldIcon", L"img/UI/menu/ingame/UI_Icon_Economy.png", 30, 30);
+	_ratsIcon = IMAGEMANAGER->addDImage("ratsIcon", L"img/UI/menu/ingame/Icon_Mouse.png", 30, 30);
+	_waveIcon = IMAGEMANAGER->addDImage("waveIcon", L"img/UI/menu/ingame/EasyIcon.png", 30, 30);
 	//_poisonIcon;
 }
 
@@ -157,11 +162,11 @@ void InGameMenu::leftBottomInit()
 	//LEFT BOTTOM BUTTON & ICON
 	_defaultHUDButton[HUD_TYPE_LEADERSKILL].x = 30;
 	_defaultHUDButton[HUD_TYPE_LEADERSKILL].y = WINSIZEY - 250;
-	_defaultHUDButton[HUD_TYPE_LEADERSKILL].icon = IMAGEMANAGER->addDImage("cardBagIcon", L"Img/UI/UI_CardDeck_Own.png", 90, 90);
+	_defaultHUDButton[HUD_TYPE_LEADERSKILL].icon = IMAGEMANAGER->addDImage("cardBagIcon", L"Img/UI/menu/ingame/UI_CardDeck_Own.png", 90, 90);
 
 	_defaultHUDButton[HUD_TYPE_CARDBAG].x = 30;
 	_defaultHUDButton[HUD_TYPE_CARDBAG].y = WINSIZEY - 125;
-	_defaultHUDButton[HUD_TYPE_CARDBAG].icon = IMAGEMANAGER->addDImage("cardBagIcon", L"Img/UI/UI_CardDeck_Own.png", 90, 90);
+	_defaultHUDButton[HUD_TYPE_CARDBAG].icon = IMAGEMANAGER->addDImage("cardBagIcon", L"Img/UI/menu/ingame/UI_CardDeck_Own.png", 90, 90);
 }
 
 void InGameMenu::rightTopInit()
@@ -169,19 +174,19 @@ void InGameMenu::rightTopInit()
 	//RIGHT TOP BUTTON & ICON
 	_defaultHUDButton[HUD_TYPE_ALLCARDS].x = WINSIZEX - 505;
 	_defaultHUDButton[HUD_TYPE_ALLCARDS].y = 15;
-	_defaultHUDButton[HUD_TYPE_ALLCARDS].icon = IMAGEMANAGER->addDImage("allCardsIcon", L"img/UI/Icon_Card.png", 65, 65);
+	_defaultHUDButton[HUD_TYPE_ALLCARDS].icon = IMAGEMANAGER->addDImage("allCardsIcon", L"img/UI/menu/ingame/Icon_Card.png", 65, 65);
 
 	_defaultHUDButton[HUD_TYPE_ADVISOR].x = WINSIZEX - 380;
 	_defaultHUDButton[HUD_TYPE_ADVISOR].y = 15;
-	_defaultHUDButton[HUD_TYPE_ADVISOR].icon = IMAGEMANAGER->addDImage("advisorIcon", L"img/UI/UI_Icon_Advisor.png", 60, 60);
+	_defaultHUDButton[HUD_TYPE_ADVISOR].icon = IMAGEMANAGER->addDImage("advisorIcon", L"img/UI/menu/ingame/UI_Icon_Advisor.png", 60, 60);
 
 	_defaultHUDButton[HUD_TYPE_PAUSE].x = WINSIZEX - 255;
 	_defaultHUDButton[HUD_TYPE_PAUSE].y = 15;
-	_defaultHUDButton[HUD_TYPE_PAUSE].icon = IMAGEMANAGER->addDImage("pauseIcon", L"Img/UI/UI_Icon_Pause.png", 45, 45);
+	_defaultHUDButton[HUD_TYPE_PAUSE].icon = IMAGEMANAGER->addDImage("pauseIcon", L"Img/UI/menu/ingame/UI_Icon_Pause.png", 45, 45);
 
 	_defaultHUDButton[HUD_TYPE_OPTION].x = WINSIZEX - 130;
 	_defaultHUDButton[HUD_TYPE_OPTION].y = 15;
-	_defaultHUDButton[HUD_TYPE_OPTION].icon = IMAGEMANAGER->addDImage("optionIcon", L"Img/UI/UI_Icon_Menu.png", 70, 70);
+	_defaultHUDButton[HUD_TYPE_OPTION].icon = IMAGEMANAGER->addDImage("optionIcon", L"Img/UI/menu/ingame/UI_Icon_Menu.png", 70, 70);
 }
 
 void InGameMenu::rightBottomInit()
@@ -189,11 +194,11 @@ void InGameMenu::rightBottomInit()
 	//RIGHT BOTTOM BUTTON & ICON
 	_defaultHUDButton[HUD_TYPE_REDRAW].x = WINSIZEX - 130;
 	_defaultHUDButton[HUD_TYPE_REDRAW].y = WINSIZEY - 250;
-	_defaultHUDButton[HUD_TYPE_REDRAW].icon = IMAGEMANAGER->addDImage("redrawIcon", L"img/UI/UI_Icon_ReDraw.png", 80, 80);
+	_defaultHUDButton[HUD_TYPE_REDRAW].icon = IMAGEMANAGER->addDImage("redrawIcon", L"img/UI/menu/ingame/UI_Icon_ReDraw.png", 80, 80);
 
 	_defaultHUDButton[HUD_TYPE_CARDGRAVE].x = WINSIZEX - 130;
 	_defaultHUDButton[HUD_TYPE_CARDGRAVE].y = WINSIZEY - 125;
-	_defaultHUDButton[HUD_TYPE_CARDGRAVE].icon = IMAGEMANAGER->addDImage("cardGraveIcon", L"img/UI/UI_CardDeck_Used.png", 95, 95);
+	_defaultHUDButton[HUD_TYPE_CARDGRAVE].icon = IMAGEMANAGER->addDImage("cardGraveIcon", L"img/UI/menu/ingame/UI_CardDeck_Used.png", 95, 95);
 }
 
 void InGameMenu::leftTopText()

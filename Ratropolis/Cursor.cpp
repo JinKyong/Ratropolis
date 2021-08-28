@@ -33,8 +33,14 @@ void Cursor::update()
 {
 	if (EVENTMANAGER->getOpen())
 		controlMouseEvent();
-	else if (UIMANAGER->getOpen())
-		controlMouseUI();
+	else if (UIMANAGER->getOpen()) {
+		if (UIMANAGER->getCurrentMenuName() == "allCard" ||
+			UIMANAGER->getCurrentMenuName() == "cardBag" || 
+			UIMANAGER->getCurrentMenuName() == "cardGrave")
+			controlMouseCardList();
+		else if (UIMANAGER->getCurrentMenuName() == "shop")
+			controlMouseShop();
+	}
 	else
 		controlMouse();
 
@@ -74,11 +80,12 @@ void Cursor::controlMouse()
 	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
 		changeCursor(CURSOR_TYPE_CLICK);
 
-		COLLISIONMANAGER->buttonWithCursor();
+		COLLISIONMANAGER->selectedButtonUI(_x, _y);
+		COLLISIONMANAGER->selectedButtonSnE(_backX, _backY);
 	}
 
 	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {
-		if (COLLISIONMANAGER->grabbedCard())
+		if (COLLISIONMANAGER->grabbedCard(_x, _y))
 			changeCursor(CURSOR_TYPE_GRAB);
 	}
 
@@ -86,9 +93,10 @@ void Cursor::controlMouse()
 		changeCursor(CURSOR_TYPE_DEFAULT);
 
 		if (_player->getCard()) {
-			_x = _y = -1000;
 			//충돌검사
-			COLLISIONMANAGER->handsWithUseBox(_player->getCard());
+			COLLISIONMANAGER->handsWithUseBox(_player->getCard(), _x, _y);
+
+			_x = _y = -1000;
 			_player->setCard(NULL);
 		}
 	}
@@ -102,7 +110,7 @@ void Cursor::controlMouse()
 	}
 }
 
-void Cursor::controlMouseUI()
+void Cursor::controlMouseCardList()
 {
 	//UI open
 	if (KEYMANAGER->isOnceKeyDown(MOUSE_WHEEL_CLICK)) {
@@ -136,6 +144,35 @@ void Cursor::controlMouseUI()
 	}
 }
 
+void Cursor::controlMouseShop()
+{
+	//UI open
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_WHEEL_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_CLICK);
+
+		UIMANAGER->getCurrentMenu()->changeScroll(0);
+	}
+
+	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyUp(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_DEFAULT);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
+		if (!UIMANAGER->getCurrentMenu()->getHide())
+			UIMANAGER->getCurrentMenu()->setHide(true);
+		else
+			UIMANAGER->changeMenu("null");
+	}
+}
+
 void Cursor::controlMouseEvent()
 {
 	//Event open
@@ -146,6 +183,10 @@ void Cursor::controlMouseEvent()
 	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
 		changeCursor(CURSOR_TYPE_CLICK);
 
+		if (EVENTMANAGER->getSelectedButton() != -1) {
+			EVENTMANAGER->getReward();
+			UIMANAGER->changeMenu("null");
+		}
 	}
 
 	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {

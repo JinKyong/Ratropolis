@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "EventMenu.h"
-#include "Player.h"
 
 EventMenu::EventMenu()
 {
@@ -18,7 +17,6 @@ HRESULT EventMenu::init()
 
 	_cursor = GAMEMANAGER->getPlayer()->getCursor();
 
-	EVENTMANAGER->loadEvent(8);
 	UIMANAGER->setOpen(true);
 
 	return S_OK;

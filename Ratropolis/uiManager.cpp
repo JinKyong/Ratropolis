@@ -7,11 +7,13 @@ Menu* uiManager::_currentMenu = NULL;
 HRESULT uiManager::init()
 {
 	_currentMenu = NULL;
+	_currentMenuName = "null";
 
 	addMenu("allCard", new CardMenu);
 	addMenu("cardBag", new CardMenu(1));
 	addMenu("cardGrave", new CardMenu(2));
 	addMenu("event", new EventMenu);
+	addMenu("shop", new ShopMenu);
 
 	EVENTMANAGER->init();
 
@@ -96,7 +98,9 @@ Menu * uiManager::addMenu(string menuName, Menu * menu)
 
 HRESULT uiManager::changeMenu(string menuName)
 {
-	if (menuName == "null") {
+	_currentMenuName = menuName;
+
+	if (_currentMenuName == "null") {
 		if (_currentMenu) _currentMenu->release();
 		_open = false;
 
@@ -105,7 +109,7 @@ HRESULT uiManager::changeMenu(string menuName)
 		return S_OK;
 	}
 
-	menuIter find = _menuList.find(menuName);
+	menuIter find = _menuList.find(_currentMenuName);
 
 	if (find == _menuList.end()) return E_FAIL;
 

@@ -74,7 +74,7 @@ void DeckManager::update()
 	if (GAMEMANAGER->getPlayer()->getCard())
 		GAMEMANAGER->getPlayer()->getCard()->setSelect(true);
 	else
-		COLLISIONMANAGER->handsWithCursor();
+		COLLISIONMANAGER->handsWithCursor(_ptMouse.x, _ptMouse.y);
 }
 
 void DeckManager::render()

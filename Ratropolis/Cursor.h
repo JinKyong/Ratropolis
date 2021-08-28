@@ -37,7 +37,8 @@ public:
 
 	//control
 	void controlMouse();
-	void controlMouseUI();
+	void controlMouseCardList();
+	void controlMouseShop();
 	void controlMouseEvent();
 
 	//cursor

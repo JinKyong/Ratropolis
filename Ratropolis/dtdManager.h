@@ -35,6 +35,7 @@ private:
 	//Brush(붓)
 	ID2D1BitmapBrush		*_dBitmapBrush;
 	ID2D1SolidColorBrush	*_dBrush;
+	ID2D1SolidColorBrush	*_shadowBrush;
 
 	//Text(폰트 포맷)
 	IDWriteFactory			*_dWFactory;
@@ -69,7 +70,7 @@ public:
 	void printText(LPCWCHAR text, float x, float y, int width, int height);
 	void printText(LPCWCHAR text, float x, float y, int width, int height, float size, bool centralW = false, bool centralH = false);
 	void printText(LPCWCHAR text, D2D1_RECT_F rc);
-	void printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centralW = false, bool centralH = false);
+	void printText(LPCWCHAR text, D2D1_RECT_F rc, float size, bool centralW = false, bool centralH = false, bool shadow = false);
 
 
 	//각종 변환

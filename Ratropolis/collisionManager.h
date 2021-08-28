@@ -1,5 +1,6 @@
 #pragma once
 #include "singletonBase.h"
+#include "Button.h"
 #include <vector>
 
 class Player;
@@ -33,8 +34,10 @@ public:
 
 
 	//커서와 카드(핸드) 충돌(cardRT)
-	void handsWithCursor();				//카드(핸드)와 커서 충돌
-	bool grabbedCard();					//카드(핸드) 드래그(선택)
-	void handsWithUseBox(Card* card);	//카드(핸드) 사용
-	void buttonWithCursor();			//버튼 선택
+	void handsWithCursor(float x, float y);				//카드(핸드)와 커서 충돌
+	bool grabbedCard(float x, float y);					//카드(핸드) 드래그(선택)
+	void handsWithUseBox(Card* card, float x, float y);	//카드(핸드) 사용
+	void selectedButtonUI(float x, float y);			//UI버튼 선택
+	void selectedButtonSnE(float x, float y);			//Shop & Evnet 버튼 선택
+	void buttonWithCursor(PBUTTON button, float x, float y);	//버튼 충돌
 };

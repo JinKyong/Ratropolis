@@ -16,6 +16,7 @@ private:
 
 	menuList	_menuList;
 	static Menu* _currentMenu;
+	string _currentMenuName;
 
 	bool _start;
 	bool _open;
@@ -41,6 +42,7 @@ public:
 
 	InGameMenu* getInGame() { return _inGame; }
 	Menu* getCurrentMenu() { return _currentMenu; }
+	string getCurrentMenuName() { return _currentMenuName; }
 
 	bool getOpen() { return _open; }
 	void setOpen(bool open) { _open = open; }

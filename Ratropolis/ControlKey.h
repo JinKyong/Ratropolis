@@ -21,8 +21,9 @@
 #define	KEY_CARD9				'9'
 #define	KEY_CARD10				'0'
 
-//Evnet
+//Event & Shop
 #define KEY_EVENT				VK_F5
+#define KEY_SHOP				VK_F6
 
 /******************* MOUSE *******************/
 

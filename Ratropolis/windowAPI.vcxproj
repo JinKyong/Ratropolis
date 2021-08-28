@@ -152,6 +152,7 @@
     <ClInclude Include="Building3.h" />
     <ClInclude Include="BuildingHeader.h" />
     <ClInclude Include="BuildManager.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Card1.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneHeader.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="ShopMenu.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -246,6 +248,7 @@
     <ClCompile Include="EventMenu.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="getReward.cpp" />
     <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Icon_Civil.cpp" />
     <ClCompile Include="Icon_Gold.cpp" />
@@ -266,6 +269,7 @@
     <ClCompile Include="sampleScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="ShopMenu.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

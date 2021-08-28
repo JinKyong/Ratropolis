@@ -1,6 +1,6 @@
 #pragma once
-
-class Cursor;
+#include "Button.h"
+#include "Player.h"
 
 class Menu
 {

@@ -68,27 +68,29 @@ void collisionManager::selectButtonWithCursor(RECT* button, float x, float y)
 	}
 }
 
-void collisionManager::handsWithCursor()
+void collisionManager::handsWithCursor(float x, float y)
 {
+	POINT pt = { x, y };
 	vector<Card*> hands = DECKMANAGER->getCurrentHands();
 
 	for (int i = 0; i < hands.size(); i++) {
 		//POINT pt = { _player->getX(), _player->getY() };
-		if (PtInRect(&(hands[i]->getBody()), _ptMouse)) {
+		if (PtInRect(&(hands[i]->getBody()), pt)) {
 			DECKMANAGER->sortHandsSelect(i);
 			return;
 		}
 	}
 }
 
-bool collisionManager::grabbedCard()
+bool collisionManager::grabbedCard(float x, float y)
 {
 	if (_player->getCard())	return false;
 
+	POINT pt = { x, y };
 	vector<Card*> hands = DECKMANAGER->getCurrentHands();
 
 	for (int i = 0; i < hands.size(); i++) {
-		if (PtInRect(&(hands[i]->getBody()), _ptMouse)) {
+		if (PtInRect(&(hands[i]->getBody()), pt)) {
 			_player->changeCard(hands[i]);
 			return true;
 		}
@@ -97,11 +99,13 @@ bool collisionManager::grabbedCard()
 	return false;
 }
 
-void collisionManager::handsWithUseBox(Card* card)
+void collisionManager::handsWithUseBox(Card* card, float x, float y)
 {
+	POINT pt = { x, y };
+
 	switch (card->getCardStat()->type) {
 	case CARD_TYPE_ECONOMY:
-		if (PtInRect(&GAMEMANAGER->getUseBox(), _ptMouse))
+		if (PtInRect(&GAMEMANAGER->getUseBox(), pt))
 			card->useCard();
 		break;
 
@@ -117,14 +121,44 @@ void collisionManager::handsWithUseBox(Card* card)
 	}
 }
 
-void collisionManager::buttonWithCursor()
+void collisionManager::selectedButtonUI(float x, float y)
 {
+	POINT pt = { x, y };
 	BUTTON* buttons = UIMANAGER->getInGame()->getButton();
 
 	for (int i = 0; i < END_HUD_TYPE; i++) {
-		if (PtInRect(&buttons[i].body, _ptMouse)) {
+		if (PtInRect(&buttons[i].body, pt)) {
 			UIMANAGER->getInGame()->useButton(i);
 			break;
 		}
 	}
+}
+
+void collisionManager::selectedButtonSnE(float x, float y)
+{
+	POINT pt = { x, y };
+	PBUTTON shop = GAMEMANAGER->getShopButton();
+	PBUTTON event = GAMEMANAGER->getEventButton();
+
+	if (shop->activate) {
+		UIMANAGER->changeMenu("shop");
+		return;
+	}
+
+	if (event->activate) {
+		GAMEMANAGER->offEvent();
+		EVENTMANAGER->loadEvent(8);
+		UIMANAGER->changeMenu("event");
+		return;
+	}
+}
+
+void collisionManager::buttonWithCursor(PBUTTON button, float x, float y)
+{
+	POINT pt = { x, y };
+
+	if (PtInRect(&button->body, pt))
+		button->activate = true;
+	else
+		button->activate = false;
 }
