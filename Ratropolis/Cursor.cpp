@@ -2,6 +2,7 @@
 #include "Cursor.h"
 #include "Player.h"
 #include "Card.h"
+#include "InGameMenu.h"
 
 HRESULT Cursor::init(Player* player)
 {
@@ -82,6 +83,7 @@ void Cursor::controlMouse()
 
 		COLLISIONMANAGER->selectedButtonUI(_x, _y);
 		COLLISIONMANAGER->selectedButtonSnE(_backX, _backY);
+		COLLISIONMANAGER->barWithCursor(_x, _y);
 	}
 
 	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {

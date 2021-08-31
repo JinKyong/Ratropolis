@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "BuildManager.h"
+#include "InGameMenu.h"
 #include "MenuHeader.h"
 
 HRESULT collisionManager::init()
@@ -33,6 +34,25 @@ bool collisionManager::spaceWithCursor(RECT space, float x, float y)
 	return false;
 }
 
+void collisionManager::selectedButtonSnE(float x, float y)
+{
+	POINT pt = { x, y };
+	PBUTTON shop = GAMEMANAGER->getShopButton();
+	PBUTTON event = GAMEMANAGER->getEventButton();
+
+	if (shop->activate) {
+		UIMANAGER->changeMenu("shop");
+		return;
+	}
+
+	if (event->activate) {
+		GAMEMANAGER->offEvent();
+		EVENTMANAGER->loadEvent(8);
+		UIMANAGER->changeMenu("event");
+		return;
+	}
+}
+
 Card* collisionManager::cardListWithCursor(Card* card, float x, float y)
 {
 	POINT pt = { x, y };
@@ -53,6 +73,32 @@ Card * collisionManager::selectedCard(vector<Card*> cards, float x, float y)
 	}
 
 	return NULL;
+}
+
+void collisionManager::selectedButtonUI(float x, float y)
+{
+	POINT pt = { x, y };
+	BUTTON* buttons = UIMANAGER->getInGame()->getButton();
+
+	for (int i = 0; i < END_HUD_TYPE; i++) {
+		if (PtInRect(&buttons[i].body, pt)) {
+			UIMANAGER->getInGame()->useButton(i);
+			break;
+		}
+	}
+}
+
+void collisionManager::barWithCursor(float x, float y)
+{
+	POINT pt = { x, y };
+
+	WaveBar* bar = UIMANAGER->getInGame()->getLeftWave();
+	if (PtInRect(&bar->getBody(), pt))
+		UIMANAGER->getInGame()->waveLoadingFin();
+
+	bar = UIMANAGER->getInGame()->getRightWave();
+	if (PtInRect(&bar->getBody(), pt))
+		UIMANAGER->getInGame()->waveLoadingFin();
 }
 
 void collisionManager::selectButtonWithCursor(RECT* button, float x, float y)
@@ -118,38 +164,6 @@ void collisionManager::handsWithUseBox(Card* card, float x, float y)
 
 	default:
 		break;
-	}
-}
-
-void collisionManager::selectedButtonUI(float x, float y)
-{
-	POINT pt = { x, y };
-	BUTTON* buttons = UIMANAGER->getInGame()->getButton();
-
-	for (int i = 0; i < END_HUD_TYPE; i++) {
-		if (PtInRect(&buttons[i].body, pt)) {
-			UIMANAGER->getInGame()->useButton(i);
-			break;
-		}
-	}
-}
-
-void collisionManager::selectedButtonSnE(float x, float y)
-{
-	POINT pt = { x, y };
-	PBUTTON shop = GAMEMANAGER->getShopButton();
-	PBUTTON event = GAMEMANAGER->getEventButton();
-
-	if (shop->activate) {
-		UIMANAGER->changeMenu("shop");
-		return;
-	}
-
-	if (event->activate) {
-		GAMEMANAGER->offEvent();
-		EVENTMANAGER->loadEvent(8);
-		UIMANAGER->changeMenu("event");
-		return;
 	}
 }
 

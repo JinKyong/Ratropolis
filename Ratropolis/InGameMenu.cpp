@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "InGameMenu.h"
 #include "Player.h"
+#include "ControlKey.h"
 
 HRESULT InGameMenu::init()
 {
@@ -27,6 +28,11 @@ HRESULT InGameMenu::init()
 		_defaultHUDButton[i].activate = false;
 	}
 
+	_leftWave = new WaveBar;
+	_rightWave = new WaveBar;
+	_wave = 0;
+	_nextWave = -1;
+
 
 	return S_OK;
 }
@@ -42,10 +48,47 @@ void InGameMenu::update()
 	for (; progress != _progress.end();) {
 		(*progress)->update();
 
-		if ((*progress)->getFin())
+		if ((*progress)->getFin()) {
+			SAFE_RELEASE(*progress);
 			progress = _progress.erase(progress);
+		}
 		else
 			++progress;
+	}
+
+
+	//wave 알림
+	switch (_nextWave) {
+	case DIRECT_RIGHT:
+		_rightWave->update();
+		if (_rightWave->getFin()) {
+			_nextWave = -1;
+			GAMEMANAGER->getEnemyManager()->startWave(++_wave, DIRECT_RIGHT);
+			GAMEMANAGER->setOnWave(true);
+		}
+		break;
+
+	case DIRECT_LEFT:
+		_leftWave->update();
+		if (_leftWave->getFin()) {
+			_nextWave = -1;
+			GAMEMANAGER->getEnemyManager()->startWave(++_wave, DIRECT_LEFT);
+			GAMEMANAGER->setOnWave(true);
+		}
+		break;
+
+	case DIRECT_ALL:
+		_rightWave->update();
+		_leftWave->update();
+		if (_rightWave->getFin() || _leftWave->getFin()) {
+			_nextWave = -1;
+			GAMEMANAGER->getEnemyManager()->startWave(++_wave, DIRECT_ALL);
+			GAMEMANAGER->setOnWave(true);
+		}
+		break;
+
+	default:
+		break;
 	}
 
 	//버튼 충돌 검사
@@ -73,6 +116,26 @@ void InGameMenu::render()
 		height = i / 7;
 
 		(*progress)->render(360 + width * 110, 60 + height * 110);
+	}
+
+
+	//wave 알림
+	switch (_nextWave) {
+	case DIRECT_RIGHT:
+		_rightWave->render();
+		break;
+
+	case DIRECT_LEFT:
+		_leftWave->render();
+		break;
+
+	case DIRECT_ALL:
+		_rightWave->render();
+		_leftWave->render();
+		break;
+
+	default:
+		break;
 	}
 
 
@@ -147,6 +210,53 @@ void InGameMenu::addCircleBar(int cost, float duration, int * reward)
 	_progress.push_back(bar);
 }
 
+void InGameMenu::addWaveBar(int direct)
+{
+	_nextWave = direct;
+	bool boss = false;
+	if (_wave == 4)
+		boss = true;
+
+	switch (_nextWave) {
+	case DIRECT_RIGHT:
+		_rightWave->init(DIRECT_RIGHT, boss);
+		break;
+
+	case DIRECT_LEFT:
+		_leftWave->init(DIRECT_LEFT, boss);
+		break;
+
+	case DIRECT_ALL:
+		_rightWave->init(DIRECT_RIGHT, boss);
+		_leftWave->init(DIRECT_LEFT, boss);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void InGameMenu::waveLoadingFin()
+{
+	switch (_nextWave) {
+	case DIRECT_RIGHT:
+		_rightWave->setFin(true);
+		break;
+
+	case DIRECT_LEFT:
+		_leftWave->setFin(true);
+		break;
+
+	case DIRECT_ALL:
+		_leftWave->setFin(true);
+		_rightWave->setFin(true);
+		break;
+
+	default:
+		break;
+	}
+}
+
 void InGameMenu::leftTopInit()
 {
 	//LEFT TOP HUD
@@ -212,39 +322,25 @@ void InGameMenu::leftTopText()
 
 	//gold
 	swprintf_s(tmp, L"%d", stat.gold);
-
-	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
-	tmpRECT = dRectMake(65 + 1, 27 + 1, 80, 20);
-	DTDMANAGER->printText(tmp, tmpRECT, 18);
-
 	DTDMANAGER->setBrushColor(ColorF(ColorF::Goldenrod));
 	tmpRECT = dRectMake(65, 27, 80, 20);
-	DTDMANAGER->printText(tmp, tmpRECT, 18);
+	DTDMANAGER->printText(tmp, tmpRECT, 18, false, false, true);
 
 
 
 	//tax
 	swprintf_s(tmp, L"+%d", stat.tax);
-
-	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
-	tmpRECT = dRectMake(120 + 1, 23 + 1, 80, 20);
-	DTDMANAGER->printText(tmp, tmpRECT, 13);
-
 	DTDMANAGER->setBrushColor(ColorF(ColorF::GhostWhite));
 	tmpRECT = dRectMake(120, 23, 80, 20);
-	DTDMANAGER->printText(tmp, tmpRECT, 13);
+	DTDMANAGER->printText(tmp, tmpRECT, 13, false, false, true);
 
 
 
 	//civil
 	swprintf_s(tmp, L"%d/%d", stat.currentCivil, stat.maxCivil);
-
-	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
-	tmpRECT = dRectMake(195 + 1, 27 + 1, 80, 20);
-	DTDMANAGER->printText(tmp, tmpRECT, 18);
 	DTDMANAGER->setBrushColor(ColorF(ColorF::Green));
 	tmpRECT = dRectMake(195, 27, 80, 20);
-	DTDMANAGER->printText(tmp, tmpRECT, 18);
+	DTDMANAGER->printText(tmp, tmpRECT, 18, false, false, true);
 
 
 	DTDMANAGER->resetBrushColor();

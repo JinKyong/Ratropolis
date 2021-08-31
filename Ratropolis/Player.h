@@ -10,8 +10,6 @@ typedef struct tagDefaultStatus {
 	int tax;			//세금
 	int currentCivil;	//현재 시민
 	int maxCivil;		//전체 시민
-	int wave;			//현재 웨이브
-	//int poison;			//오염도
 }DEFAULT_STAT;
 
 class Player

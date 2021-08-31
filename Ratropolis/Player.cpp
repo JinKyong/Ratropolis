@@ -56,7 +56,6 @@ void Player::playGame()
 	_defaultStat.tax = 5;
 	_defaultStat.currentCivil = 5;
 	_defaultStat.maxCivil = 5;
-	_defaultStat.wave = 1;
 
 	//지도자 레벨
 	_level = 1;

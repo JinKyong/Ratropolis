@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
@@ -135,6 +131,13 @@
     </Filter>
     <Filter Include="playGround\Object\NPC\base">
       <UniqueIdentifier>{9faee894-aad9-4ed0-a972-39c493fd1a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\Object\Enemy\base">
+      <UniqueIdentifier>{c459e887-de40-443e-9a5d-1a21e7d9d45b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +357,21 @@
     <ClInclude Include="Button.h">
       <Filter>playGround\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>playGround\Object\Enemy\base</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHeader.h">
+      <Filter>playGround\Object\Enemy\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Punch_Rabbit.h">
+      <Filter>playGround\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>playGround\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveBar.h">
+      <Filter>playGround\Component\ProgressBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -538,6 +556,18 @@
     </ClCompile>
     <ClCompile Include="ShopMenu.cpp">
       <Filter>playGround\UI\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>playGround\Object\Enemy\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Punch_Rabbit.cpp">
+      <Filter>playGround\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>playGround\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveBar.cpp">
+      <Filter>playGround\Component\ProgressBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 #include "Button.h"
 #include "CircleBar.h"
+#include "WaveBar.h"
 #include <vector>
 
 enum HUD_TYPE {
@@ -44,6 +45,11 @@ private:
 	//CircleLoading
 	progressList _progress;
 
+	//waveLoading
+	WaveBar *_leftWave, *_rightWave;
+	int _wave;
+	int _nextWave;
+
 
 public:
 	virtual HRESULT init();
@@ -53,6 +59,8 @@ public:
 
 	void useButton(int index);
 	void addCircleBar(int cost, float duration, int* reward);
+	void addWaveBar(int direct);
+	void waveLoadingFin();
 
 	void leftTopInit();
 	void leftBottomInit();
@@ -71,5 +79,13 @@ public:
 
 
 	BUTTON* getButton() { return _defaultHUDButton; }
+
+	WaveBar* getLeftWave() { return _leftWave; }
+	WaveBar* getRightWave() { return _rightWave; }
+
+	int getWave() { return _wave; }
+	void setWave(int wave) { _wave = wave; }
+	int getNextWave() { return _nextWave; }
+	void setNextWave(int nextWave) { _nextWave = nextWave; }
 };
 

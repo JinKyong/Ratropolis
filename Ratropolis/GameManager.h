@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include "BuildManager.h"
+#include "EnemyManager.h"
 #include "NPCManager.h"
 #include "Button.h"
 #include <vector>
@@ -13,7 +14,6 @@ private:
 	dImage* _fadeImage;
 
 	RECT _useBox;
-
 	Player* _player;
 
 	//Shop & Event Button
@@ -30,8 +30,15 @@ private:
 
 	//Object
 	BuildManager* _buildManager;
-	//enemyManager;
+	EnemyManager* _enemyManager;
 	NPCManager* _NPCManager;
+
+
+	//Timer
+	float _gameTime;				//게임 전체 경과시간
+	float _waveTime;				//웨이브 시작 후 경과시간
+	bool _firstWaveStart;			//첫 웨이브 시작 여부
+	bool _onWave;					//웨이브 진행중인지
 
 public:
 	HRESULT init(Player* player);
@@ -42,7 +49,6 @@ public:
 	void playGame();
 	void renderSight();
 	void renderPlayer();
-
 
 	void onShop();
 	void offShop();
@@ -61,5 +67,10 @@ public:
 	PBUTTON getEventButton() { return &_eventButton; }
 
 	BuildManager* getBuildManager() { return _buildManager; }
+	EnemyManager* getEnemyManager() { return _enemyManager; }
+	NPCManager* getNPCManager() { return _NPCManager; }
+
+	bool getOnWave() { return _onWave; }
+	void setOnWave(bool onWave) { _onWave = onWave; }
 };
 

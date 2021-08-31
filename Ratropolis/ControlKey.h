@@ -31,3 +31,12 @@
 #define	MOUSE_LEFT_CLICK		VK_LBUTTON
 #define	MOUSE_RIGHT_CLICK		VK_RBUTTON
 #define MOUSE_WHEEL_CLICK		VK_MBUTTON
+
+
+
+
+
+/******************* DIRECT *******************/
+#define DIRECT_RIGHT		0
+#define DIRECT_LEFT			1
+#define DIRECT_ALL			2

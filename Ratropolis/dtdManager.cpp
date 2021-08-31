@@ -27,7 +27,7 @@ HRESULT dtdManager::init()
 
 	//RenderTarget이 생성되었으면 Brush 생성
 	if (SUCCEEDED(hr)) {
-		hr = _dRenderTarget->CreateSolidColorBrush(ColorF(ColorF::Black), &_dBrush);
+		hr = _dRenderTarget->CreateSolidColorBrush(ColorF(ColorF::White), &_dBrush);
 		hr = _dRenderTarget->CreateSolidColorBrush(ColorF(ColorF::Black), &_shadowBrush);
 	}
 
@@ -450,5 +450,5 @@ void dtdManager::setBackBuffer(float width, float height)
 
 void dtdManager::resetBrushColor()
 {
-	_dBrush->SetColor(ColorF(ColorF::Black));
+	_dBrush->SetColor(ColorF(ColorF::White));
 }

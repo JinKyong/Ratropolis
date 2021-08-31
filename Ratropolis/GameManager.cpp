@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameManager.h"
 #include "Player.h"
+#include "InGameMenu.h"
 
 HRESULT GameManager::init(Player * player)
 {
@@ -12,7 +13,12 @@ HRESULT GameManager::init(Player * player)
 	//Shop & Event Button
 
 	_buildManager = new BuildManager;
+	_enemyManager = new EnemyManager;
 	_NPCManager = new NPCManager;
+
+	_gameTime = _waveTime = 0;
+	_firstWaveStart = false;
+	_onWave = false;
 
 	return S_OK;
 }
@@ -20,12 +26,14 @@ HRESULT GameManager::init(Player * player)
 void GameManager::release()
 {
 	_buildManager->release();
+	_enemyManager->release();
 	_NPCManager->release();
 }
 
 void GameManager::update()
 {
 	_buildManager->update();
+	_enemyManager->update();
 	_NPCManager->update();
 
 	//ButtonMove
@@ -60,11 +68,36 @@ void GameManager::update()
 	}
 
 	_player->update();
+
+	//경과시간
+	_gameTime += TIMEMANAGER->getElapsedTime();
+	if (!_firstWaveStart && _gameTime >= 10) {
+		_firstWaveStart = true;
+		UIMANAGER->getInGame()->addWaveBar(RND->getInt(2));
+	}
+
+	if (_onWave) {
+		_waveTime += TIMEMANAGER->getElapsedTime();
+		
+		if (_enemyManager->clearWave()) {
+			_onWave = false;
+			_waveTime = 0;
+			UIMANAGER->getInGame()->addWaveBar(RND->getInt(2));
+		}
+		else if (_waveTime >= 10) {
+			UIMANAGER->getInGame()->addWaveBar(RND->getInt(2));
+			_waveTime = 0;
+		}
+	}
+	else {
+		_waveTime = 0;
+	}
 }
 
 void GameManager::render()
 {
 	_buildManager->render();
+	_enemyManager->render();
 	_NPCManager->render();
 
 	WCHAR tmp[128];
@@ -93,8 +126,16 @@ void GameManager::render()
 
 	//배경 시야
 	renderSight();
-
 	renderPlayer();
+
+
+	if (PRINTMANAGER->isDebug()) {
+		WCHAR tmp[128];
+		swprintf_s(tmp, L"time : %f", _gameTime);
+		D2D1_RECT_F tmpRECT = CAMERAMANAGER->getScreen();
+		tmpRECT = dRectMakeCenter((tmpRECT.right + tmpRECT.left) / 2, tmpRECT.top + 50, 200, 50);
+		DTDMANAGER->printText(tmp, tmpRECT, 15, true, true);
+	}
 }
 
 void GameManager::playGame()
@@ -125,6 +166,7 @@ void GameManager::playGame()
 
 
 	_buildManager->init(88);
+	_enemyManager->init();
 	_NPCManager->init();
 }
 
