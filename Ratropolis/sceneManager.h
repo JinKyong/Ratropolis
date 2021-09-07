@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 
+class Player;
 class Scene;
 
 class sceneManager : public singletonBase<sceneManager>
@@ -12,6 +13,7 @@ private:
 	typedef map<string, Scene*>::iterator mapSceneIter;
 
 private:
+	static Player* _player;
 	static Scene* _currentScene;
 
 	mapSceneList _mSceneList;
@@ -20,7 +22,7 @@ public:
 	sceneManager();
 	~sceneManager();
 
-	HRESULT init();
+	HRESULT init(Player* player);
 	void release();
 	void update();
 	void render();

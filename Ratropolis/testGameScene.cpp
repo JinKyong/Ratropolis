@@ -2,12 +2,13 @@
 #include "testGameScene.h"
 #include "Player.h"
 
-HRESULT testGameScene::init()
+HRESULT testGameScene::init(Player* player)
 {
+	Scene::init(player);
+
 	CAMERAMANAGER->setBackScreenSize(MAPWIDTH, MAPHEIGHT);
 	COLLISIONMANAGER->init();
 
-	_player = GAMEMANAGER->getPlayer();
 	_player->setCamX(MAPWIDTH / 2);
 	_player->setCamY(MAPHEIGHT - 240);
 	_player->playGame();

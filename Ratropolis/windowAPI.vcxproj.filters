@@ -372,6 +372,9 @@
     <ClInclude Include="WaveBar.h">
       <Filter>playGround\Component\ProgressBar</Filter>
     </ClInclude>
+    <ClInclude Include="titleScene.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -568,6 +571,9 @@
     </ClCompile>
     <ClCompile Include="WaveBar.cpp">
       <Filter>playGround\Component\ProgressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="titleScene.cpp">
+      <Filter>playGround\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

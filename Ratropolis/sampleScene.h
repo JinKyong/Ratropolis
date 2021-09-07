@@ -3,9 +3,8 @@
 
 class sampleScene : public Scene
 {
-
 public:
-	virtual HRESULT init();
+	virtual HRESULT init(Player* player);
 	virtual void release();
 	virtual void update();
 	virtual void render();

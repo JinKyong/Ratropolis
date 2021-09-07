@@ -218,6 +218,7 @@
     <ClInclude Include="testGameScene.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="titleScene.h" />
     <ClInclude Include="ToolTip.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="uiManager.h" />
@@ -289,6 +290,7 @@
     <ClCompile Include="testGameScene.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="titleScene.cpp" />
     <ClCompile Include="ToolTip.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="uiManager.cpp" />

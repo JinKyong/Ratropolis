@@ -21,8 +21,8 @@ HRESULT playGround::init()
 
 	GAMEMANAGER->init(_player);
 
-	SCENEMANAGER->init();
-	SCENEMANAGER->changeScene("sample");
+	SCENEMANAGER->init(_player);
+	SCENEMANAGER->changeScene("title");
 
 	_debug = false;
 

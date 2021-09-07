@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "sampleScene.h"
 
-HRESULT sampleScene::init()
+HRESULT sampleScene::init(Player* player)
 {
+	Scene::init(player);
+
 	return S_OK;
 }
 

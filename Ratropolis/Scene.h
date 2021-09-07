@@ -1,14 +1,17 @@
 #pragma once
 
+class Player;
+
 class Scene
 {
 protected:
+	static Player* _player;
 
 public:
 	Scene() {};
 	~Scene() {};
 
-	virtual HRESULT init() = 0;
+	virtual HRESULT init(Player* player);
 	virtual void release() = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;

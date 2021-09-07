@@ -15,7 +15,7 @@ HRESULT streamManager::init()
 {
 	_currentVideo = NULL;
 
-	//addVideo("title_top", "video/title_top.wmv");
+	addVideo("title", "video/Ratropolis_Intro.wmv");
 	//addVideo("title_bottom", "video/title_bottom.wmv");
 
 	return S_OK;
