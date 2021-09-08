@@ -15,14 +15,6 @@ void Player::release()
 
 void Player::update()
 {
-	//testKey
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD1)) {
-		changeGold(-5);
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_NUMPAD2)) {
-		changeGold(+5);
-	}
-
 	_count += TIMEMANAGER->getElapsedTime();
 	if (_count >= 5) {
 		changeGold(_defaultStat.tax);
@@ -31,7 +23,6 @@ void Player::update()
 	
 
 	//Á¶ÀÛÅ°
-	//controlMouse();
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y);
 	_cursor->update();
 

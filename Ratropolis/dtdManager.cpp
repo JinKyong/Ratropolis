@@ -129,7 +129,7 @@ void dtdManager::render(float destX, float destY, float width, float height)
 		_dRenderTarget->DrawBitmap(_dCardBitmap, dest,
 			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourCard);
 
-	//CAMERAMANAGER->fade();
+	CAMERAMANAGER->fade();
 
 	_dRenderTarget->EndDraw();
 }

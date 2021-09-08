@@ -96,7 +96,7 @@ void cameraManager::fadeIn()
 
 	if (_alpha == 0) _fade = NORMAL;
 
-	D2D1_RECT_F dest = dRectMake(3 * WINSIZEX / 16, 3 * WINSIZEY / 8, _frontWidth, _frontHeight);
+	D2D1_RECT_F dest = dRectMake(0, 0, _frontWidth, _frontHeight);
 	D2D1_RECT_F sour = dRectMake(0, 0, _fadeScreen->getWidth(), _fadeScreen->getHeight());
 	DTDMANAGER->getRenderTarget()->DrawBitmap(_fadeScreen->getBitmap(), dest,
 		_alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
@@ -109,7 +109,7 @@ void cameraManager::fadeOut()
 
 	if (_alpha == 1.0) _fade = NORMAL;
 
-	D2D1_RECT_F dest = dRectMake(3 * WINSIZEX / 16, 3 * WINSIZEY / 8, _frontWidth, _frontHeight);
+	D2D1_RECT_F dest = dRectMake(0, 0, _frontWidth, _frontHeight);
 	D2D1_RECT_F sour = dRectMake(0, 0, _fadeScreen->getWidth(), _fadeScreen->getHeight());
 	DTDMANAGER->getRenderTarget()->DrawBitmap(_fadeScreen->getBitmap(), dest,
 		_alpha, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);

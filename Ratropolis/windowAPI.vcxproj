@@ -191,6 +191,7 @@
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="Labor.h" />
     <ClInclude Include="macroFunc.h" />
+    <ClInclude Include="mainScene.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuHeader.h" />
     <ClInclude Include="NameTag.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="Labor.cpp" />
+    <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="NameTag.cpp" />
     <ClCompile Include="NPC.cpp" />

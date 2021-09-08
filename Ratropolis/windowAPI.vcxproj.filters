@@ -216,9 +216,6 @@
     <ClInclude Include="Scene.h">
       <Filter>playGround\Stage\base</Filter>
     </ClInclude>
-    <ClInclude Include="SceneHeader.h">
-      <Filter>playGround\Stage\base</Filter>
-    </ClInclude>
     <ClInclude Include="testGameScene.h">
       <Filter>playGround\Stage</Filter>
     </ClInclude>
@@ -373,6 +370,12 @@
       <Filter>playGround\Component\ProgressBar</Filter>
     </ClInclude>
     <ClInclude Include="titleScene.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="mainScene.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneHeader.h">
       <Filter>playGround\Stage</Filter>
     </ClInclude>
   </ItemGroup>
@@ -573,6 +576,9 @@
       <Filter>playGround\Component\ProgressBar</Filter>
     </ClCompile>
     <ClCompile Include="titleScene.cpp">
+      <Filter>playGround\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="mainScene.cpp">
       <Filter>playGround\Stage</Filter>
     </ClCompile>
   </ItemGroup>

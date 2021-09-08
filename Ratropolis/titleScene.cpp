@@ -37,7 +37,7 @@ void titleScene::render()
 
 void titleScene::changeScene()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN)) {
+	if (KEYMANAGER->isOnceKeyDown(VK_RETURN) || KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
 		STREAMMANAGER->closeVideo();
 		CAMERAMANAGER->setFade(FADEOUT);
 		_change = true;
@@ -45,6 +45,6 @@ void titleScene::changeScene()
 
 	if (_change) {
 		if (CAMERAMANAGER->getAlpha() == 1.0)
-			SCENEMANAGER->changeScene("sample");
+			SCENEMANAGER->changeScene("main");
 	}
 }

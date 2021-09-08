@@ -196,9 +196,15 @@ void dImage::frameRender(float destX, float destY, float opacity)
 void dImage::frameRender(float destX, float destY, int currentFrameX, int currentFrameY, float opacity)
 {
 	D2D1_RECT_F destRect = dRectMake(destX, destY, _imageInfo->frameWidth, _imageInfo->frameHeight);
-	D2D1_RECT_F sourRect = dRectMake(
-		currentFrameX * _imageInfo->frameWidth, currentFrameY * _imageInfo->frameHeight,
-		_imageInfo->frameWidth, _imageInfo->frameHeight);
+	//D2D1_RECT_F sourRect = dRectMake(
+	//	currentFrameX * _imageInfo->frameWidth, currentFrameY * _imageInfo->frameHeight,
+	//	_imageInfo->frameWidth, _imageInfo->frameHeight);
+
+	D2D1_SIZE_F size = _imageInfo->bitMap->GetSize();
+	float ratioX = size.width / _imageInfo->width;
+	float ratioY = size.height / _imageInfo->height;
+	D2D1_RECT_F sourRect = dRectMake(currentFrameX * _imageInfo->frameWidth * ratioX, currentFrameY * _imageInfo->frameHeight * ratioY,
+		_imageInfo->frameWidth * ratioX, _imageInfo->frameHeight * ratioY);
 
 	//rendertarget을 불러와서 이미지의 비트맵을 그려준다
 	DTDMANAGER->getCurrentRenderTarget()->DrawBitmap(_imageInfo->bitMap, destRect,
