@@ -9,14 +9,10 @@ HRESULT testGameScene::init(Player* player)
 	CAMERAMANAGER->setBackScreenSize(MAPWIDTH, MAPHEIGHT);
 	COLLISIONMANAGER->init();
 
-	_player->setCamX(MAPWIDTH / 2);
-	_player->setCamY(MAPHEIGHT - 240);
-	_player->playGame();
-
-	//배경 이미지 등록하고 한번만 그림
+	//배경 이미지 등록하고 한번만 그림(로딩에서 할 것)
 	setBackImage();
 	drawBackImage();
-
+	
 	DECKMANAGER->init();
 	GAMEMANAGER->playGame();
 	UIMANAGER->playGame();
@@ -55,7 +51,6 @@ void testGameScene::render()
 	DECKMANAGER->render();
 	GAMEMANAGER->render();
 	UIMANAGER->render();
-
 }
 
 void testGameScene::changeScene()

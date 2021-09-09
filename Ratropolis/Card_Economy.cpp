@@ -94,9 +94,9 @@ void Card_Economy::render()
 
 		DTDMANAGER->setBrushColor(ColorF(ColorF::Red));
 		DTDMANAGER->printText(atb, tmpRECT, 10, true, false);
-		DTDMANAGER->resetBrushColor();
 	}
 
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
 	DTDMANAGER->printText(_cardStat.desc, tmpRECT, 10, true, true);
 
 	//µð¹ö±ë
@@ -109,6 +109,7 @@ void Card_Economy::render()
 	}
 
 	DTDMANAGER->resetTransform();
+	DTDMANAGER->resetBrushColor();
 }
 
 void Card_Economy::useCard()

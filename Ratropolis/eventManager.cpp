@@ -39,7 +39,7 @@ void eventManager::release()
 void eventManager::update()
 {
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y);
-	_cursor->update();
+	_cursor->controlMouseEvent();
 	
 	COLLISIONMANAGER->selectButtonWithCursor(_buttonRECT, _cursor->getX(), _cursor->getY());
 }

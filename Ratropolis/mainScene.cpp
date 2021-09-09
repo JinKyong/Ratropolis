@@ -18,6 +18,19 @@ HRESULT mainScene::init(Player * player)
 	_ratCloakX = _ratCloakY = 0;
 
 
+	_start.x = 200;
+	_start.y = 450;
+	_start.body = RectMake(_start.x, _start.y, 200, 50);
+	_start.activate = false;
+	_start.selected = false;
+
+	_exit.x = 200;
+	_exit.y = 600;
+	_exit.body = RectMake(_exit.x, _exit.y, 200, 50);
+	_exit.activate = false;
+	_exit.selected = false;
+
+
 	_change = false;
 
 	return S_OK;
@@ -30,9 +43,31 @@ void mainScene::release()
 void mainScene::update()
 {
 	_player->getCursor()->updatePosition(_ptMouse.x, _ptMouse.y);
-	//_player->getCursor()->update();
+
+	COLLISIONMANAGER->buttonWithCursor(&_start, _player->getCursor()->getX(), _player->getCursor()->getY());
+	COLLISIONMANAGER->buttonWithCursor(&_exit, _player->getCursor()->getX(), _player->getCursor()->getY());
+
+	if (_start.activate)
+		_player->getCursor()->changeButton(&_start);
+	else if (_exit.activate)
+		_player->getCursor()->changeButton(&_exit);
+	else
+		_player->getCursor()->changeButton(NULL);
+
+	_player->getCursor()->updatePosition(_ptMouse.x, _ptMouse.y);
+	_player->getCursor()->controlMouseMain();
+
+	if (_start.selected) {
+		CAMERAMANAGER->setFade(FADEOUT);
+		_change = true;
+	}
+	else if (_exit.selected) {
+		PostQuitMessage(0);
+		return;
+	}
 
 	controlFrame();
+	changeScene();
 }
 
 void mainScene::render()
@@ -41,11 +76,27 @@ void mainScene::render()
 	middleRender();
 	frontRender();
 
+	D2D1_RECT_F tempRECT = { _start.body.left, _start.body.top, _start.body.right, _start.body.bottom };
+	if (_start.activate)
+		DTDMANAGER->printText(L"게임 시작", tempRECT, 50, false, false, true);
+	else
+		DTDMANAGER->printText(L"게임 시작", tempRECT, 40, false, false, true);
+
+	tempRECT = dRectMake(_exit.body.left, _exit.body.top, 200, 50);
+	if (_exit.activate)
+		DTDMANAGER->printText(L"게임 종료", tempRECT, 50, false, false, true);
+	else
+		DTDMANAGER->printText(L"게임 종료", tempRECT, 40, false, false, true);
+
 	_player->render();
 }
 
 void mainScene::changeScene()
 {
+	if (_change) {
+		if (CAMERAMANAGER->getAlpha() == 1.0)
+			SCENEMANAGER->changeScene("loading");
+	}
 }
 
 void mainScene::controlFrame()

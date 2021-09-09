@@ -144,6 +144,7 @@ void GameManager::playGame()
 
 	_player->setCamX(44 * 90);
 	_player->setCamY(CAMERAMANAGER->getBackScreenHeight() / 2 + 300);
+	_player->playGame();
 
 	//Button
 	_shopButton.x = 44 * 90 - 45;

@@ -57,7 +57,7 @@ void ShopMenu::release()
 void ShopMenu::update()
 {
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y + _scrollY);
-	_cursor->update();
+	_cursor->controlMouseShop();
 
 	if (_card) {
 		_card->setZoom(1.0);

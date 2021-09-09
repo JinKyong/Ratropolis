@@ -1,5 +1,6 @@
 #pragma once
 #include "ControlKey.h"
+#include "Button.h"
 
 class Player;
 
@@ -29,6 +30,10 @@ private:
 	float _backX, _backY;
 	RECT _backBody;
 
+
+	//¹öÆ°
+	PBUTTON _selectedButton;
+
 public:
 	HRESULT init(Player* player);
 	void release();
@@ -40,10 +45,12 @@ public:
 	void controlMouseCardList();
 	void controlMouseShop();
 	void controlMouseEvent();
+	void controlMouseMain();
 
 	//cursor
 	void updatePosition(float x, float y);
 	void changeCursor(CURSOR_TYPE type);
+	void changeButton(PBUTTON button);
 
 
 

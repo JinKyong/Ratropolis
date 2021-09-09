@@ -56,7 +56,7 @@ void CardMenu::release()
 void CardMenu::update()
 {
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y + _scrollY);
-	_cursor->update();
+	_cursor->controlMouseCardList();
 
 	if (_hide) {
 		//카드 위치 조정

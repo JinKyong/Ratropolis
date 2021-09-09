@@ -23,6 +23,8 @@ HRESULT Cursor::init(Player* player)
 
 	updatePosition(_ptMouse.x, _ptMouse.y);
 
+	_selectedButton = NULL;
+
 	return S_OK;
 }
 
@@ -32,6 +34,7 @@ void Cursor::release()
 
 void Cursor::update()
 {
+	/*
 	if (EVENTMANAGER->getOpen())
 		controlMouseEvent();
 	else if (UIMANAGER->getOpen()) {
@@ -44,6 +47,7 @@ void Cursor::update()
 	}
 	else
 		controlMouse();
+		*/
 
 }
 
@@ -207,6 +211,37 @@ void Cursor::controlMouseEvent()
 	}
 }
 
+void Cursor::controlMouseMain()
+{
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_WHEEL_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_CLICK);
+
+		if (_selectedButton)
+			_selectedButton->selected = true;
+	}
+
+	if (KEYMANAGER->isStayKeyDown(MOUSE_LEFT_CLICK)) {
+
+	}
+
+	if (KEYMANAGER->isOnceKeyUp(MOUSE_LEFT_CLICK)) {
+		changeCursor(CURSOR_TYPE_DEFAULT);
+
+		if (_selectedButton) {
+			_selectedButton->selected = false;
+			_selectedButton = NULL;
+		}
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
+
+	}
+}
+
 void Cursor::updatePosition(float x, float y)
 {
 	_x = x;
@@ -227,4 +262,13 @@ void Cursor::changeCursor(CURSOR_TYPE type)
 	if (_currentImage = _images[type]) return;
 
 	_currentImage = _images[type];
+}
+
+void Cursor::changeButton(PBUTTON button)
+{
+	//같은 버튼 선택하면 그냥 반환
+	if (_selectedButton == button) return;
+
+	//선택
+	_selectedButton = button;
 }

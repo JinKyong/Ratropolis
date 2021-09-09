@@ -7,4 +7,5 @@ typedef struct tagButton {
 	RECT body;
 
 	bool activate;
+	bool selected;
 }BUTTON, *PBUTTON;

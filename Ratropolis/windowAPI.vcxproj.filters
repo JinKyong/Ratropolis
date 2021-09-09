@@ -378,6 +378,12 @@
     <ClInclude Include="SceneHeader.h">
       <Filter>playGround\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="loadingScene.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="gameScene.h">
+      <Filter>playGround\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -579,6 +585,12 @@
       <Filter>playGround\Stage</Filter>
     </ClCompile>
     <ClCompile Include="mainScene.cpp">
+      <Filter>playGround\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="loadingScene.cpp">
+      <Filter>playGround\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="gameScene.cpp">
       <Filter>playGround\Stage</Filter>
     </ClCompile>
   </ItemGroup>

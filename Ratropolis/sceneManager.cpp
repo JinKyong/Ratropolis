@@ -21,8 +21,11 @@ HRESULT sceneManager::init(Player* player)
 
 	addScene("test", new testGameScene);
 	addScene("sample", new sampleScene);
+
 	addScene("title", new titleScene);
 	addScene("main", new mainScene);
+	addScene("loading", new loadingScene);
+	addScene("game", new gameScene);
 
 	return S_OK;
 }

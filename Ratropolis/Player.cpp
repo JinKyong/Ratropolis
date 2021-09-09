@@ -24,7 +24,7 @@ void Player::update()
 
 	//Á¶ÀÛÅ°
 	_cursor->updatePosition(_ptMouse.x, _ptMouse.y);
-	_cursor->update();
+	_cursor->controlMouse();
 
 	if (_selectedCard) {
 		_selectedCard->setX(_ptMouse.x);
