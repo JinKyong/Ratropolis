@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ShopMenu.h"
 
-HRESULT ShopMenu::init()
+ShopMenu::ShopMenu()
 {
 	_back = IMAGEMANAGER->addDImage("darkBackground", L"img/UI/DarkBack.png", WINSIZEX, WINSIZEY);
 
@@ -10,7 +10,7 @@ HRESULT ShopMenu::init()
 	_shopFrame = IMAGEMANAGER->addDImage("shopFrame", L"img/UI/menu/shop/Shop_Pannel2.png", 1300, 1000);
 	_goldIcon = IMAGEMANAGER->addDImage("shop_goldIcon", L"img/UI/menu/shop/UI_Icon_Economy.png", 40, 40);
 	_soldOut = IMAGEMANAGER->addDImage("shop_soldOut", L"img/UI/menu/shop/Sold_Out.png", 150, 75);
-	
+
 
 	//버튼
 	_exit.icon = IMAGEMANAGER->addDImage("shop_exit", L"img/UI/menu/shop/ExitColorBox.png", 87, 83);
@@ -24,25 +24,44 @@ HRESULT ShopMenu::init()
 	_reroll.body = RectMakeCenter(_reroll.x, _reroll.y, _reroll.icon->getWidth(), _reroll.icon->getHeight());
 
 	_buttonHL = IMAGEMANAGER->addDImage("shop_buttonHL", L"img/UI/menu/shop/UI_Exit_OutGlow.png", 95, 90);
-	_rollable = true;
 
+	_sellingCards.push_back(1);
+	_sellingCards.push_back(3);
+	_sellingCards.push_back(18);
+	_sellingCards.push_back(31);
+	_sellingCards.push_back(32);
+}
+
+ShopMenu::~ShopMenu()
+{
+}
+
+HRESULT ShopMenu::init()
+{
+	if (!_hide) {
+		_rollable = true;
+
+		makeCard();
+	}	
 
 	_scrollY = 0;
-	_hide = true;
 
 	_cursor = GAMEMANAGER->getPlayer()->getCursor();
 
-	makeCard();
 	_card = NULL;
 	_gold = GAMEMANAGER->getPlayer()->getDefaultStat().gold;
 
 	UIMANAGER->setOpen(true);
+
+	SOUNDMANAGER->play("shopOpen");
 
 	return S_OK;
 }
 
 void ShopMenu::release()
 {
+	if (_hide) return;
+
 	for (int i = 0; i < 8; i++) {
 		if (_cardCost[i] == 0) continue;
 
@@ -145,7 +164,9 @@ void ShopMenu::changeScroll(float num)
 			_gold -= _cardCost[_selectedCard];
 
 			//카드 추가
-			DECKMANAGER->addCard2Deck(_card);
+			Card* card = DICTIONARY->makeCard(_card->getCardStat()->number, _card->getCardStat()->level);
+			card->init();
+			DECKMANAGER->addCard2Deck(card);
 			_cardCost[_selectedCard] = 0;
 			_num--;
 
@@ -154,8 +175,10 @@ void ShopMenu::changeScroll(float num)
 		}
 	}
 
-	if (_exit.activate)
+	if (_exit.activate) {
+
 		UIMANAGER->changeMenu("null");
+	}
 	else if (_reroll.activate) {
 		//리롤
 		release();
@@ -171,13 +194,13 @@ void ShopMenu::makeCard()
 {
 	//카드 생성
 	for (int i = 0; i < 8; i++) {
-		Card* card = DICTIONARY->makeCard(18, RND->getInt(2) + 1);
+		Card* card = DICTIONARY->makeCard(_sellingCards[RND->getInt(5)], RND->getInt(2) + 1);
 		card->init();
 		_cardList.push_back(card);
 		_num++;
 
 		//비용산정 어케하냐, 레어도랑 카트 타입에 따라서 다르게?
-		_cardCost[i] = RND->getFromIntTo(110, 131);
+		_cardCost[i] = RND->getFromIntTo(50 * card->getCardStat()->level, 70 * card->getCardStat()->level);
 	}
 
 	//카드 정렬

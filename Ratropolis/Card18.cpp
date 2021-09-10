@@ -52,4 +52,5 @@ void Card18::useCard()
 
 	//cost
 	Card_Build::useCard();
+	SOUNDMANAGER->play("useCard");
 }

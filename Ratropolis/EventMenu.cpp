@@ -19,6 +19,8 @@ HRESULT EventMenu::init()
 
 	UIMANAGER->setOpen(true);
 
+	SOUNDMANAGER->play("eventOpen");
+
 	return S_OK;
 }
 

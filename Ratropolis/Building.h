@@ -44,7 +44,10 @@ public:
 	virtual void render();
 
 	virtual void preview();
+
+	void destroy();
 	void addReward();
+
 
 
 

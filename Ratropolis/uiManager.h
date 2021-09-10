@@ -28,6 +28,7 @@ public:
 	void render();
 
 	Menu* addMenu(string menuName, Menu* menu);
+	Menu* findMenu(string menuName);
 	HRESULT changeMenu(string menuName);
 
 	void playGame();

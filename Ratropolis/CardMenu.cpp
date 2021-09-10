@@ -40,6 +40,8 @@ HRESULT CardMenu::init()
 
 	UIMANAGER->setOpen(true);
 
+	SOUNDMANAGER->play("dictOpen");
+
 	return S_OK;
 }
 
@@ -51,6 +53,8 @@ void CardMenu::release()
 
 		_cards[i]->setZoom(1.0);
 	}
+
+	SOUNDMANAGER->play("dictClose");
 }
 
 void CardMenu::update()

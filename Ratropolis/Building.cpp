@@ -47,6 +47,7 @@ void Building::update()
 
 			addReward();
 			GAMEMANAGER->getBuildManager()->expandSpace(_idX);
+			SOUNDMANAGER->play("endConstruct");
 		}
 	}
 }
@@ -83,6 +84,13 @@ void Building::preview()
 
 	_bodyImage->render(_idX * EACH_SPACE, GROUND - _bodyImage->getHeight(), 0.5);
 	DTDMANAGER->resetTransform();
+}
+
+void Building::destroy()
+{
+	release();
+
+	SOUNDMANAGER->play("demolisher");
 }
 
 void Building::addReward()

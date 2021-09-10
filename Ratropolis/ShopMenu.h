@@ -12,6 +12,7 @@ private:
 
 private:
 	//카드 리스트
+	vector<int> _sellingCards;
 	salesList	_cardList;
 	int			_cardCost[8];
 	int			_num;				//남은 카드 수
@@ -36,6 +37,9 @@ private:
 	int _gold;
 
 public:
+	ShopMenu();
+	~ShopMenu();
+
 	virtual HRESULT init();
 	virtual void release();
 	virtual void update();
@@ -45,4 +49,3 @@ public:
 
 	void makeCard();
 };
-

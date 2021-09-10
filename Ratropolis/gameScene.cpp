@@ -7,9 +7,11 @@ HRESULT gameScene::init(Player * player)
 
 	CAMERAMANAGER->setBackScreenSize(MAPWIDTH, MAPHEIGHT);
 
-
 	DECKMANAGER->init();
 	GAMEMANAGER->playGame();
+
+
+	SOUNDMANAGER->play("dessert");
 
 	return S_OK;
 }
@@ -21,6 +23,8 @@ void gameScene::release()
 
 	DECKMANAGER->release();
 	DECKMANAGER->releaseSingleton();
+
+	SOUNDMANAGER->stop("dessert");
 }
 
 void gameScene::update()

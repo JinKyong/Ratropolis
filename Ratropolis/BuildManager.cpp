@@ -245,6 +245,7 @@ void BuildManager::addWall()
 	//건물 추가
 	_building->setReward(card->getReward());
 	_building->setOnBuild(true);
+	SOUNDMANAGER->play("startConstruct");
 	_buildings.push_back(_building);
 
 	_getWall = 0;
@@ -268,6 +269,7 @@ void BuildManager::addBuilding()
 	_building->init(idX);
 	_building->setReward(card->getReward());
 	_building->setOnBuild(true);
+	SOUNDMANAGER->play("startConstruct");
 	_buildings.push_back(_building);
 
 	_building = NULL;

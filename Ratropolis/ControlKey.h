@@ -1,6 +1,9 @@
 #pragma once
 
 /******************* KEYBOARD *******************/
+//GOD MOD
+#define KEY_ALL_ENEMY_DELETE	'R'
+
 
 //Camera Move
 #define	KEY_MAX_LEFT			'Q'

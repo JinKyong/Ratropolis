@@ -13,7 +13,7 @@ HRESULT WaveBar::init(int direct, bool boss)
 
 	//others
 	_elapsedTime = 0;
-	_duration = 10;
+	_duration = 60;
 
 	//position
 	if (direct)

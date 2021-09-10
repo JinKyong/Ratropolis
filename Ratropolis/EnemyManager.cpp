@@ -51,10 +51,24 @@ void EnemyManager::startWave(int num, int direct)
 		_enemies.push_back(new Punch_Rabbit);
 		_enemies.push_back(new Punch_Rabbit);
 		_enemies.push_back(new Punch_Rabbit);
-		_enemies.push_back(new Punch_Rabbit);
 		break;
 
 	case 3:
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		break;
+
+	case 4:
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		_enemies.push_back(new Punch_Rabbit);
+		break;
+
+	case 5:
 		_enemies.push_back(new Punch_Rabbit);
 		_enemies.push_back(new Punch_Rabbit);
 		_enemies.push_back(new Punch_Rabbit);
@@ -99,6 +113,8 @@ void EnemyManager::startWave(int num, int direct)
 	default:
 		break;
 	}
+
+	SOUNDMANAGER->play("waveStart");
 }
 
 bool EnemyManager::clearWave()

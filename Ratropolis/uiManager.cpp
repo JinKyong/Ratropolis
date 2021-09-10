@@ -96,6 +96,15 @@ Menu * uiManager::addMenu(string menuName, Menu * menu)
 	return menu;
 }
 
+Menu * uiManager::findMenu(string menuName)
+{
+	menuIter find = _menuList.find(menuName);
+
+	if (find == _menuList.end()) return NULL;
+
+	else return find->second;
+}
+
 HRESULT uiManager::changeMenu(string menuName)
 {
 	_currentMenuName = menuName;

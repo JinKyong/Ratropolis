@@ -33,11 +33,14 @@ HRESULT mainScene::init(Player * player)
 
 	_change = false;
 
+	SOUNDMANAGER->play("mainTheme");
+
 	return S_OK;
 }
 
 void mainScene::release()
 {
+	SOUNDMANAGER->stop("mainTheme");
 }
 
 void mainScene::update()

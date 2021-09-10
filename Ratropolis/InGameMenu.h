@@ -42,6 +42,12 @@ private:
 	dImage* _waveIcon;		//웨이브 아이콘
 	//dImage* _poisonIcon;
 
+
+	//drawCost
+	float _drawCount;
+	int _drawCost;
+
+
 	//CircleLoading
 	progressList _progress;
 

@@ -42,6 +42,7 @@ void collisionManager::selectedButtonSnE(float x, float y)
 
 	if (shop->activate) {
 		UIMANAGER->changeMenu("shop");
+		UIMANAGER->getCurrentMenu()->setHide(true);
 		return;
 	}
 

@@ -129,6 +129,8 @@ void DeckManager::useCard(Card * card)
 				_currentHands.erase(hand);
 				break;
 			}
+
+			SOUNDMANAGER->stop("activeCard");
 			break;
 		}
 	}
@@ -166,6 +168,7 @@ void DeckManager::drawCard(int num)
 	for (int i = 0; i < num; i++) {
 		addCard2Hand(_cardBag[0]);
 		_cardBag.erase(_cardBag.begin());
+		SOUNDMANAGER->play("drawCard");
 	}
 }
 

@@ -65,12 +65,12 @@ void eventManager::render()
 	}
 	for (int i = 0; i < _buttonNum; i++) {
 		if (i == _selectedButton) {
-
+			DTDMANAGER->setScale(1.2, 1.2, 
+				WINSIZEX / 2, WINSIZEY / 3 + _eventFrame->getHeight() / 2 + _buttonFrame->getHeight() / 2 + 15 + i * (15 + _buttonFrame->getHeight()));
 		}
-		else {
-			_buttonFrame->render(WINSIZEX / 2 - _buttonFrame->getWidth() / 2,
-				WINSIZEY / 3 + _eventFrame->getHeight() / 2 + 15 + i * (15 + _buttonFrame->getHeight()));
-		}
+		_buttonFrame->render(WINSIZEX / 2 - _buttonFrame->getWidth() / 2,
+			WINSIZEY / 3 + _eventFrame->getHeight() / 2 + 15 + i * (15 + _buttonFrame->getHeight()));
+		DTDMANAGER->resetTransform();
 	}
 
 	if (PRINTMANAGER->isDebug()) {
@@ -146,6 +146,11 @@ void eventManager::printText()
 		DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
 		tmpRECT = dRectMake(WINSIZEX / 2 - _buttonFrame->getWidth() / 2 + 70 + 1,
 			WINSIZEY / 3 + _eventFrame->getHeight() / 2 + 35 + (i - 1) * (15 + _buttonFrame->getHeight()) + 1, 580, 40);
+
+		if (i - 1 == _selectedButton) {
+			DTDMANAGER->setScale(1.2, 1.2, (tmpRECT.left + tmpRECT.right) / 2, (tmpRECT.top + tmpRECT.bottom) / 2);
+		}
+
 		DTDMANAGER->printText(tmp, tmpRECT, 20, false, true);
 
 		//ÃÑ 3¹ø ¾´´Ù
@@ -169,6 +174,8 @@ void eventManager::printText()
 		DTDMANAGER->resetBrushColor();
 		if (PRINTMANAGER->isDebug())
 			DTDMANAGER->Rectangle(tmpRECT);
+
+		DTDMANAGER->resetTransform();
 	}
 }
 
@@ -219,11 +226,14 @@ void eventManager::loadMetaData()
 
 void eventManager::registerIlluste()
 {
+	IMAGEMANAGER->addDImage("eventIlluste_fixed8", L"img/UI/event/Event_Illust_Fixed_8.png", 375, 275);
+	return;
+
 	char tmp[128];
 	WCHAR tmp2[128];
 
 	//fixed event
-	for (int i = 0; i < 38; i++) {
+	for (int i = 0; i < 28; i++) {
 		sprintf_s(tmp, "eventIlluste_fixed%d", i);
 		swprintf_s(tmp2, L"img/UI/event/Event_Illust_Fixed_%d.png", i);
 		IMAGEMANAGER->addDImage(tmp, tmp2, 375, 275);

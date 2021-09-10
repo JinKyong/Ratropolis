@@ -53,4 +53,5 @@ void Card32::useCard()
 
 	//cost
 	Card_Economy::useCard();
+	SOUNDMANAGER->play("useCard32");
 }

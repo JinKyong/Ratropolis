@@ -28,6 +28,12 @@ HRESULT InGameMenu::init()
 		_defaultHUDButton[i].activate = false;
 	}
 
+
+	_drawCount = 0;
+	_drawCost = 50 + _wave * 25;
+
+
+
 	_leftWave = new WaveBar;
 	_rightWave = new WaveBar;
 	_wave = 0;
@@ -55,6 +61,16 @@ void InGameMenu::update()
 		else
 			++progress;
 	}
+
+
+	if (_drawCount > 0) {
+		_drawCount -= TIMEMANAGER->getElapsedTime();
+		if (_drawCount <= 0) {
+			_drawCount = 0;
+			SOUNDMANAGER->play("drawCardReady");
+		}
+	}
+
 
 
 	//wave 알림
@@ -90,6 +106,8 @@ void InGameMenu::update()
 	default:
 		break;
 	}
+	if (_wave > 5)
+		_wave = 5;
 
 	//버튼 충돌 검사
 	if (!UIMANAGER->getOpen()) {
@@ -191,7 +209,17 @@ void InGameMenu::useButton(int index)
 		break;
 
 	case HUD_TYPE_REDRAW:
-		DECKMANAGER->redrawCard();
+		if (!_drawCount) {
+			DECKMANAGER->redrawCard();
+			_drawCount = 15;
+		}
+		else {
+			if (GAMEMANAGER->getPlayer()->getDefaultStat().gold >= _drawCost) {
+				DECKMANAGER->redrawCard();
+				GAMEMANAGER->getPlayer()->changeGold(-_drawCost);
+				_drawCount = 15;
+			}
+		}
 		break;
 
 	case HUD_TYPE_CARDGRAVE:
@@ -212,6 +240,8 @@ void InGameMenu::addCircleBar(int cost, float duration, int * reward)
 
 void InGameMenu::addWaveBar(int direct)
 {
+	if (_wave > 4) return;
+
 	_nextWave = direct;
 	bool boss = false;
 	if (_wave == 4)
@@ -272,7 +302,7 @@ void InGameMenu::leftBottomInit()
 	//LEFT BOTTOM BUTTON & ICON
 	_defaultHUDButton[HUD_TYPE_LEADERSKILL].x = 30;
 	_defaultHUDButton[HUD_TYPE_LEADERSKILL].y = WINSIZEY - 250;
-	_defaultHUDButton[HUD_TYPE_LEADERSKILL].icon = IMAGEMANAGER->addDImage("cardBagIcon", L"Img/UI/menu/ingame/UI_CardDeck_Own.png", 90, 90);
+	_defaultHUDButton[HUD_TYPE_LEADERSKILL].icon = IMAGEMANAGER->addDImage("leaderSkill", L"Img/UI/menu/ingame/UI_Icon_Trade.png", 90, 90);
 
 	_defaultHUDButton[HUD_TYPE_CARDBAG].x = 30;
 	_defaultHUDButton[HUD_TYPE_CARDBAG].y = WINSIZEY - 125;
@@ -343,6 +373,14 @@ void InGameMenu::leftTopText()
 	DTDMANAGER->printText(tmp, tmpRECT, 18, false, false, true);
 
 
+
+	//wave
+	swprintf_s(tmp, L"%d/5", _wave);
+	DTDMANAGER->setBrushColor(ColorF(ColorF::Black));
+	tmpRECT = dRectMake(100, 67, 80, 20);
+	DTDMANAGER->printText(tmp, tmpRECT, 18, false, false);
+
+
 	DTDMANAGER->resetBrushColor();
 }
 
@@ -362,11 +400,25 @@ void InGameMenu::rightTopText()
 
 void InGameMenu::rightBottomText()
 {
-
 	//TEXT
-	D2D1_RECT_F tmpRECT = dRectMake(WINSIZEX - 50, WINSIZEY - 115, 100, 50);
-
+	D2D1_RECT_F tmpRECT;
 	WCHAR tmp[128];
+
+	if (_drawCount > 0) {
+		tmpRECT = dRectMakeCenter(_defaultHUDButton[HUD_TYPE_REDRAW].x, _defaultHUDButton[HUD_TYPE_REDRAW].y - 20, 100, 50);
+		swprintf_s(tmp, L"%d", (int)_drawCount);
+		DTDMANAGER->setBrushColor(ColorF(ColorF::LightGoldenrodYellow));
+		DTDMANAGER->printText(tmp, tmpRECT, 20, true, true, true);
+
+		tmpRECT = dRectMakeCenter(_defaultHUDButton[HUD_TYPE_REDRAW].x, _defaultHUDButton[HUD_TYPE_REDRAW].y + 20, 100, 50);
+		swprintf_s(tmp, L"%dG", (int)_drawCost);
+		DTDMANAGER->printText(tmp, tmpRECT, 20, true, true, true);
+
+		DTDMANAGER->resetBrushColor();
+	}
+
+	tmpRECT = dRectMake(WINSIZEX - 50, WINSIZEY - 115, 100, 50);
+	tmp[128];
 	swprintf_s(tmp, L"%d", DECKMANAGER->getCardGrave().size());
 	DTDMANAGER->printText(tmp, tmpRECT, 20);
 }

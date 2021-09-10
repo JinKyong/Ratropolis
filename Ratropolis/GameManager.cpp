@@ -46,7 +46,7 @@ void GameManager::update()
 			_shopCount -= TIMEMANAGER->getElapsedTime();
 	}
 	else {
-		if (_shopCount >= 10)
+		if (_shopCount >= 90)
 			onShop();
 		else
 			_shopCount += TIMEMANAGER->getElapsedTime();
@@ -61,7 +61,7 @@ void GameManager::update()
 			_eventCount -= TIMEMANAGER->getElapsedTime();
 	}
 	else {
-		if (_eventCount >= 10)
+		if (_eventCount >= 120)
 			onEvent();
 		else
 			_eventCount += TIMEMANAGER->getElapsedTime();
@@ -71,7 +71,7 @@ void GameManager::update()
 
 	//경과시간
 	_gameTime += TIMEMANAGER->getElapsedTime();
-	if (!_firstWaveStart && _gameTime >= 10) {
+	if (!_firstWaveStart && _gameTime >= 25) {
 		_firstWaveStart = true;
 		UIMANAGER->getInGame()->addWaveBar(RND->getInt(2));
 	}
@@ -84,7 +84,7 @@ void GameManager::update()
 			_waveTime = 0;
 			UIMANAGER->getInGame()->addWaveBar(RND->getInt(2));
 		}
-		else if (_waveTime >= 10) {
+		else if (_waveTime >= 120) {
 			UIMANAGER->getInGame()->addWaveBar(RND->getInt(2));
 			_waveTime = 0;
 		}
@@ -225,6 +225,8 @@ void GameManager::onShop()
 {
 	_onShop = true;
 	_shopCount = 30;
+
+	SOUNDMANAGER->play("shopArrive");
 }
 
 void GameManager::offShop()
@@ -232,12 +234,19 @@ void GameManager::offShop()
 	_shopButton.activate = false;
 	_onShop = false;
 	_shopCount = 0;
+
+	UIMANAGER->findMenu("shop")->setHide(false);
+	UIMANAGER->findMenu("shop")->release();
+
+	SOUNDMANAGER->play("shopLeave");
 }
 
 void GameManager::onEvent()
 {
 	_onEvent = true;
 	_eventCount = 30;
+
+	SOUNDMANAGER->play("eventArrive");
 }
 
 void GameManager::offEvent()
@@ -245,4 +254,6 @@ void GameManager::offEvent()
 	_eventButton.activate = false;
 	_onEvent = false;
 	_eventCount = 0;
+
+	SOUNDMANAGER->play("eventLeave");
 }

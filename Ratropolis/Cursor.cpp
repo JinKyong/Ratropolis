@@ -127,8 +127,10 @@ void Cursor::controlMouseCardList()
 		changeCursor(CURSOR_TYPE_CLICK);
 
 		if (UIMANAGER->getCurrentMenu()->getHide()) {
-			if (COLLISIONMANAGER->selectedCard(DECKMANAGER->getCurrentDeck(), _x, _y))
+			if (COLLISIONMANAGER->selectedCard(DECKMANAGER->getCurrentDeck(), _x, _y)) {
 				UIMANAGER->getCurrentMenu()->setHide(false);
+				SOUNDMANAGER->play("dictSelect");
+			}
 			else
 				UIMANAGER->getCurrentMenu()->setHide(true);
 		}
@@ -172,10 +174,7 @@ void Cursor::controlMouseShop()
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(MOUSE_RIGHT_CLICK)) {
-		if (!UIMANAGER->getCurrentMenu()->getHide())
-			UIMANAGER->getCurrentMenu()->setHide(true);
-		else
-			UIMANAGER->changeMenu("null");
+
 	}
 }
 

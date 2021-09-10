@@ -50,60 +50,48 @@ void soundManager::update()
 
 void soundManager::registerSound()
 {
-	//addSound("beginning", "music/Beginning of the Journey.mp3",	true, false);
-	//addSound("castle", "music/Hyrule Castle.mp3", true, false);
-	//이펙트 사운드
-	addSound("DefaultAttack", "sound/DefaultAttack.mp3", false, false);		//평타
-	addSound("hitDamage", "sound/hitDamage.mp3", false, false);				//데미지받음
-	addSound("LevelUp", "sound/LevelUp.mp3", false, false);					//레벨업
-	addSound("PickUp", "sound/PickUp.mp3", false, false);					//템줍기
-	addSound("Complete", "sound/Complete1.mp3", false, false);				//보스클리어
+	//카드 효과음
+	addSound("useCard", "sound/SFX_Card_Throw.wav", false, false);
+	addSound("useCard31", "sound/SFX_Card_031.wav", false, false);
+	addSound("useCard32", "sound/SFX_Card_032.wav", false, false);
+	addSound("activeCard", "sound/SFX_Card_Active.wav", false, true);
+	addSound("drawCard", "sound/SFX_Card_Draw.wav", false, false);
+	addSound("drawCardReady", "sound/SFX_Card_DrawReady.wav", false, false);
 
-	addSound("Index", "sound/index.mp3", false, false);						//선택창 이동
-	addSound("Select", "sound/select.mp3", false, false);					//선택
-	addSound("Cancel", "sound/cancel.mp3", false, false);					//취소
-	addSound("Option", "sound/option.mp3", false, false);					//옵션창(UI)
 
-	addSound("FireBlast", "sound/FireBlast.mp3", false, false);
-	addSound("Gust", "sound/Gust.mp3", false, false);
-	addSound("Lightning", "sound/Lightning.mp3", false, false);
-	addSound("RockSlide", "sound/RockSlide.mp3", false, false);
-	addSound("DynamicPunch", "sound/DynamicPunch.mp3", false, false);
-	addSound("LeafBlade", "sound/LeafBlade.mp3", false, false);
-	addSound("ThunderFang", "sound/ThunderFang.mp3", false, false);
-	addSound("IceFang", "sound/IceFang.mp3", false, false);
-	addSound("FireFang", "sound/FireFang.mp3", false, false);
-	addSound("Pound", "sound/Pound.mp3", false, false);
+	//건물 효과음
+	addSound("startConstruct", "sound/SFX_Building_Construction_1.wav", false, false);
+	addSound("endConstruct", "sound/SFX_Building_Construction_2.wav", false, false);
+	addSound("demolisher", "sound/SFX_Building_Demolisher.wav", false, false);
 
-	addSound("Powder", "sound/Powder.mp3", false, false);
-	addSound("MetalClaw", "sound/MetalClaw.mp3", false, false);
-	addSound("Bind", "sound/Bind.mp3", false, false);
-	addSound("CrossChop", "sound/CrossChop.mp3", false, false);
-	addSound("FeintAttack", "sound/FeintAttack.mp3", false, false);
-	addSound("RockSmash", "sound/RockSmash.mp3", false, false);
-	addSound("ShadowClaw", "sound/ShadowClaw.mp3", false, false);
-	addSound("TriAttack", "sound/TriAttack.mp3", false, false);
 
-	addSound("WakeUpSlap", "sound/WakeUpSlap.mp3", false, false);
-	addSound("WingAttack", "sound/WingAttack.mp3", false, false);
-	addSound("VineWhip", "sound/VineWhip.mp3", false, false);
-	addSound("Waterfall", "sound/Waterfall.mp3", false, false);
-	addSound("SheerCold", "sound/SheerCold.mp3", false, false);
-	addSound("DracoMeteor", "sound/DracoMeteor.mp3", false, false);
+	//카드 리스트 효과음
+	addSound("dictOpen", "sound/SFX_UI_Dictionary_Open.wav", false, false);
+	addSound("dictClose", "sound/SFX_UI_Dictionary_Close.wav", false, false);
+	addSound("dictSelect", "sound/SFX_UI_Dictionary_Select.wav", false, false);
+
+
+	//스탯 변동 효과음
+	addSound("getGold", "sound/SFX_Effect_GoldGet.wav", false, false);
+	addSound("buy", "sound/SFX_UI_Buy.wav", false, false);
+
 
 	//맵 사운드
-	addSound("Mt.Bristle", "sound/Field/Mt.Bristle0.mp3", true, true);
-	addSound("Concealed Ruins", "sound/Field/Concealed Ruins1.mp3", true, true);
-	addSound("Amp Plains", "sound/Field/Amp Plains2.mp3", true, true);
-	addSound("Brine Cave", "sound/Field/Brine Cave3.mp3", true, true);
-	addSound("Waterfall Cave", "sound/Field/Waterfall Cave4.mp3", true, true);
-	addSound("Apple Woods", "sound/Field/Apple Woods5.mp3", true, true);
-	addSound("Craggy Coast", "sound/Field/Craggy Coast6.mp3", true, true);
-	addSound("Mt.Horn", "sound/Field/Mt.Horn7.mp3", true, true);
+	addSound("mainTheme", "sound/BGM_MainTheme.wav", true, true);
+	addSound("dessert", "sound/BGM_Dessert.wav", true, true);
 
-	//기타 사운드
-	addSound("mainBGM", "sound/other/mainBGM.mp3", true, true);
-	addSound("select", "sound/other/dungeonSelect.mp3", true, true);
+
+	//커서 효과음
+
+
+	//이벤트 효과음
+	addSound("shopArrive", "sound/SFX_Effect_Merchant_Arrived.wav", false, false);
+	addSound("shopOpen", "sound/SFX_Effect_Merchant_Click.wav", false, false);
+	addSound("shopLeave", "sound/SFX_Effect_Merchant_Leave.wav", false, false);
+	addSound("eventArrive", "sound/SFX_Effect_Event_Arrived.wav", false, false);
+	addSound("eventOpen", "sound/SFX_Effect_Event_Click.wav", false, false);
+	addSound("eventLeave", "sound/SFX_Effect_Event_Leave.wav", false, false);
+	addSound("waveStart", "sound/SFX_UI_WaveStart.wav", false, false);
 }
 
 void soundManager::addSound(string keyName, string soundName, bool bgm, bool loop)

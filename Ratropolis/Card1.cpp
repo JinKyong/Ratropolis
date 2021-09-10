@@ -53,4 +53,5 @@ void Card1::useCard()
 
 	//cost
 	Card_Economy::useCard();
+	SOUNDMANAGER->play("useCard");
 }

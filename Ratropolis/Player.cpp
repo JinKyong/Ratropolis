@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "InGameMenu.h"
 
 HRESULT Player::init()
 {
@@ -59,6 +60,10 @@ void Player::playGame()
 void Player::controlKeyboard()
 {
 	//Keyboard
+	//godmod
+	if (KEYMANAGER->isOnceKeyDown(KEY_ALL_ENEMY_DELETE)) {
+		GAMEMANAGER->getEnemyManager()->release();
+	}
 
 	//Camera Move
 	if (KEYMANAGER->isOnceKeyDown(KEY_MAX_LEFT)) {
@@ -139,8 +144,8 @@ void Player::controlKeyboard()
 		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(KEY_DRAW)) {
-		if(!_selectedCard)
-			DECKMANAGER->redrawCard();
+		if (!_selectedCard)
+			UIMANAGER->getInGame()->useButton(HUD_TYPE_REDRAW);
 	}
 }
 
@@ -166,6 +171,11 @@ void Player::changeGold(int num)
 {
 	_defaultStat.gold += num;
 
+	if (num > 0)
+		SOUNDMANAGER->play("getGold");
+	else
+		SOUNDMANAGER->play("buy");
+
 	if (_defaultStat.gold >= 99999)
 		_defaultStat.gold = 99999;
 }
@@ -174,6 +184,11 @@ void Player::changeGoldPercent(float num)
 {
 	float gold = _defaultStat.gold * num;
 	_defaultStat.gold += gold;
+
+	if (num > 0)
+		SOUNDMANAGER->play("getGold");
+	else
+		SOUNDMANAGER->play("buy");
 
 	if (_defaultStat.gold >= 99999)
 		_defaultStat.gold = 99999;
@@ -225,6 +240,7 @@ void Player::cancleCard()
 	}
 
 	_selectedCard = NULL;
+	SOUNDMANAGER->stop("activeCard");
 }
 
 void Player::changeCard(Card * card)
@@ -237,6 +253,7 @@ void Player::changeCard(Card * card)
 
 	//선택
 	_selectedCard = card;
+	SOUNDMANAGER->play("activeCard");
 
 	//선택한 카드가 건물 카드면?
 	if (_selectedCard->getCardStat()->type == CARD_TYPE_BUILD)
