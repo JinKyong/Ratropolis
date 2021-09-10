@@ -17,7 +17,6 @@ HRESULT titleScene::init(Player* player)
 
 void titleScene::release()
 {
-	STREAMMANAGER->closeVideo();
 }
 
 void titleScene::update()

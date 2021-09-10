@@ -60,7 +60,10 @@ void streamManager::startVideo(string strKey)
 
 void streamManager::closeVideo()
 {
-	_currentVideo->closeVideo();
+	if (_currentVideo) {
+		_currentVideo->closeVideo();
+		_currentVideo = NULL;
+	}
 	//_video->deletVideo();
 }
 

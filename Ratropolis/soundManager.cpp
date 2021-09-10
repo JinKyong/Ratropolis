@@ -25,9 +25,6 @@ HRESULT soundManager::init()
 
 	memset(_sound, 0, sizeof(Sound*)  * TOTALSOUNDBUFFER);
 	memset(_channel, 0, sizeof(Channel*) * TOTALSOUNDBUFFER);
-
-	//°î µî·Ï
-	registerSound();
 	
 
 	return S_OK;

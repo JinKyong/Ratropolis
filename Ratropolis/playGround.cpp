@@ -24,6 +24,7 @@ HRESULT playGround::init()
 	SCENEMANAGER->init(_player);
 	SCENEMANAGER->changeScene("title");
 
+
 	_debug = false;
 
 	return S_OK;

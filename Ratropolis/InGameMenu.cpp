@@ -302,7 +302,7 @@ void InGameMenu::leftBottomInit()
 	//LEFT BOTTOM BUTTON & ICON
 	_defaultHUDButton[HUD_TYPE_LEADERSKILL].x = 30;
 	_defaultHUDButton[HUD_TYPE_LEADERSKILL].y = WINSIZEY - 250;
-	_defaultHUDButton[HUD_TYPE_LEADERSKILL].icon = IMAGEMANAGER->addDImage("leaderSkill", L"Img/UI/menu/ingame/UI_Icon_Trade.png", 90, 90);
+	_defaultHUDButton[HUD_TYPE_LEADERSKILL].icon = IMAGEMANAGER->addDImage("leaderSkill", L"Img/UI/menu/ingame/UI_Icon_Trade.png", 75, 75);
 
 	_defaultHUDButton[HUD_TYPE_CARDBAG].x = 30;
 	_defaultHUDButton[HUD_TYPE_CARDBAG].y = WINSIZEY - 125;

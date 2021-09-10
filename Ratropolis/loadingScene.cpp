@@ -90,6 +90,8 @@ void loadingScene::drawBackImage()
 		IMAGEMANAGER->findDImage(key)->render(1000 * i + 3997, MAPHEIGHT - 709);
 	}
 
+	dImage* worldTree = IMAGEMANAGER->findDImage("desert_worldTree");
+	worldTree->render(MAPWIDTH / 2 - worldTree->getWidth() / 2, 0);
 
 	for (int i = 0; i < MAPWIDTH; i += 60) {
 		IMAGEMANAGER->findDImage("desertTile")->render(i, MAPHEIGHT - 300);
@@ -123,6 +125,8 @@ DWORD loadingScene::loadingData(LPVOID lpParameter)
 		swprintf_s(tmp, L"img/background/Landscape_NearDesert_%d.png", i);
 		IMAGEMANAGER->addDImage(key, tmp, 1000, 709);
 	}
+
+	IMAGEMANAGER->addDImage("desert_worldTree", L"img/background/Desert_WorldTree.png", 2458, 1200);
 
 	IMAGEMANAGER->addDImage("desertTile", L"img/background/DesertTile.png", 60, 60);
 	IMAGEMANAGER->addDImage("waterTile", L"img/background/water.png", 60, 60);
