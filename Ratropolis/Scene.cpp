@@ -7,5 +7,7 @@ HRESULT Scene::init(Player * player)
 {
 	_player = player;
 
+	DTDMANAGER->resetRenderTarget();
+
 	return S_OK;
 }

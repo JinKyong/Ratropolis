@@ -190,6 +190,7 @@ void Cursor::controlMouseEvent()
 
 		if (EVENTMANAGER->getSelectedButton() != -1) {
 			EVENTMANAGER->getReward();
+			GAMEMANAGER->offEvent();
 			UIMANAGER->changeMenu("null");
 		}
 	}

@@ -94,18 +94,30 @@ void Dictionary::registerCardGemImage()
 
 void Dictionary::registerCardIlluste()
 {
-	for (int i = 0; i < 33; i++) {
-		char key[128];
-		WCHAR dir[128];
+	IMAGEMANAGER->addDImage("illuste1", L"img/card/illuste/illuste1.png", 136, 100);
+	IMAGEMANAGER->addDImage("illuste3", L"img/card/illuste/illuste3.png", 136, 100);
+	IMAGEMANAGER->addDImage("illuste18", L"img/card/illuste/illuste18.png", 136, 100);
+	IMAGEMANAGER->addDImage("illuste31", L"img/card/illuste/illuste31.png", 136, 100);
+	IMAGEMANAGER->addDImage("illuste32", L"img/card/illuste/illuste32.png", 136, 100);
 
-		sprintf_s(key, "illuste%d", i);
-		swprintf_s(dir, L"img/card/illuste/illuste%d.png", i);
+	IMAGEMANAGER->addDImage("UI_illuste1", L"img/card/illuste/illuste1.png", 68, 50);
+	IMAGEMANAGER->addDImage("UI_illuste3", L"img/card/illuste/illuste3.png", 68, 50);
+	IMAGEMANAGER->addDImage("UI_illuste18", L"img/card/illuste/illuste18.png", 68, 50);
+	IMAGEMANAGER->addDImage("UI_illuste31", L"img/card/illuste/illuste31.png", 68, 50);
+	IMAGEMANAGER->addDImage("UI_illuste32", L"img/card/illuste/illuste32.png", 68, 50);
 
-		//340, 250
-		IMAGEMANAGER->addDImage(key, dir, 136, 100);
-		sprintf_s(key, "UI_illuste%d", i);
-		IMAGEMANAGER->addDImage(key, dir, 68, 50);
-	}
+	//for (int i = 0; i < 33; i++) {
+	//	char key[128];
+	//	WCHAR dir[128];
+
+	//	sprintf_s(key, "illuste%d", i);
+	//	swprintf_s(dir, L"img/card/illuste/illuste%d.png", i);
+
+	//	//340, 250
+	//	IMAGEMANAGER->addDImage(key, dir, 136, 100);
+	//	sprintf_s(key, "UI_illuste%d", i);
+	//	IMAGEMANAGER->addDImage(key, dir, 68, 50);
+	//}
 }
 
 void Dictionary::registerCardCostImage()

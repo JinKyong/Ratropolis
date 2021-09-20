@@ -6,6 +6,7 @@ HRESULT dtdManager::init()
 	release();
 
 	_clear = true;
+	resetRenderTarget();
 
 	HRESULT hr;
 
@@ -65,6 +66,7 @@ HRESULT dtdManager::init()
 
 	//wincodec(이미지 로더)을 사용하기 위함
 	CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+	//CoInitialize(COINIT_APARTMENTTHREADED);
 
 	_pastRenderTarget = _currentRenderTarget = NULL;
 
@@ -91,6 +93,8 @@ void dtdManager::release()
 	SAFE_RELEASE2(_dWFactory);
 	SAFE_RELEASE2(_dWDefaultFormat);
 	SAFE_RELEASE2(_dWCustomFormat);
+
+	CoUninitialize();
 }
 
 void dtdManager::render(float destX, float destY, float width, float height)
@@ -113,19 +117,19 @@ void dtdManager::render(float destX, float destY, float width, float height)
 		sourCard = dRectMake(0, 0, WINSIZEX, WINSIZEY);
 
 	//배경
-	if (_dBackBitmap)
+	if (_dBackBitmap && _dBackBitmapDraw)
 		_dRenderTarget->DrawBitmap(_dBackBitmap, dest,
 			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
 	//오브젝트
-	if (_dBitmap)
+	if (_dBitmap && _dBitmapDraw)
 		_dRenderTarget->DrawBitmap(_dBitmap, dest,
 			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sour);
 	//UI(inGame)
-	if (_dUIBitmap)
+	if (_dUIBitmap && _dUIBitmapDraw)
 		_dRenderTarget->DrawBitmap(_dUIBitmap, dest,
 			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourUI);
 	//Card
-	if (_dCardBitmap)
+	if (_dCardBitmap && _dCardBitmapDraw)
 		_dRenderTarget->DrawBitmap(_dCardBitmap, dest,
 			1.0, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, sourCard);
 
@@ -147,19 +151,35 @@ void dtdManager::endDraw()
 {
 	if (_currentRenderTarget) {
 		//Background
-		if (_currentRenderTarget == _dBackRenderTarget)
+		if (_currentRenderTarget == _dBackRenderTarget) {
 			_currentRenderTarget->GetBitmap(&_dBackBitmap);
+			//_dBackBitmapDraw = true;
+		}
 		//BackBuffer
-		else if (_currentRenderTarget == _dBitRenderTarget)
+		else if (_currentRenderTarget == _dBitRenderTarget) {
 			_currentRenderTarget->GetBitmap(&_dBitmap);
+			//_dBitmapDraw = true;
+		}
 		//UI
-		else if (_currentRenderTarget == _dUIRenderTarget)
+		else if (_currentRenderTarget == _dUIRenderTarget) {
 			_currentRenderTarget->GetBitmap(&_dUIBitmap);
-		else if (_currentRenderTarget == _dCardRenderTarget)
+			//_dUIBitmapDraw = true;
+		}
+		else if (_currentRenderTarget == _dCardRenderTarget) {
 			_currentRenderTarget->GetBitmap(&_dCardBitmap);
+			//_dCardBitmapDraw = true;
+		}
 
 		_currentRenderTarget->EndDraw();
 	}
+}
+
+void dtdManager::resetRenderTarget()
+{
+	_dBitmapDraw = true;
+	_dBackBitmapDraw = true;
+	_dUIBitmapDraw = true;
+	_dCardBitmapDraw = true;
 }
 
 void dtdManager::changeRenderTarget(RENDERTARGET_TYPE type)

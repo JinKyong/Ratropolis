@@ -111,6 +111,7 @@ DWORD loadingScene::loadingData(LPVOID lpParameter)
 	loadingScene* loadingHelper = (loadingScene*)lpParameter;
 
 	COLLISIONMANAGER->init();
+	CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
 	//배경 이미지 등록
 	for (int i = 0; i < 5; i++) {
@@ -141,6 +142,7 @@ DWORD loadingScene::loadingData(LPVOID lpParameter)
 
 	loadingHelper->_change = true;
 	CAMERAMANAGER->setFade(FADEOUT);
+	CoUninitialize();
 
 	return 0;
 }

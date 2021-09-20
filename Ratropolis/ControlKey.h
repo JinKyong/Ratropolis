@@ -28,6 +28,12 @@
 #define KEY_EVENT				VK_F5
 #define KEY_SHOP				VK_F6
 
+//RenderTarget
+#define KEY_BITRENDER			VK_F1
+#define KEY_BACKRENDER			VK_F2
+#define KEY_UIRENDER			VK_F3
+#define KEY_CARDRENDER			VK_F4
+
 /******************* MOUSE *******************/
 
 //CLICK

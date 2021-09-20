@@ -31,6 +31,10 @@ private:
 	ID2D1Bitmap				*_dBackBitmap;
 	ID2D1Bitmap				*_dUIBitmap;
 	ID2D1Bitmap				*_dCardBitmap;
+	bool					_dBitmapDraw;
+	bool					_dBackBitmapDraw;
+	bool					_dUIBitmapDraw;
+	bool					_dCardBitmapDraw;
 
 	//Brush(붓)
 	ID2D1BitmapBrush		*_dBitmapBrush;
@@ -51,6 +55,7 @@ public:
 
 	void beginDraw(bool clear = true);
 	void endDraw();
+	void resetRenderTarget();
 	void changeRenderTarget(RENDERTARGET_TYPE type);
 	void changeRenderTargetPast();
 
@@ -89,16 +94,24 @@ public:
 	//백버퍼 사이즈 재설정
 	void setBackBuffer(float width, float height);
 
+	//RT ON/OFF
+	void onOffBitRender() { _dBitmapDraw = !_dBitmapDraw; }
+	void onOffBackRender() { _dBackBitmapDraw = !_dBackBitmapDraw; }
+	void onOffUIRender() { _dUIBitmapDraw = !_dUIBitmapDraw; }
+	void onOffCardRender() { _dCardBitmapDraw = !_dCardBitmapDraw; }
+
+	//Brush
 	void resetBrushColor();
 	D2D1_COLOR_F getBrushColor() { return _dBrush->GetColor(); }
 	void setBrushColor(D2D1_COLOR_F color) { _dBrush->SetColor(color); }
-
 	ID2D1SolidColorBrush* getBrush() { return _dBrush; }
 
+	//RT
 	ID2D1HwndRenderTarget* getRenderTarget() { return _dRenderTarget; }
 	ID2D1BitmapRenderTarget* getBitRenderTarget() { return _dBitRenderTarget; }
 	ID2D1BitmapRenderTarget* getBackRenderTarget() { return _dBackRenderTarget; }
 	ID2D1BitmapRenderTarget* getCurrentRenderTarget() { return _currentRenderTarget; }
+
 
 	void setClear(bool clear) { _clear = clear; }
 	bool getClear() { return _clear; }

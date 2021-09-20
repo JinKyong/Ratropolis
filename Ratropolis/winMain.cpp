@@ -31,7 +31,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	wndClass.cbWndExtra = 0;	//윈도우 여분 메모리
 	wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	wndClass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_GAMEICON));
 	wndClass.hInstance = hInstance;	//인스턴스 등록
 	wndClass.lpfnWndProc = (WNDPROC)WndProc;
 	wndClass.lpszClassName = WINNAME;

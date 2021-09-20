@@ -47,7 +47,6 @@ void collisionManager::selectedButtonSnE(float x, float y)
 	}
 
 	if (event->activate) {
-		GAMEMANAGER->offEvent();
 		EVENTMANAGER->loadEvent(8);
 		UIMANAGER->changeMenu("event");
 		return;

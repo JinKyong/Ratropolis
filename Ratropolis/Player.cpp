@@ -64,6 +64,22 @@ void Player::controlKeyboard()
 	if (KEYMANAGER->isOnceKeyDown(KEY_ALL_ENEMY_DELETE)) {
 		GAMEMANAGER->getEnemyManager()->release();
 	}
+	if (KEYMANAGER->isOnceKeyDown(KEY_BITRENDER)) {
+		DTDMANAGER->onOffBitRender();
+	}
+	if (KEYMANAGER->isOnceKeyDown(KEY_BACKRENDER)) {
+		DTDMANAGER->onOffBackRender();
+	}
+	if (KEYMANAGER->isOnceKeyDown(KEY_UIRENDER)) {
+		DTDMANAGER->onOffUIRender();
+	}
+	if (KEYMANAGER->isOnceKeyDown(KEY_CARDRENDER)) {
+		DTDMANAGER->onOffCardRender();
+	}
+
+
+
+
 
 	//Camera Move
 	if (KEYMANAGER->isOnceKeyDown(KEY_MAX_LEFT)) {

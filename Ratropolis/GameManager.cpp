@@ -46,7 +46,7 @@ void GameManager::update()
 			_shopCount -= TIMEMANAGER->getElapsedTime();
 	}
 	else {
-		if (_shopCount >= 90)
+		if (_shopCount >= 10)
 			onShop();
 		else
 			_shopCount += TIMEMANAGER->getElapsedTime();
@@ -61,7 +61,7 @@ void GameManager::update()
 			_eventCount -= TIMEMANAGER->getElapsedTime();
 	}
 	else {
-		if (_eventCount >= 120)
+		if (_eventCount >= 10)
 			onEvent();
 		else
 			_eventCount += TIMEMANAGER->getElapsedTime();

@@ -227,22 +227,21 @@ void eventManager::loadMetaData()
 void eventManager::registerIlluste()
 {
 	IMAGEMANAGER->addDImage("eventIlluste_fixed8", L"img/UI/event/Event_Illust_Fixed_8.png", 375, 275);
-	return;
 
-	char tmp[128];
-	WCHAR tmp2[128];
+	//char tmp[128];
+	//WCHAR tmp2[128];
 
-	//fixed event
-	for (int i = 0; i < 28; i++) {
-		sprintf_s(tmp, "eventIlluste_fixed%d", i);
-		swprintf_s(tmp2, L"img/UI/event/Event_Illust_Fixed_%d.png", i);
-		IMAGEMANAGER->addDImage(tmp, tmp2, 375, 275);
-	}
+	////fixed event
+	//for (int i = 0; i < 28; i++) {
+	//	sprintf_s(tmp, "eventIlluste_fixed%d", i);
+	//	swprintf_s(tmp2, L"img/UI/event/Event_Illust_Fixed_%d.png", i);
+	//	IMAGEMANAGER->addDImage(tmp, tmp2, 375, 275);
+	//}
 
-	//random event
-	for (int i = 0; i < 60; i++) {
-		sprintf_s(tmp, "eventIlluste_random%d", i);
-		swprintf_s(tmp2, L"img/UI/event/Event_Illust_Random_%d.png", i);
-		IMAGEMANAGER->addDImage(tmp, tmp2, 375, 275);
-	}
+	////random event
+	//for (int i = 0; i < 60; i++) {
+	//	sprintf_s(tmp, "eventIlluste_random%d", i);
+	//	swprintf_s(tmp2, L"img/UI/event/Event_Illust_Random_%d.png", i);
+	//	IMAGEMANAGER->addDImage(tmp, tmp2, 375, 275);
+	//}
 }
