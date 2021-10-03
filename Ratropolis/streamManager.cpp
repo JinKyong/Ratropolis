@@ -1,16 +1,6 @@
 #include "stdafx.h"
 #include "streamManager.h"
 
-
-streamManager::streamManager()
-{
-}
-
-
-streamManager::~streamManager()
-{
-}
-
 HRESULT streamManager::init()
 {
 	_currentVideo = NULL;

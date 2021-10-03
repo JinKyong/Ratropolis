@@ -6,10 +6,10 @@ class printManager : public singletonBase<printManager>
 private:
 	bool _debug;
 
-public:
 	printManager() {};
-	~printManager() {};
+	friend singletonBase<printManager>;
 
+public:
 	HRESULT init();
 	void release();
 

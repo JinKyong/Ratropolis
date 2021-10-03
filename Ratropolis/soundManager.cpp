@@ -8,11 +8,6 @@ soundManager::soundManager()
 {
 }
 
-
-soundManager::~soundManager()
-{
-}
-
 HRESULT soundManager::init()
 {
 	//FMOD 엔진 초기화

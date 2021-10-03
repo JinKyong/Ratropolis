@@ -36,8 +36,10 @@ private:
 
 	HANDLE _threads[END_DECK_THREAD_TYPE];
 
-public:
+	DeckManager() {};
+	friend singletonBase<DeckManager>;
 
+public:
 	HRESULT init();
 	void release();
 	void update();

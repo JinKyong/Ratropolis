@@ -13,10 +13,10 @@ class collisionManager : public singletonBase<collisionManager>
 private:
 	Player* _player;
 
-public:
 	collisionManager() {};
-	~collisionManager() {};
+	friend singletonBase<collisionManager>;
 
+public:	
 	HRESULT init();
 	void release();
 	

@@ -12,9 +12,10 @@ private:
 	mapVideoList _mapVideoList;
 	video* _currentVideo;
 
+	streamManager() {};
+	friend singletonBase<streamManager>;
+
 public:
-	streamManager();
-	~streamManager();
 	HRESULT init();
 	void release();
 

@@ -22,10 +22,10 @@ private:
 	arrIniDatas	_vIniData;
 	WCHAR _currentTxt[128];
 
-public:
-	txtData();
-	~txtData();
+	txtData() {};
+	friend singletonBase<txtData>;
 
+public:
 	HRESULT init();
 	void release();
 

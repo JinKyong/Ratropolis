@@ -19,10 +19,10 @@ private:
 	mapImageList _mImageList;
 	d2dImageList _dImageList;
 
-public:
-	imageManager();
-	~imageManager();
+	imageManager() {};
+	friend singletonBase<imageManager>;
 
+public:
 	HRESULT init();
 	void release();
 

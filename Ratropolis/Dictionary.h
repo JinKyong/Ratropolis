@@ -22,6 +22,9 @@ private:
 	cardList		_cardList;
 	buildingList	_buildingList;
 
+	Dictionary() {};
+	friend singletonBase<Dictionary>;
+
 public:
 	HRESULT init();
 	void release();

@@ -28,10 +28,10 @@ private:
 
 	arrSounds	_mTotalSounds;
 
-public:
 	soundManager();
-	~soundManager();
+	friend singletonBase<soundManager>;
 
+public:
 	HRESULT init();
 	void release();
 	void update();

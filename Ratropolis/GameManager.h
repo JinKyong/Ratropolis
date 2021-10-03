@@ -40,6 +40,9 @@ private:
 	bool _firstWaveStart;			//첫 웨이브 시작 여부
 	bool _onWave;					//웨이브 진행중인지
 
+	GameManager() {};
+	friend singletonBase<GameManager>;
+
 public:
 	HRESULT init(Player* player);
 	void release();

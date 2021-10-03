@@ -61,6 +61,9 @@ private:
 	//전투 log가 담기는 vector
 	battleLog _battleLog;
 
+	eventManager() {};
+	friend singletonBase<eventManager>;
+
 public:
 	HRESULT init();
 	void release();
